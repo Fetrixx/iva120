@@ -509,7 +509,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
-          <label class="textCentered">  TOTAL DE OPERACIONES EN EL MERCADO INTERNO  </label>
+          <label class="textLeftBold">  TOTAL DE OPERACIONES EN EL MERCADO INTERNO  </label>
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2" >
@@ -539,7 +539,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
-          <label class="textCentered">  TOTAL DE OPERACIONES DE EXPORTACIÓN </label>
+          <label class="textLeftBold">  TOTAL DE OPERACIONES DE EXPORTACIÓN </label>
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2" >
@@ -549,7 +549,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
-            <label class="textCenteredBold"> TOTAL DE OPERACIONES ACUMULADAS </label>
+            <label class="textLeftBold"> TOTAL DE OPERACIONES ACUMULADAS </label>
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2" >
@@ -721,7 +721,7 @@
             </mat-grid-tile>
   
             <mat-grid-tile colspan="6" rowspan="2" >
-              <label class="textCenteredBold">
+              <label class="textLeftBold">
                 TOTAL DE IVA CRÉDITO PARA OPERACIONES EN EL MERCADO INTERNO
               </label>
             </mat-grid-tile>
@@ -810,7 +810,7 @@
           </mat-grid-tile>
   
           <mat-grid-tile colspan="10" rowspan="2">
-            <label class="textCenteredBold"> SALDO A FAVOR DEL CONTRIBUYENTE </label>
+            <label class="textLeftBold"> SALDO A FAVOR DEL CONTRIBUYENTE </label>
           </mat-grid-tile>
   
           <mat-grid-tile colspan="4" rowspan="2" >
@@ -832,7 +832,7 @@
           </mat-grid-tile>
           
           <mat-grid-tile colspan="10" rowspan="2">
-            <label class="textCenteredBold"> 
+            <label class="textLeftBold"> 
               SALDO A FAVOR DEL CONTRIBUYENTE
             </label>
           </mat-grid-tile>
@@ -884,7 +884,7 @@
           </mat-grid-tile>
 
           <mat-grid-tile colspan="10" rowspan="2">
-            <label class="textCenteredBold">  
+            <label class="textLeftBold">  
               IMPUESTO DETERMINADO
             </label>
           </mat-grid-tile>
@@ -909,174 +909,136 @@
         <!--mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="5"-->
         <mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="3">
           
-          <mat-grid-tile class="textTitle" colspan="6" rowspan="2">
-
-            <div style="display: flex; justify-content: center; align-items: center;">
-              <label class="textCentered"> RUBRO 3 - COMPRAS LOCALES E IMPORTACIONES DEL PERIODO </label>
-              </div>
+          <mat-grid-tile class="textTitle" colspan="8" rowspan="2">
+            <label class="textCentered"> RUBRO 5 - IMPUESTO DETERMINADO Y/O SALDO FINANCIERO A FAVOR DEL CONTRIBUYENTE </label>
           </mat-grid-tile>
-          <mat-grid-tile class="textTitle" colspan="4">MONTO IMPONIBLE </mat-grid-tile>
-          <mat-grid-tile class="textTitle" colspan="4" rowspan="2" > IVA CRÉDITO -III- </mat-grid-tile>
-          <mat-grid-tile class="textTitle" colspan="2">AL 5% -I-</mat-grid-tile>
-          <mat-grid-tile class="textTitle" colspan="2">AL 10% -II-</mat-grid-tile>
+          <mat-grid-tile class="textTitle" colspan="6">MONTO A FAVOR DEL </mat-grid-tile>
+          <mat-grid-tile class="textTitle" colspan="3"> CONTRIBUYENTE -I-</mat-grid-tile>
+          <mat-grid-tile class="textTitle" colspan="3"> FISCO -II- </mat-grid-tile>
           
-
-
-
-          <mat-grid-tile colspan="6" rowspan="2">
-            <label class="textLeft"> IVA Crédito atribuido directamente a operaciones gravadas en el mercado interno </label>
-            
+          <mat-grid-tile colspan="8" rowspan="2">
+            <label class="textLeft"> Impuesto determinado para operaciones gravadas </label>
           </mat-grid-tile>
           
-          <mat-grid-tile colspan="4" rowspan="2">                                 <!-- ingresar texto -->
-  
-            <mat-form-field class="inputNumber">
-              <input matInput type="number">
-            </mat-form-field>
-  
-          </mat-grid-tile>
-  
-          <mat-grid-tile colspan="2" rowspan="2">
+          <mat-grid-tile colspan="3" rowspan="2">
             <mat-form-field class="inputNumber">
               <input matInput type="number">
             </mat-form-field>
           </mat-grid-tile>
   
-  
-          <mat-grid-tile colspan="2" rowspan="2">
+          <mat-grid-tile colspan="3" rowspan="2">
             <mat-form-field class="inputNumber">
               <input matInput type="number">
             </mat-form-field>
           </mat-grid-tile>
   
-          <mat-grid-tile colspan="6" rowspan="2" >
-            <label class="textLeft">
-              IVA Crédito atribuido indistintamente a operaciones gravadas, exoneradas o no alcanzadas
-            </label>
+          <mat-grid-tile colspan="8" rowspan="2">
+            <label class="textLeft"> Saldo a favor del contribuyente del período anterior </label>
           </mat-grid-tile>
           
-          <mat-grid-tile colspan="4" rowspan="2">                                 
-  
-            <mat-form-field class="inputNumber">
-              <input matInput type="number">
-            </mat-form-field>
-  
-          </mat-grid-tile>
-  
-          <mat-grid-tile colspan="2" rowspan="2">
+          <mat-grid-tile colspan="3" rowspan="2">
             <mat-form-field class="inputNumber">
               <input matInput type="number">
             </mat-form-field>
           </mat-grid-tile>
   
-  
-          <mat-grid-tile colspan="2" rowspan="2">
-            <mat-form-field class="inputNumber">
-              <input matInput type="number">
-            </mat-form-field>
-          </mat-grid-tile>
-          
-          <mat-grid-tile colspan="6" rowspan="2" >
-            <label class="textLeft">
-              IVA Crédito atribuido proporcionalmente a operaciones gravadas en el mercado interno
-            </label>
-          </mat-grid-tile>
-          
-          <mat-grid-tile colspan="4" rowspan="2">                                 
-            <mat-form-field class="inputNumber">
-              <input matInput type="number">
-            </mat-form-field>
-          </mat-grid-tile>
-  
-          <mat-grid-tile colspan="2" rowspan="2">
-            <mat-form-field class="inputNumber">
-              <input matInput type="number">
-            </mat-form-field>
-          </mat-grid-tile>
-  
-  
-          <mat-grid-tile colspan="2" rowspan="2">
+          <mat-grid-tile colspan="3" rowspan="2">
             <mat-form-field class="inputNumber">
               <input matInput type="number">
             </mat-form-field>
           </mat-grid-tile>
 
-          <mat-grid-tile colspan="6" rowspan="2" >
-            <label class="textLeft">
-              IVA Crédito atribuido proporcionalmente a operaciones gravadas en el mercado interno y a exportación
-            </label>
+          <mat-grid-tile colspan="8" rowspan="2">
+            <label class="textLeft"> Retenciones computables por operaciones gravadas </label>
           </mat-grid-tile>
           
-          <mat-grid-tile colspan="4" rowspan="2">                                 
-  
-            <mat-form-field class="inputNumber">
-              <input matInput type="number">
-            </mat-form-field>
-  
-          </mat-grid-tile>
-  
-          <mat-grid-tile colspan="2" rowspan="2">
+          <mat-grid-tile colspan="3" rowspan="2">
             <mat-form-field class="inputNumber">
               <input matInput type="number">
             </mat-form-field>
           </mat-grid-tile>
   
-  
-          <mat-grid-tile colspan="2" rowspan="2">
+          <mat-grid-tile colspan="3" rowspan="2">
             <mat-form-field class="inputNumber">
               <input matInput type="number">
             </mat-form-field>
           </mat-grid-tile>
 
-          <mat-grid-tile colspan="6" rowspan="2.5" >
-            <label class="textLeft">
-              IVA Crédito por ajustes de precios, devoluciones y descuentos otorgados, por ventas ya declaradas y operaciones declaradas incobrables
-            </label>
+          <mat-grid-tile colspan="8" rowspan="2">
+            <label class="textLeft"> Percepciones computables por operaciones gravadas </label>
           </mat-grid-tile>
           
-          <mat-grid-tile colspan="4" rowspan="2.5">                                 
-  
-            <mat-form-field class="inputNumber">
-              <input matInput type="number">
-            </mat-form-field>
-  
-          </mat-grid-tile>
-  
-          <mat-grid-tile colspan="2" rowspan="2.5">
+          <mat-grid-tile colspan="3" rowspan="2">
             <mat-form-field class="inputNumber">
               <input matInput type="number">
             </mat-form-field>
           </mat-grid-tile>
   
-  
-          <mat-grid-tile colspan="2" rowspan="2.5">
+          <mat-grid-tile colspan="3" rowspan="2">
             <mat-form-field class="inputNumber">
               <input matInput type="number">
             </mat-form-field>
           </mat-grid-tile>
 
-          <mat-grid-tile colspan="6" rowspan="2" >
-            <label class="textCenteredBold">
-              TOTAL DE IVA CRÉDITO PARA OPERACIONES EN EL MERCADO INTERNO
-            </label>
+          <mat-grid-tile colspan="8" rowspan="2">
+            <label class="textLeft"> Multa por presentar la Declaración Jurada con posterioridad al vencimiento </label>
           </mat-grid-tile>
           
-          <mat-grid-tile colspan="4" rowspan="2">                                 
-  
-            <mat-form-field class="inputNumber">
-              <input matInput type="number">
-            </mat-form-field>
-  
-          </mat-grid-tile>
-  
-          <mat-grid-tile colspan="2" rowspan="2">
+          <mat-grid-tile colspan="3" rowspan="2">
             <mat-form-field class="inputNumber">
               <input matInput type="number">
             </mat-form-field>
           </mat-grid-tile>
   
+          <mat-grid-tile colspan="3" rowspan="2">
+            <mat-form-field class="inputNumber">
+              <input matInput type="number">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="8" rowspan="2">
+            <label class="textLeftBold"> SUBTOTALES </label>
+          </mat-grid-tile>
+          
+          <mat-grid-tile colspan="3" rowspan="2">
+            <mat-form-field class="inputNumber">
+              <input matInput type="number">
+            </mat-form-field>
+          </mat-grid-tile>
   
-          <mat-grid-tile colspan="2" rowspan="2">
+          <mat-grid-tile colspan="3" rowspan="2">
+            <mat-form-field class="inputNumber">
+              <input matInput type="number">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="8" rowspan="2">
+            <label class="textLeftBold"> SALDO A FAVOR DEL CONTRIBUYENTE </label>
+          </mat-grid-tile>
+          
+          <mat-grid-tile colspan="3" rowspan="2">
+            <mat-form-field class="inputNumber">
+              <input matInput type="number">
+            </mat-form-field>
+          </mat-grid-tile>
+  
+          <mat-grid-tile colspan="3" rowspan="2">
+            <mat-form-field class="inputNumber">
+              <input matInput type="number">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile colspan="8" rowspan="2">
+            <label class="textLeftBold"> SALDO A PAGAR A FAVOR DEL FISCO </label>
+          </mat-grid-tile>
+          
+          <mat-grid-tile colspan="3" rowspan="2">
+            <mat-form-field class="inputNumber">
+              <input matInput type="number">
+            </mat-form-field>
+          </mat-grid-tile>
+  
+          <mat-grid-tile colspan="3" rowspan="2">
             <mat-form-field class="inputNumber">
               <input matInput type="number">
             </mat-form-field>
@@ -1086,6 +1048,256 @@
   
       </mat-card-content>
     </mat-card>
+</div>
+
+
+<div class="cardsDiv">
+  <mat-card class="card">                                                                     <!-- CARD WITH INFO  -->
+    <mat-card-content>
+      
+      <!--mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="5"-->
+      <mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="3">
+        
+        <mat-grid-tile class="textTitle" colspan="8" rowspan="2">
+          <label class="textCentered"> 
+            RUBRO 6 - INFORMACIÓN DE LAS COMPRAS DEL PERIODO,
+            VINCULADAS A OPERACIONES EXONERADAS O NO ALCANZADAS POR EL IMPUESTO 
+          </label>
+        </mat-grid-tile>
+        <mat-grid-tile class="textTitle" colspan="3" rowspan="2"> MONTO -I-</mat-grid-tile>
+        <mat-grid-tile class="textTitle" colspan="3" rowspan="2"> IVA -II- </mat-grid-tile>
+        
+        <mat-grid-tile colspan="8" rowspan="2">
+          <label class="textLeft"> 
+            Compras con IVA Crédito del 10% relacionadas directamente a operaciones
+            exoneradas o no alcanzadas por el Impuesto 
+          </label>
+        </mat-grid-tile>
+        
+        <mat-grid-tile colspan="3" rowspan="2">
+          <mat-form-field class="inputNumber">
+            <input matInput type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="3" rowspan="2">
+          <mat-form-field class="inputNumber">
+            <input matInput type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="8" rowspan="2">
+          <label class="textLeft">
+            Compras con IVA Crédito del 5% relacionadas directamente a operaciones
+            exoneradas o no alcanzadas por el Impuesto
+          </label>
+        </mat-grid-tile>
+        
+        <mat-grid-tile colspan="3" rowspan="2">
+          <mat-form-field class="inputNumber">
+            <input matInput type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="3" rowspan="2">
+          <mat-form-field class="inputNumber">
+            <input matInput type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="8" rowspan="2">
+          <label class="textLeft"> 
+            Compras exentas relacionadas a operaciones exoneradas, no alcanzadas y a exportaciones  
+          </label>
+        </mat-grid-tile>
+        
+        <mat-grid-tile colspan="3" rowspan="2">
+          <mat-form-field class="inputNumber">
+            <input matInput type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="3" rowspan="2">
+          <mat-form-field class="inputNumber">
+            <input matInput type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="8" rowspan="2">
+          <label class="textLeft"> 
+            Compras exentas relacionadas a operaciones exoneradas o no alcanzadas por el Impuesto
+          </label>
+        </mat-grid-tile>
+        
+        <mat-grid-tile colspan="3" rowspan="2">
+          <mat-form-field class="inputNumber">
+            <input matInput type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="3" rowspan="2">
+          <mat-form-field class="inputNumber">
+            <input matInput type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="8" rowspan="2">
+          <label class="textLeft"> 
+            Ajustes de precios, descuentos otorgados y/o devoluciones recibidas, por
+            enajenación de bienes o prestación de servicios exonerados o no alcanzados por
+            el Impuesto
+          </label>
+        </mat-grid-tile>
+        
+        <mat-grid-tile colspan="3" rowspan="2">
+          <mat-form-field class="inputNumber">
+            <input matInput type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="3" rowspan="2">
+          <mat-form-field class="inputNumber">
+            <input matInput type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="8" rowspan="2">
+          <label class="textLeft">
+            Impuesto al Valor Agregado - Costo o Gasto deducible en el IRE o IRP 
+          </label>
+        </mat-grid-tile>
+        
+        <mat-grid-tile colspan="3" rowspan="2">
+          <mat-form-field class="inputNumber">
+            <input matInput type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="3" rowspan="2">
+          <mat-form-field class="inputNumber">
+            <input matInput type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="8" rowspan="2">
+          <label class="textLeft"> 
+            Impuesto al Valor Agregado - Costo o Gasto por remisión del saldo IVA Crédito al
+            fisco, no deducible en el IRE o IRP
+          </label>
+        </mat-grid-tile>
+        
+        <mat-grid-tile colspan="3" rowspan="2">
+          <mat-form-field class="inputNumber">
+            <input matInput type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="3" rowspan="2">
+          <mat-form-field class="inputNumber">
+            <input matInput type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+    
+    </mat-grid-list>
+
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+
+<div class="cardsDiv">
+  <mat-card class="card">                                                                     <!-- CARD WITH INFO  -->
+    <mat-card-content>
+      
+      <!--mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="5"-->
+      <mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="3">
+
+        <mat-grid-tile colspan="14" rowspan="2" >
+          <label class="textFooter">
+            El que suscribe 
+          </label>
+          
+          <mat-form-field class="inputText">
+            <input matInput placeholder="" type="text">
+          </mat-form-field>
+        </mat-grid-tile>   
+
+        <mat-grid-tile colspan="7" rowspan="2" >
+          <label class="textFooter">
+            En su carácter de
+          </label>
+          
+          <mat-form-field class="inputText">
+            <input matInput placeholder="" type="text">
+          </mat-form-field>
+        </mat-grid-tile>   
+
+        <mat-grid-tile colspan="7" rowspan="2" >
+          <label class="textFooter">
+            con Documento No.
+          </label>
+          
+          <mat-form-field class="inputText">
+            <input matInput placeholder="" type="number">
+          </mat-form-field>
+        </mat-grid-tile>  
+
+        <mat-grid-tile colspan="14" rowspan="2" >
+          <label class="textLeft">
+            Declara que los datos consignados en este formulario son correctos, íntegros, verdaderos y han sido confeccionados sin omitir dato alguno
+          </label>
+        </mat-grid-tile>  
+
+        <mat-grid-tile colspan="7" rowspan="2" >
+          <label class="textFooter">
+            Lugar
+          </label>
+          
+          <mat-form-field class="inputText">
+            <input matInput placeholder="" type="text">
+          </mat-form-field>
+        </mat-grid-tile>   
+
+        <mat-grid-tile colspan="7" rowspan="2" >
+          <label class="textFooter">
+            fecha(dd/mm/Año)
+          </label>
+          
+          <mat-form-field class="inputText">
+            <input matInput placeholder="" type="number">
+          </mat-form-field>
+        </mat-grid-tile> 
+
+
+        <mat-grid-tile colspan="7" rowspan="6" >
+          <label class="textFooter">
+            Firma
+          </label>
+        </mat-grid-tile> 
+
+
+        <mat-grid-tile colspan="7" rowspan="6" >
+          <label class="textFooter">
+            CERTIFICACIÓN O SELLO DE RECEPCIÓN
+          </label>
+        </mat-grid-tile> 
+
+
+
+
+        <mat-grid-tile colspan="14" rowspan="2" >
+          <label class="textLeft">
+            Estimado Contribuyente: Le recordamos que los pagos que efectúe emergentes de esta declaración, serán imputados en su cuenta
+            corriente conforme a lo señalado en la Ley N° 125/1991, Art. 162.
+          </label>
+        </mat-grid-tile>  
+
+    
+    </mat-grid-list>
+
+    </mat-card-content>
+  </mat-card>
 </div>
 
 

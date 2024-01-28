@@ -42,20 +42,37 @@ input[type=number]::-webkit-outer-spin-button {
   text-align: center;
   margin: 4%;
   font-weight: bold;
+  width: 100%;
 }
 
 .textHead{
   text-align: center;
-  margin: 4%;
-  text-wrap:balance;
+  margin-left: 4%;
+  text-wrap:pretty;
   line-height: 12pt;
+}
+
+.textFooter{
+  text-align: left;
+  margin-left: 4%;
+  margin-right: 2%;
+  text-wrap:nowrap;
   
 }
+
 .textLeft{
   text-wrap:balance;
   text-align: left;
   margin: 4%;
   width: 100%;
+}
+
+.textLeftBold{
+  text-wrap:balance;
+  text-align: left;
+  margin: 4%;
+  width: 100%;
+  font-weight: bold;
 }
   .inputNumber{
     
@@ -68,7 +85,7 @@ input[type=number]::-webkit-outer-spin-button {
   .inputText{
     
     margin-bottom: -1.4em;
-    padding: 3%;
+    padding: 1%;
     height: 4.8rem;
     width: 100%;
   }

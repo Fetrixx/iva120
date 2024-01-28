@@ -21,6 +21,7 @@ input[type=number]::-webkit-outer-spin-button {
     background: #e4f4f4;
     width: 100%;
     font-weight: bold;
+    text-wrap: pretty;
   }
   
 .cardsDiv{
@@ -38,7 +39,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .textCenteredBold{
-  text-wrap:balance;
+  text-wrap:pretty;
   text-align: center;
   margin: 4%;
   font-weight: bold;
@@ -46,15 +47,24 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .textHead{
+  text-wrap:pretty;
   text-align: center;
-  margin-left: 4%;
+  margin-left: 1rem;
+  margin-right: 2%;
+  /*
+  height: 100%;
+  width:100%;
+  text-align: center;
+  
   text-wrap:balance;
   line-height: 12pt;
+  */
+  
 }
 
 .textFooter{
   text-align: left;
-  margin-left: 4%;
+  margin-left: 1rem;
   margin-right: 2%;
   text-wrap:nowrap;
   
@@ -63,14 +73,14 @@ input[type=number]::-webkit-outer-spin-button {
 .textLeft{
   text-wrap:pretty;
   text-align: left;
-  margin: 4%;
+  margin: 1rem;
   width: 100%;
 }
 
 .textLeftBold{
   text-wrap:balance;
   text-align: left;
-  margin: 4%;
+  margin: 1rem;
   width: 100%;
   font-weight: bold;
 }

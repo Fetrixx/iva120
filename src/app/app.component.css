@@ -60,7 +60,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 4%;
   font-weight: bold;
   width: 100%;
-  font-size: 2vw;
+  font-size: 1.5vw;
 }
 
 .textHead{

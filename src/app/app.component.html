@@ -1,17 +1,14 @@
-
 <div class="cardsDiv">
   <mat-card class="card" >                                                                     <!-- CARD WITH INFO  -->
     <mat-card-content>
       <mat-grid-list cols="10" rowHeight="1.8rem" gutterSize="3" >
         
-        <mat-grid-tile colspan="2" rowspan="8"  >
-          <h1 class="textCentered">IMPUESTO AL VALOR AGREGADO V4 - 120</h1>
+        <mat-grid-tile colspan="2" rowspan="10"  >
+          <h1 class="textHeadBold">IMPUESTO AL VALOR AGREGADO V4 - 120</h1>
           
         </mat-grid-tile>    
 
         <mat-grid-tile colspan="4" rowspan="2" >
-          <label class="textHead"> Numero de Orden</label>
-          
           <mat-form-field class="inputText">
             <mat-label>Numero de Orden *</mat-label>
             <input matInput placeholder="" type="number">
@@ -20,8 +17,6 @@
         </mat-grid-tile>    
 
         <mat-grid-tile colspan="3" rowspan="2" >
-          <label class="textHead">RUC</label>
-          
           <mat-form-field class="inputText">
             <mat-label>RUC *</mat-label>
             <input matInput placeholder="" type="number">
@@ -30,8 +25,6 @@
         </mat-grid-tile>   
 
         <mat-grid-tile colspan="1" rowspan="2" >
-          <label class="textHead"> DV</label>
-          
           <mat-form-field class="inputText">
             <mat-label>DV *</mat-label>
             <input matInput placeholder="" type="number" >
@@ -39,9 +32,22 @@
                     
         </mat-grid-tile>   
 
-        <mat-grid-tile colspan="8" rowspan="2" >
-          <label class="textHead"> Nombres</label>
+        <mat-grid-tile colspan="4" rowspan="2" >
+          <mat-form-field class="inputText">
+            <mat-label> Razón Social/Primer Apellido </mat-label>
+            <input matInput placeholder="" type="number">
+          </mat-form-field>
+                    
+        </mat-grid-tile>    
+        <mat-grid-tile colspan="4" rowspan="2" >
+          <mat-form-field class="inputText">
+            <mat-label> Segundo Apellido </mat-label>
+            <input matInput placeholder="" type="number">
+          </mat-form-field>
+                    
+        </mat-grid-tile>    
 
+        <mat-grid-tile colspan="8" rowspan="2" >
           <mat-form-field class="inputText">
             <mat-label>Nombres</mat-label>
             <input matInput placeholder="" type="text">
@@ -63,15 +69,22 @@
         </mat-grid-tile>   
 
         <mat-grid-tile colspan="4" rowspan="2" >          
-          <label class="textHead"> Nro. de Orden de Declaración que se rectifica</label>
           <mat-form-field class="inputText">
-            <mat-label>Numero de Orden*</mat-label>
+            <mat-label> Nro. de Orden de Declaración que se rectifica </mat-label>
             <input matInput placeholder="" type="number" >
           </mat-form-field>
         </mat-grid-tile>   
           
         <mat-grid-tile colspan="4" rowspan="2" >          
           
+          <mat-form-field class="inputText" appearance="fill">
+            <mat-label>Periodo / Ejercicio Fiscal</mat-label>
+            <input matInput [matDatepicker]="picker">
+            
+            <mat-datepicker  #picker></mat-datepicker>
+          </mat-form-field>
+          <button class="button" mat-raised-button (click)="picker.open()"> Seleccionar </button>
+
         </mat-grid-tile>   
 
   
@@ -1261,12 +1274,17 @@
 
         <mat-grid-tile colspan="7" rowspan="2" >
           <label class="textFooter">
-            fecha(dd/mm/Año)
+            Fecha
           </label>
           
-          <mat-form-field class="inputText">
-            <input matInput placeholder="" type="number">
+          <mat-form-field class="inputText" appearance="fill">
+            <mat-label>Selecciona una Fecha</mat-label>
+            <input matInput [matDatepicker]="picker2">
+            
+            <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
+          <button class="button" mat-raised-button (click)="picker2.open()">Seleccionar</button>
+
         </mat-grid-tile> 
 
 

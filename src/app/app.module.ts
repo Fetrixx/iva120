@@ -12,13 +12,18 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
-import {MatDatepickerModule, MatDatepicker} from '@angular/material/datepicker';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import {MatRadioModule} from '@angular/material/radio';
 
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
+import {MatButtonModule} from '@angular/material/button';
+//import { Component } from '@angular/core';
+
+
+import {MatNativeDateModule} from '@angular/material/core';
 
 
 @NgModule({
@@ -35,9 +40,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatInputModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatDatepicker,
-    MatRadioModule
-  ],
+    MatRadioModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatNativeDateModule ],
   providers: [],
   bootstrap: [AppComponent]
 })
@@ -46,3 +52,19 @@ export class AppModule { }
 
 
 
+
+/*
+
+@Component({
+  selector: 'datepicker-api-example',
+  templateUrl: 'datepicker-api-example.html',
+  styleUrls: ['datepicker-api-example.css'],
+  standalone: true,
+  providers: [provideNativeDateAdapter()],
+  imports: [MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule],
+})
+export class DatepickerApiExample {}
+
+
+
+*/

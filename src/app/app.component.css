@@ -31,12 +31,6 @@ input[type=number]::-webkit-outer-spin-button {
   margin-right: 10%;;
   margin-top: 1rem;
 
-  /*
-  
-  margin-left: 2rem;
-  */
-  
-  
 }
 .textCentered{
   text-wrap:balance;
@@ -69,14 +63,6 @@ input[type=number]::-webkit-outer-spin-button {
   margin-left: 4%;
   margin-right: 2%;
   font-size: 1vw;
-  /*
-  height: 100%;
-  width:100%;
-  text-align: center;
-  
-  text-wrap:balance;
-  line-height: 12pt;
-  */
   
 }
 
@@ -134,16 +120,6 @@ input[type=number]::-webkit-outer-spin-button {
     display:flex;
     justify-content: center;
     font-size: 1vw;
-    /*
-    vertical-align: bottom;
-    line-height: 100%;
-    position: relative;
-    display:flex;
-    justify-content: center;
-    height: 100%;
-    margin-top: 10%;
-    */
-    
   }
  
   .textSello{
@@ -160,64 +136,3 @@ input[type=number]::-webkit-outer-spin-button {
 
   
   
-
-/*
-button {
-    margin: 3%;
-}
-
-
-div{
-    margin: 3%;
-}
-
-mat-card {
-    margin: 3%;
-}
-*/
-
-/*
-body[ng-cloak] {
-    display:none;
-  }
-  body {
-      background-color: #FEEBC8;
-  }
-  div[flex="30"] {
-    background-color: #DFDFDF;  
-  }
-  
-  section[flex="40"] {
-    background-color: #D4E5FA;
-  }
-  section[flex="70"] {
-    background-color: #E8FCD6;
-  }
-  section[flex="20"] {
-   background-color: #FFD5E3;
-  }
-  section[flex=""] {
-   background-color: rgba(0, 128, 0, 0.35);
-  }
-  
-  
-  /* Important to set height for column layout */
-  /*
-  .boxWithHeight {
-    box-sizing: border-box;
-    height: 100%;
-  }
-  
-  .a, section {
-    border: 5px solid rgba(85, 97, 85, 0.27);
-    margin: 5px;  
-  }
-  
-  section {
-    background-color: #dedede;
-  }
-  */
-  /*
-  Copyright 2016-2018 Google Inc. All Rights Reserved. 
-  Use of this source code is governed by an MIT-style license that can be found in the LICENSE file at http://material.angularjs.org/latest/license.
-  */

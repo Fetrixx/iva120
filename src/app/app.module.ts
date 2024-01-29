@@ -52,19 +52,3 @@ export class AppModule { }
 
 
 
-
-/*
-
-@Component({
-  selector: 'datepicker-api-example',
-  templateUrl: 'datepicker-api-example.html',
-  styleUrls: ['datepicker-api-example.css'],
-  standalone: true,
-  providers: [provideNativeDateAdapter()],
-  imports: [MatFormFieldModule, MatInputModule, MatDatepickerModule, MatButtonModule],
-})
-export class DatepickerApiExample {}
-
-
-
-*/

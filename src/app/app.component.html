@@ -10,7 +10,7 @@
 
         <mat-grid-tile colspan="4" rowspan="2" >
           <mat-form-field class="inputText">
-            <mat-label>Numero de Orden *</mat-label>
+            <mat-label class="textLeft">Numero de Orden *</mat-label>
             <input matInput placeholder="" type="number">
           </mat-form-field>
                     
@@ -18,7 +18,7 @@
 
         <mat-grid-tile colspan="3" rowspan="2" >
           <mat-form-field class="inputText">
-            <mat-label>RUC *</mat-label>
+            <mat-label class="textLeft">RUC *</mat-label>
             <input matInput placeholder="" type="number">
           </mat-form-field>
                     
@@ -26,7 +26,7 @@
 
         <mat-grid-tile colspan="1" rowspan="2" >
           <mat-form-field class="inputText">
-            <mat-label>DV *</mat-label>
+            <mat-label class="textLeft">DV *</mat-label>
             <input matInput placeholder="" type="number" >
           </mat-form-field>
                     
@@ -34,22 +34,22 @@
 
         <mat-grid-tile colspan="4" rowspan="2" >
           <mat-form-field class="inputText">
-            <mat-label> Razón Social/Primer Apellido </mat-label>
-            <input matInput placeholder="" type="number">
+            <mat-label class="textLeft"> Razón Social/Primer Apellido </mat-label>
+            <input matInput placeholder="" type="text">
           </mat-form-field>
                     
         </mat-grid-tile>    
         <mat-grid-tile colspan="4" rowspan="2" >
           <mat-form-field class="inputText">
-            <mat-label> Segundo Apellido </mat-label>
-            <input matInput placeholder="" type="number">
+            <mat-label class="textLeft"> Segundo Apellido </mat-label>
+            <input matInput placeholder="" type="text">
           </mat-form-field>
                     
         </mat-grid-tile>    
 
         <mat-grid-tile colspan="8" rowspan="2" >
           <mat-form-field class="inputText">
-            <mat-label>Nombres</mat-label>
+            <mat-label class="textLeft">Nombres</mat-label>
             <input matInput placeholder="" type="text">
           </mat-form-field>
                     
@@ -60,25 +60,37 @@
           
           
 
-          <mat-radio-group>
-            <mat-radio-button class="textLeft"> Declaración Jurada Original</mat-radio-button>
-            <mat-radio-button class="textLeft"> Declaración Jurada Rectificativa</mat-radio-button>
-            <mat-radio-button class="textLeft"> Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre Definitivo</mat-radio-button>
+          <mat-radio-group >
+            <mat-radio-button >
+              <label class="textLeft">
+                Declaración Jurada Original
+              </label>
+            </mat-radio-button>
+            <mat-radio-button >
+              <label class="textLeft">
+                Declaración Jurada Rectificativa
+              </label>
+            </mat-radio-button>
+            <mat-radio-button >
+              <label class="textLeft">
+                Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre Definitivo 
+              </label>
+            </mat-radio-button>
           </mat-radio-group>
 
         </mat-grid-tile>   
 
         <mat-grid-tile colspan="4" rowspan="2" >          
           <mat-form-field class="inputText">
-            <mat-label> Nro. de Orden de Declaración que se rectifica </mat-label>
+            <mat-label class="textLeft"> Nro. de Orden de Declaración que se rectifica </mat-label>
             <input matInput placeholder="" type="number" >
           </mat-form-field>
-        </mat-grid-tile>   7
+        </mat-grid-tile>   
           
         <mat-grid-tile colspan="4" rowspan="2" >          
           
           <mat-form-field class="inputText" appearance="fill">
-            <mat-label>Periodo / Ejercicio Fiscal</mat-label>
+            <mat-label class="textLeft">Periodo / Ejercicio Fiscal</mat-label>
             <input matInput [matDatepicker]="picker">
             
             <mat-datepicker  #picker></mat-datepicker>
@@ -86,12 +98,6 @@
           <button class="button" mat-raised-button (click)="picker.open()"> Seleccionar </button>
 
         </mat-grid-tile>   
-
-  
-
-        
-
-
 
       </mat-grid-list>
     </mat-card-content>
@@ -1279,7 +1285,7 @@
           </label>
           
           <mat-form-field class="inputText" appearance="fill">
-            <mat-label>Selecciona una Fecha</mat-label>
+            <mat-label class="textLeft">Selecciona una Fecha</mat-label>
             <input matInput [matDatepicker]="picker2">
             
             <mat-datepicker #picker2></mat-datepicker>

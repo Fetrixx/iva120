@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatGridListModule} from '@angular/material/grid-list';
 
@@ -25,6 +24,10 @@ import {MatButtonModule} from '@angular/material/button';
 
 import {MatNativeDateModule} from '@angular/material/core';
 
+import {MatCardModule} from '@angular/material/card';
+
+import { DatepickerViewsSelection } from './dateMMYYYY/datepicker-views-selection';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +37,6 @@ import {MatNativeDateModule} from '@angular/material/core';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
     FlexLayoutModule,
     MatGridListModule,
     MatInputModule,
@@ -43,7 +45,11 @@ import {MatNativeDateModule} from '@angular/material/core';
     MatRadioModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatNativeDateModule ],
+    MatNativeDateModule,
+    MatButtonModule,
+    MatCardModule,
+    DatepickerViewsSelection
+   ],
   providers: [],
   bootstrap: [AppComponent]
 })

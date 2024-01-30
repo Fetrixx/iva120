@@ -88,15 +88,18 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-
+          <mat-label class="textLeft">Periodo / Ejercicio Fiscal</mat-label>
+          <datepicker-views-selection #picker class="inputDate"></datepicker-views-selection>
+          
+          
+            <!--
           <mat-form-field class="inputText" appearance="fill">
-            <mat-label class="textLeft">Periodo / Ejercicio Fiscal</mat-label>
+              <mat-label class="textLeft">Periodo / Ejercicio Fiscal</mat-label>
             <input matInput [matDatepicker]="picker">
-
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
           <button class="button" mat-raised-button (click)="picker.open()"> Seleccionar </button>
-
+            -->
         </mat-grid-tile>
 
       </mat-grid-list>
@@ -1313,7 +1316,7 @@
 
 
         <mat-grid-tile colspan="7" rowspan="6">
-          <label class="textSello">
+          <label class="textFirma">
             CERTIFICACIÓN O SELLO DE RECEPCIÓN
           </label>
         </mat-grid-tile>

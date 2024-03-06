@@ -27,6 +27,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatCardModule} from '@angular/material/card';
 
 import { DatepickerViewsSelection } from './dateMMYYYY/datepicker-views-selection';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { DatepickerViewsSelection } from './dateMMYYYY/datepicker-views-selectio
     AppComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

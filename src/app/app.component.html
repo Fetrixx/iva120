@@ -1,10 +1,69 @@
+<!-- retval -->
+<button (click)="retVal(this.r1Values,0,0)">asdasd
+</button>
+
+
+<!--button (click)="cargarValores()">set Values
+</button-->
+
+<button (click)="cargarTodos()">set Values 2
+</button>
+
+<div style="display: flex; flex-direction: row; margin: 40px; background-color: lightblue; border-radius: 5px;">
+  <div style="display: flex; flex-direction: column;">
+    <div style="height: 100px; width: 100px;  background-color: yellow; margin: 10px;">
+
+    </div>
+  </div>
+
+</div>
+
+<!--
+  <div style="display: grid;
+grid-template-columns: repeat(10, 1fr);
+grid-auto-rows: auto;
+column-gap: 0.5em;
+row-gap: 0.5em;
+margin-left: 10vw;
+margin-right: 10vw;
+">
+  <div style="background-color: lightblue;
+  grid-column-start: 1; 
+  grid-column-end: 3; 
+  grid-row-start: 1;
+  grid-row-end: 4;
+  grid-auto-rows: 100px;
+  "> 
+    hola
+
+  </div>
+  <div style="background-color: lightblue;
+  grid-column-start: 3; 
+  grid-column-end: 7; 
+  grid-row-start: 1;
+  grid-row-end: 1;
+  
+  "> 
+    hola
+
+  </div>
+  <div style="background-color: pink;
+  grid-column-start: 3; 
+  grid-column-end: 5; 
+  grid-row-start: 2;
+  grid-row-end: 4; ">
+four
+  </div>
+</div>
+-->
+
 <div class="cardsDiv">
-  <mat-card class="card"> <!-- CARD WITH INFO  -->
+  <mat-card style="display: flex; flex-direction: column; background-color: lightblue;"> <!-- CARD WITH INFO  -->
     <mat-card-content>
       <mat-grid-list cols="10" rowHeight="1.8rem" gutterSize="3">
 
         <mat-grid-tile colspan="2" rowspan="10">
-          <h1 class="textHeadBold">IMPUESTO AL VALOR AGREGADO V4 - 120</h1>
+          <h1 class="textHeadBold">IMPUESTO AL VALOR AGREGADO V4 - 1_20</h1>
 
         </mat-grid-tile>
 
@@ -89,10 +148,16 @@
 
         <mat-grid-tile colspan="4" rowspan="2">
           <mat-label class="textLeft">Periodo / Ejercicio Fiscal</mat-label>
-          <datepicker-views-selection #picker class="inputDate"></datepicker-views-selection>
-          
-          
-            <!--
+          <!--datepicker-views-selection #picker class="inputDate"></datepicker-views-selection-->
+          <mat-form-field style="margin-right: 30px; align-items: center; justify-content: center;">
+            <input matInput placeholder="1_2_3" type="number">
+          </mat-form-field>
+          <mat-form-field style="margin-right: 30px;">
+            <input matInput placeholder="1_2_3" type="number">
+          </mat-form-field>
+
+
+          <!--
           <mat-form-field class="inputText" appearance="fill">
               <mat-label class="textLeft">Periodo / Ejercicio Fiscal</mat-label>
             <input matInput [matDatepicker]="picker">
@@ -126,7 +191,7 @@
     <mat-card-content>
 
       <!--mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="5"-->
-      <mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="3">
+      <mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="3"> <!-- RUBRO 1 -->
 
         <mat-grid-tile class="textTitle" colspan="6" rowspan="2">
 
@@ -143,28 +208,25 @@
 
         <mat-grid-tile colspan="6" rowspan="2">
           <label class="textLeft"> Enajenación de bienes y/o prestación de servicios gravados con tasa del 10% </label>
-
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2"> <!-- ingresar texto -->
 
+          <input type="number" value="" #r1_1_1 id="r1_1_1" class="inputNEW">
+          <!--
           <mat-form-field class="inputNumber">
-            <input matInput type="number" value="123123" id="r1_11">
+            <input matInput type="number" value="" #r1_1_1 id="r1_1_1">
           </mat-form-field>
-
+          -->
         </mat-grid-tile>
 
-        <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number" disabled="true">
-          </mat-form-field>
+        <mat-grid-tile colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
+          <input type="number" disabled="true" #r1_1_2 id="r1_1_2" class="inputNEW">
         </mat-grid-tile>
 
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_1_3 id="r1_1_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="3">
@@ -175,24 +237,16 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="3">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r1_2_1 id="r1_2_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="3">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_2_2 id="r1_2_2" class="inputNEW">
         </mat-grid-tile>
 
 
-        <mat-grid-tile colspan="2" rowspan="3">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number" disabled="true">
-          </mat-form-field>
+        <mat-grid-tile colspan="2" rowspan="3" style="background: rgb(231, 231, 231)">
+          <input type="number" value="" #r1_2_3 id="r1_2_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="2">
@@ -202,22 +256,16 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_3_1 id="r1_3_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_3_2 id="r1_3_2" class="inputNEW">
         </mat-grid-tile>
 
 
-        <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number" disabled="true">
-          </mat-form-field>
+        <mat-grid-tile colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
+          <input type="number" value="" #r1_3_3 id="r1_3_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="2">
@@ -227,24 +275,15 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r1_4_1 id="r1_4_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_4_2 id="r1_4_2" class="inputNEW">
         </mat-grid-tile>
 
-
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_4_3 id="r1_4_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="2.5">
@@ -255,24 +294,16 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2.5">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r1_5_1 id="r1_5_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="2.5">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_5_2 id="r1_5_2" class="inputNEW">
         </mat-grid-tile>
 
 
         <mat-grid-tile colspan="2" rowspan="2.5">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_5_3 id="r1_5_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="2">
@@ -282,24 +313,16 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r1_6_1 id="r1_6_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_6_2 id="r1_6_2" class="inputNEW">
         </mat-grid-tile>
 
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_6_3 id="r1_6_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="2">
@@ -309,24 +332,16 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r1_7_1 id="r1_7_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_7_2 id="r1_7_2" class="inputNEW">
         </mat-grid-tile>
 
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_7_3 id="r1_7_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="2.5">
@@ -337,24 +352,15 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2.5">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r1_8_1 id="r1_8_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="2.5">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_8_2 id="r1_8_2" class="inputNEW">
         </mat-grid-tile>
 
-
         <mat-grid-tile colspan="2" rowspan="2.5">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_8_3 id="r1_8_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="4.5">
@@ -368,24 +374,16 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="4.5">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r1_9_1 id="r1_9_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="4.5">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_9_2 id="r1_9_2" class="inputNEW">
         </mat-grid-tile>
 
 
         <mat-grid-tile colspan="2" rowspan="4.5">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_9_3 id="r1_9_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="3.5">
@@ -398,24 +396,16 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="3.5">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r1_10_1 id="r1_10_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="3.5">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_10_2 id="r1_10_2" class="inputNEW">
         </mat-grid-tile>
 
 
         <mat-grid-tile colspan="2" rowspan="3.5">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_10_3 id="r1_10_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="3">
@@ -427,24 +417,15 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="3">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r1_11_1 id="r1_11_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="3">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_11_2 id="r1_11_2" class="inputNEW">
         </mat-grid-tile>
 
-
         <mat-grid-tile colspan="2" rowspan="3">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_11_3 id="r1_11_3" class="inputNEW">
         </mat-grid-tile>
 
 
@@ -454,24 +435,16 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r1_12_1 id="r1_12_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_12_2 id="r1_12_2" class="inputNEW">
         </mat-grid-tile>
 
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r1_12_3 id="r1_12_3" class="inputNEW">
         </mat-grid-tile>
 
 
@@ -505,9 +478,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r2_1_1 id="r2_1_1" class="inputNEW">
         </mat-grid-tile>
 
 
@@ -518,9 +489,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r2_2_1 id="r2_2_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
@@ -528,9 +497,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r2_3_1 id="r2_3_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
@@ -538,9 +505,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r2_4_1 id="r2_4_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
@@ -549,9 +514,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r2_5_1 id="r2_5_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
@@ -560,9 +523,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r2_6_1 id="r2_6_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
@@ -570,9 +531,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r2_7_1 id="r2_7_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
@@ -580,9 +539,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r2_8_1 id="r2_8_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
@@ -590,9 +547,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r2_9_1 id="r2_9_1" class="inputNEW">
         </mat-grid-tile>
 
 
@@ -630,24 +585,16 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r3_1_1 id="r3_1_1" class="inputNEW">
         </mat-grid-tile>
 
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r3_1_2 id="r3_1_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r3_1_3 id="r3_1_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="2">
@@ -657,24 +604,16 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r3_2_1 id="r3_2_1" class="inputNEW">
         </mat-grid-tile>
 
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r3_2_2 id="r3_2_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r3_2_3 id="r3_2_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="2">
@@ -684,24 +623,16 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r3_3_1 id="r3_3_1" class="inputNEW">
         </mat-grid-tile>
 
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r3_3_2 id="r3_3_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r3_3_3 id="r3_3_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="2">
@@ -711,24 +642,16 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r3_4_1 id="r3_4_1" class="inputNEW">
         </mat-grid-tile>
 
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r3_4_2 id="r3_4_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r3_4_3 id="r3_4_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="2.5">
@@ -739,24 +662,16 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="2.5">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r3_5_1 id="r3_5_1" class="inputNEW">
         </mat-grid-tile>
 
 
         <mat-grid-tile colspan="2" rowspan="2.5">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r3_5_2 id="r3_5_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2.5">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r3_5_3 id="r3_5_3" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="6" rowspan="2">
@@ -766,24 +681,16 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r3_6_1 id="r3_6_1" class="inputNEW">
         </mat-grid-tile>
 
 
         <mat-grid-tile colspan="2" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r3_6_2 id="r3_6_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
-
+          <input type="number" value="" #r3_6_3 id="r3_6_3" class="inputNEW">
         </mat-grid-tile>
 
       </mat-grid-list>
@@ -816,9 +723,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r4_1_1 id="r4_1_1" class="inputNEW">
         </mat-grid-tile>
 
 
@@ -829,9 +734,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r4_2_1 id="r4_2_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
@@ -841,9 +744,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r4_3_1 id="r4_3_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
@@ -851,9 +752,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r4_4_1 id="r4_4_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
@@ -863,9 +762,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r4_5_1 id="r4_5_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
@@ -875,9 +772,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r4_6_1 id="r4_6_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
@@ -887,9 +782,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r4_7_1 id="r4_7_1" class="inputNEW">
         </mat-grid-tile>
 
 
@@ -901,23 +794,19 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r4_8_1 id="r4_8_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2.5">
           <label class="textLeft">
-            Deducción conforme al Art. 7° y 8° de la Ley N° 4.962/2013 por incorporación de personas con
+            Deducción conforme al Art. 7° y 8° de la Ley N° 4.96_2/201_3 por incorporación de personas con
             discapacidad y en concepto de gastos y costos por adecuación del entorno físico, tecnológica, etc. y
             contratación de facilitadores laborales (No trasladable)
           </label>
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2.5">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r4_9_1 id="r4_9_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="10" rowspan="2">
@@ -927,9 +816,7 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="4" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r4_10_1 id="r4_10_1" class="inputNEW">
         </mat-grid-tile>
 
 
@@ -957,15 +844,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_1_1 id="r5_1_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_1_2 id="r5_1_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="8" rowspan="2">
@@ -973,15 +856,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_2_1 id="r5_2_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_2_2 id="r5_2_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="8" rowspan="2">
@@ -989,15 +868,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_3_1 id="r5_3_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_3_2 id="r5_3_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="8" rowspan="2">
@@ -1005,15 +880,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_4_1 id="r5_4_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_4_2 id="r5_4_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="8" rowspan="2">
@@ -1021,15 +892,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_5_1 id="r5_5_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_5_2 id="r5_5_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="8" rowspan="2">
@@ -1037,15 +904,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_6_1 id="r5_6_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_6_2 id="r5_6_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="8" rowspan="2">
@@ -1053,15 +916,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_7_1 id="r5_7_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_7_2 id="r5_7_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="8" rowspan="2">
@@ -1069,15 +928,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_8_1 id="r5_8_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r5_8_2 id="r5_8_2" class="inputNEW">
         </mat-grid-tile>
 
       </mat-grid-list>
@@ -1109,15 +964,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r6_1_1 id="r6_1_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r6_1_2 id="r6_1_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="8" rowspan="2">
@@ -1128,15 +979,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r6_2_1 id="r6_2_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r6_2_2 id="r6_2_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="8" rowspan="2">
@@ -1146,15 +993,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r6_3_1 id="r6_3_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r6_3_2 id="r6_3_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="8" rowspan="2">
@@ -1164,15 +1007,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r6_4_1 id="r6_4_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r6_4_2 id="r6_4_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="8" rowspan="2">
@@ -1184,15 +1023,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r6_5_1 id="r6_5_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r6_5_2 id="r6_5_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="8" rowspan="2">
@@ -1202,15 +1037,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r6_6_1 id="r6_6_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r6_6_2 id="r6_6_2" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="8" rowspan="2">
@@ -1221,15 +1052,11 @@
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r6_7_1 id="r6_7_1" class="inputNEW">
         </mat-grid-tile>
 
         <mat-grid-tile colspan="3" rowspan="2">
-          <mat-form-field class="inputNumber">
-            <input matInput type="number">
-          </mat-form-field>
+          <input type="number" value="" #r6_7_2 id="r6_7_2" class="inputNEW">
         </mat-grid-tile>
 
       </mat-grid-list>
@@ -1328,7 +1155,7 @@
           <label class="textLeft">
             Estimado Contribuyente: Le recordamos que los pagos que efectúe emergentes de esta declaración, serán
             imputados en su cuenta
-            corriente conforme a lo señalado en la Ley N° 125/1991, Art. 162.
+            corriente conforme a lo señalado en la Ley N° 1_25/199_1, Art. 16_2.
           </label>
         </mat-grid-tile>
 

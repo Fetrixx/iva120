@@ -1,17 +1,64 @@
+@media print {
+	label {
+		font-size: 10px;
+    text-wrap:pretty;
+	}
+  mat-label{
+    font-size: 8px;
+    text-wrap:pretty;
+  }
+  span{
+    font-size: 10px;
+    text-wrap:pretty;
+  }
+  
+  /*items to hide when printing*/
+  #botones {
+    display: none;
+  }
+  
+  /*  background: rgb(231, 231, 231)*/
+  
+}
+
+/*
+elementos centrados por default
+usar width para acomodar otros.
+*/
+
+/*
+@media print{    
+  div{
+      background-color: #FFFFFF;
+  }
+}
+*/
 ::ng-deep .mdc-text-field--disabled {
   background-color: rgba(211, 211, 211, 0.452) !important;
   /*outline: 1px solid red;  */
 }
 
 .inputNEW {
-  background-color: rgba(240, 248, 255, 0);
-  border-color: aliceblue;
+  background-color: rgba(0, 136, 255, 0);
+  border-color: lightgray;
+  border-width: 1px;
   width: 90%;
   height: 70%;
   margin: 5px;
-  text-align: end;
   padding: 0 16px;
 }
+.inputNEWNumber {
+  background-color: rgba(240, 248, 255, 0);
+  border-color: lightgray;
+  border-width: 1px;
+  width: 90%;
+  height: 70%;
+  margin: 5px;
+  padding: 0 16px;
+  text-align: end;
+}
+
+
 
 .mat-mdc-card-content {
   padding: 8px;
@@ -25,13 +72,6 @@
   font-weight: bold;
 }
 
-
-mat-grid-tile {
-
-  background: whitesmoke;
-  border-radius: 5px;
-}
-
 /* erase increment and decrement from input number field */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -40,9 +80,22 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 .card {
-  background: lightblue
+  
+  background: lightblue;
+  display: flex; 
+  flex-direction: column;
 }
 
+.tile{
+  border-style: solid;
+  border-width: 1px;
+  border-color:lightblue;
+  background: whitesmoke;
+
+  text-wrap: pretty;
+  text-align: left;
+  /*align-items: center; justify-content: flex-start;*/
+}
 
 
 .textTitle {
@@ -55,13 +108,14 @@ input[type=number]::-webkit-outer-spin-button {
 
 .cardsDiv {
 
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
   ;
-  margin-top: 10px
-    /*margin-top: 1rem;*/
-
-
+  /*margin-top: 10px*/
+  /*margin-top: 1rem;*/
+  border-style: solid;
+  border-width: 1px;
+  border-color: lightblue
 }
 
 .textCentered {
@@ -112,23 +166,19 @@ input[type=number]::-webkit-outer-spin-button {
 .textFooter {
   text-align: left;
   margin-left: 1vw;
-  margin-right: 2%;
+  margin-right: 1vw;
   text-wrap: nowrap;
   /*font-size: 1vw;*/
-
-
-
 }
 
 .textLeft {
   text-wrap: pretty;
   text-align: left;
 
-  margin: 1vw;
+  margin: 12px;
   width: 100%;
-  /*font-size: 1vw ;*/
-
   line-height: 1.25;
+  /*font-size: 1vw ;*/
 
 }
 
@@ -143,19 +193,18 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .inputNumber {
-
-  margin-bottom: -3vh;
+  
   padding: 6%;
-  height: 4.8rem;
+  height: 80%;
   width: 100%;
   line-height: 1.25;
 }
 
 .inputText {
   text-wrap: pretty;
-  margin-bottom: -3vh;
+  
   padding: 1%;
-  height: 4.8rem;
+  height: 80%;
   width: 100%;
   /*font-size: 1vw;*/
 }

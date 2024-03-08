@@ -11,7 +11,7 @@ import { DecimalPipe } from '@angular/common';
 export class AppComponent {
 
   title = 'iva120';
-  @Input() jsonFile: any = '../assets/test.json';
+  @Input() jsonFile: any = '../assets/test2.json';
 
   constructor(private http: HttpClient, private decimalPipe: DecimalPipe) {
 
@@ -259,7 +259,7 @@ export class AppComponent {
       const colIndex = parseInt(col) - 1; // Obtiene el índice de columna restando 1
       const value = this.retVal(this.r1Values, rowIndex, colIndex); // Obtiene el valor usando el método retVal
       const inputElement = (<HTMLInputElement>document.getElementById(id)); // Obtiene el elemento del input
-      if (inputElement) { // Verifica si el elemento existe
+      if (inputElement && !inputElement.disabled) { // verifica si el elemento existe, y si esta activado.
         inputElement.value = value.toString(); // Asigna el valor al input
       }
     });
@@ -284,7 +284,7 @@ export class AppComponent {
       const colIndex = parseInt(col) - 1;
       const value = this.retVal(this.r2Values, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
       const inputElement = document.getElementById(id) as HTMLInputElement;
-      if (inputElement) {
+      if (inputElement && !inputElement.disabled) {
         inputElement.value = value.toString();
       }
     });
@@ -306,7 +306,7 @@ export class AppComponent {
       const colIndex = parseInt(col) - 1;
       const value = this.retVal(this.r3Values, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
       const inputElement = document.getElementById(id) as HTMLInputElement;
-      if (inputElement) {
+      if (inputElement && !inputElement.disabled) {
         inputElement.value = value.toString();
       }
     });
@@ -335,7 +335,7 @@ export class AppComponent {
       const colIndex = parseInt(col) - 1; // Obtiene el índice de columna restando 1
       const value = this.retVal(this.r4Values, rowIndex, colIndex); // Obtiene el valor usando el método retVal
       const inputElement = (<HTMLInputElement>document.getElementById(id)); // Obtiene el elemento del input
-      if (inputElement) { // Verifica si el elemento existe
+      if (inputElement && !inputElement.disabled) { // Verifica si el elemento existe
         inputElement.value = value.toString(); // Asigna el valor al input
       }
     });
@@ -361,7 +361,7 @@ export class AppComponent {
       const colIndex = parseInt(col) - 1;
       const value = this.retVal(this.r5Values, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
       const inputElement = document.getElementById(id) as HTMLInputElement;
-      if (inputElement) {
+      if (inputElement && !inputElement.disabled) {
         inputElement.value = value.toString();
       }
     });
@@ -384,7 +384,7 @@ export class AppComponent {
       const colIndex = parseInt(col) - 1;
       const value = this.retVal(this.r6Values, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
       const inputElement = document.getElementById(id) as HTMLInputElement;
-      if (inputElement) {
+      if (inputElement && !inputElement.disabled) {
         inputElement.value = value.toString();
       }
     });
@@ -503,6 +503,17 @@ export class AppComponent {
       return '';
     }
     return this.decimalPipe.transform(value, '1.0-0') || '';
+  }
+
+  printScreen(){
+    //Get the print button and put it into a variable
+    var cargarTodos_Btn = document.getElementById("cargarTodos");
+    //Set the print button visibility to 'hidden' 
+    cargarTodos_Btn!.style.visibility = 'hidden';
+    //Print the page content
+    window.print()
+    cargarTodos_Btn!.style.visibility = 'visible';
+
   }
 
 

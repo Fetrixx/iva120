@@ -67,10 +67,10 @@ botones:
     https://stackoverflow.com/questions/31425557/hide-buttons-when-printing
   -->
   <button mat-raised-button id="cargarTodos" (click)="cargarTodos()" >Cargar Datos / Leer</button>
-  <button style="margin-left: 20px" mat-raised-button> Guardar </button>
+  <button style="margin-left: 20px" mat-raised-button disabled="true"> Guardar </button>
   <button style="margin-left: 20px" mat-raised-button onclick="window.print()" > Imprimir </button>
-  <button style="margin-left: 20px" mat-raised-button> Exportar </button>
-  <button style="margin-left: 20px" mat-raised-button> Recalcular </button>
+  <button style="margin-left: 20px" mat-raised-button disabled="true"> Exportar </button>
+  <button style="margin-left: 20px" mat-raised-button disabled="true"> Recalcular </button>
   
 </div>
 
@@ -139,7 +139,7 @@ four
       <mat-grid-list cols="10" rowHeight="1.8rem" gutterSize="0">
 
         <mat-grid-tile class="tile" colspan="2" rowspan="10">
-          <h2 class="textHeadBold">IMPUESTO AL VALOR AGREGADO V4 - 120</h2>
+          <h3 class="textHeadBold">IMPUESTO AL VALOR AGREGADO V4 - 120</h3>
 
         </mat-grid-tile>
 
@@ -151,9 +151,9 @@ four
           <mat-form-field subscriptSizing="dynamic" class="inputText">
             <input matInput placeholder="" type="text">
           </mat-form-field-->
-          <mat-form-field subscriptSizing="dynamic" class="inputText">
+          <mat-form-field id="nroOrden" subscriptSizing="dynamic" class="inputText">
             <mat-label class="textLeft">Numero de Orden </mat-label>
-            <input matInput placeholder="" type="number">
+            <input id="nroOrdenInput" matInput placeholder="" type="number">
           </mat-form-field  >
           <!--div style="width:100%; height: 100%; margin: 5%;">
             <label class="textLeft" > Nro. de Orden: </label>
@@ -205,8 +205,8 @@ four
 
         <mat-grid-tile class="tile" colspan="4" rowspan="4" >
           
-          <div style="display: flex; flex-direction: column; height: 100%; ">
-            <label style="border-bottom-style: solid; border-color: lightblue; border-bottom-width: 1px; height: 25%;">
+          <div style="display: flex; flex-direction: column; height: 100%;">
+            <label style="border-bottom-style: solid; border-color: lightblue; border-bottom-width: 1px; height: 25%; justify-content: center; align-items: center;">
               <input type="checkbox">
               Declaración Jurada Original
             </label>
@@ -289,10 +289,10 @@ four
 <div class="cardsDiv">
   <div class="card"> <!-- CARD WITH INFO  -->
     <div style="margin: 5px;">
-      <mat-grid-list cols="1" rowHeight="2rem">
+      <mat-grid-list cols="1" rowHeight="fit" style="height: 25px;">
         <mat-grid-tile class="tile" colspan="1">
           
-          <label style="text-wrap: pretty; text-align: left; margin: 12px; font-weight: bold;">
+          <label style="font-weight: bold;">
             PARA CONTRIBUYENTES QUE REALICEN OPERACIONES GRAVADAS Y EXONERADAS (INCLUIDAS LAS EXPORTACIONES)
           </label>
         </mat-grid-tile>
@@ -308,23 +308,53 @@ four
     <div style="margin: 5px;">
 
       <!--mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="5"-->
-      <mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="0"> <!-- RUBRO 1 -->
+      <mat-grid-list class="gridHeight_r1" cols="14" rowHeight="fit" gutterSize="0"> <!-- RUBRO 1 -->
 
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="6"
+        
+
+        <!--mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%;" colspan="6" rowspan="2">
+          <label class="labelRubro">
+            RUBRO 1 - ENAJENACIÓN DE BIENES Y/O PRESTACIÓN DE SERVICIOS DEL PERIODO
+          </label>
+        </mat-grid-tile-->
+        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%;" colspan="6"
           rowspan="2">
-
-          <div style="display: flex; justify-content: center; align-items: center;">
-            <label class="textCentered"> RUBRO 1 - ENAJENACIÓN DE BIENES Y/O PRESTACIÓN DE SERVICIOS DEL PERIODO</label>
-          </div>
+          <label style="font-weight: bold;">
+            RUBRO 1 - ENAJENACIÓN DE BIENES Y/O PRESTACIÓN DE SERVICIOS DEL PERIODO
+          </label>
         </mat-grid-tile>
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4"
-          rowspan="2">MONTO IMPONIBLE -I-</mat-grid-tile>
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4">IVA
-          DEBITO</mat-grid-tile>
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="2">AL 5%
-          -II-</mat-grid-tile>
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="2">AL 10%
-          -III-</mat-grid-tile>
+
+
+        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%;" colspan="4"
+          rowspan="2">
+          <label style="font-weight: bold;">
+            MONTO IMPONIBLE -I-
+          </label>
+        </mat-grid-tile>
+        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4">
+          <label style="font-weight: bold;">
+            IVA DEBITO
+          </label>
+        </mat-grid-tile>
+        <!--mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="2">AL 5%
+          -II-
+        </mat-grid-tile>
+        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="2">
+          AL 10% -III-
+        </mat-grid-tile-->
+
+        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="2">
+          <label style="font-weight: bold;">
+            AL 5% -II-
+          </label>
+        </mat-grid-tile>
+          
+        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="2">
+          <label style="font-weight: bold;">
+            AL 10% -III-
+          </label>
+        </mat-grid-tile>
+        
 
 
 
@@ -488,7 +518,7 @@ four
           <input type="number" value="" #r1_8_3 id="r1_8_3" class="inputNEWNumber">
         </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="6" rowspan="4.5">
+        <mat-grid-tile class="tile" colspan="6" rowspan="4">
           <label class="textLeft"> Ajustes de precios, devoluciones realizadas,
             descuentos obtenidos y recupero de Impuestos por
             operaciones incobrables, declaradas a la tasa del 5%,
@@ -498,20 +528,20 @@ four
           </label>
         </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="4" rowspan="4.5">
+        <mat-grid-tile class="tile" colspan="4" rowspan="4">
           <input type="number" value="" #r1_9_1 id="r1_9_1" class="inputNEWNumber">
         </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="2" rowspan="4.5">
+        <mat-grid-tile class="tile" colspan="2" rowspan="4">
           <input type="number" value="" #r1_9_2 id="r1_9_2" class="inputNEWNumber">
         </mat-grid-tile>
 
 
-        <mat-grid-tile class="tile" colspan="2" rowspan="4.5" style="background: rgb(231, 231, 231)">
+        <mat-grid-tile class="tile" colspan="2" rowspan="4" style="background: rgb(231, 231, 231)">
           <input type="number" value="" #r1_9_3 id="r1_9_3" class="inputNEWNumber" disabled="true">
         </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="6" rowspan="3.5">
+        <mat-grid-tile class="tile" colspan="6" rowspan="3">
           <label class="textLeft"> Ajustes de precios, devoluciones realizadas,
             descuentos obtenidos y recupero de Impuestos por
             operaciones incobrables, declaradas a la tasa del 5%,
@@ -520,16 +550,16 @@ four
           </label>
         </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="4" rowspan="3.5">
+        <mat-grid-tile class="tile" colspan="4" rowspan="3">
           <input type="number" value="" #r1_10_1 id="r1_10_1" class="inputNEWNumber">
         </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="2" rowspan="3.5">
+        <mat-grid-tile class="tile" colspan="2" rowspan="3">
           <input type="number" value="" #r1_10_2 id="r1_10_2" class="inputNEWNumber">
         </mat-grid-tile>
 
 
-        <mat-grid-tile class="tile" colspan="2" rowspan="3.5" style="background: rgb(231, 231, 231)">
+        <mat-grid-tile class="tile" colspan="2" rowspan="3" style="background: rgb(231, 231, 231)">
           <input type="number" value="" #r1_10_3 id="r1_10_3" class="inputNEWNumber" disabled="true">
         </mat-grid-tile>
 
@@ -555,7 +585,10 @@ four
 
 
         <mat-grid-tile class="tile" colspan="6" rowspan="2">
-          <label class="textCenteredBold"> TOTAL
+          <label > 
+            <b>
+              TOTAL
+            </b>
           </label>
         </mat-grid-tile>
 
@@ -584,17 +617,26 @@ four
   <div class="card"> <!-- CARD WITH INFO  -->
     <div style="margin: 5px;">
 
-      <mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="0">
+
+      
+      <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r2">
 
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="10"
           rowspan="2">
-          <label class="textCentered"> RUBRO 2 - ENAJENACIÓN DE BIENES Y/O PRESTACIÓN DE SERVICIOS DE LOS ÚLTIMOS SEIS
+          <label > RUBRO 2 - ENAJENACIÓN DE BIENES Y/O PRESTACIÓN DE SERVICIOS DE LOS ÚLTIMOS SEIS
             (6) MESES (INCLUIDO EL PERIODO QUE SE DECLARA) </label>
         </mat-grid-tile>
 
 
+
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4"
-          rowspan="2">MONTO ACUMULADO</mat-grid-tile>
+          rowspan="2">
+          <label >
+          MONTO ACUMULADO
+          </label>
+        </mat-grid-tile>
+
+
 
         <mat-grid-tile class="tile" colspan="10" rowspan="2">
 
@@ -689,17 +731,21 @@ four
   <div class="card"> <!-- CARD WITH INFO  -->
     <div style="margin: 5px;">
 
-      <mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="0">
+      <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r3"> 
 
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="6"
           rowspan="2">
-
-          <div style="display: flex; justify-content: center; align-items: center;">
-            <label class="textCentered"> RUBRO 3 - COMPRAS LOCALES E IMPORTACIONES DEL PERIODO </label>
-          </div>
+          <label > RUBRO 3 - COMPRAS LOCALES E IMPORTACIONES DEL PERIODO </label>
         </mat-grid-tile>
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4">MONTO
-          IMPONIBLE </mat-grid-tile>
+
+        
+
+        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4"rowspan="2">
+          <label > MONTO IMPONIBLE</label>
+        </mat-grid-tile>
+
+        <!--mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4">MONTO
+          IMPONIBLE </mat-grid-tile-->
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4"
           rowspan="2"> IVA CRÉDITO -III- </mat-grid-tile>
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="2">AL 5%
@@ -839,7 +885,7 @@ four
 
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="10"
           rowspan="2">
-          <label class="textCentered">
+          <label >
             RUBRO 4 - DETERMINACIÓN DEL IMPUESTO O DEL SALDO TÉCNICO
           </label>
         </mat-grid-tile>
@@ -967,7 +1013,7 @@ four
 
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="8"
           rowspan="2">
-          <label class="textCentered"> RUBRO 5 - IMPUESTO DETERMINADO Y/O SALDO FINANCIERO A FAVOR DEL CONTRIBUYENTE
+          <label > RUBRO 5 - IMPUESTO DETERMINADO Y/O SALDO FINANCIERO A FAVOR DEL CONTRIBUYENTE
           </label>
         </mat-grid-tile>
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="6">MONTO A
@@ -1087,7 +1133,7 @@ four
 
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="8"
           rowspan="2">
-          <label class="textCentered">
+          <label >
             RUBRO 6 - INFORMACIÓN DE LAS COMPRAS DEL PERIODO,
             VINCULADAS A OPERACIONES EXONERADAS O NO ALCANZADAS POR EL IMPUESTO
           </label>

@@ -1,21 +1,71 @@
+.gridHeight_r1{
+  height: 600px;
+}
+.labelRubro{
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.gridHeight_r2{
+  height: 420px;
+}
+
+.gridHeight_r3{
+  height: 300px;
+}
+
 @media print {
-	label {
-		font-size: 10px;
+	
+  .labelRubro{
+    font-size: 7px;
+    text-wrap: pretty;
+  }
+  label {
+		font-size: 6px;
     text-wrap:pretty;
+    line-height: 1px;
 	}
   mat-label{
     font-size: 8px;
     text-wrap:pretty;
   }
+  input{ /* numeros */
+    font-size: 6px;
+  }
+
+  mat-input{ /* texto */
+    font-size: 1px;
+  }
+
   span{
     font-size: 10px;
     text-wrap:pretty;
   }
   
+  .gridHeight_r1{
+    height: 300px;
+  }
+  .gridHeight_r2{
+    height: 150px;
+  }
+  .gridHeight_r3{
+    height: 150px;
+  }
+
+  .textLeft {
+    margin: 0px;
+    line-height: 1;
+    /*font-size: 1vw ;*/
+  }
+  
+  
   /*items to hide when printing*/
   #botones {
     display: none;
   }
+
+  
+  
   
   /*  background: rgb(231, 231, 231)*/
   
@@ -56,6 +106,7 @@ usar width para acomodar otros.
   margin: 5px;
   padding: 0 16px;
   text-align: end;
+  
 }
 
 
@@ -127,19 +178,10 @@ input[type=number]::-webkit-outer-spin-button {
   /*font-size: 1vw;*/
 }
 
-.textCenteredBold {
-  text-wrap: pretty;
-  text-align: center;
-  margin: 4%;
-  font-weight: bold;
-  width: 100%;
-  /*font-size: 1vw;*/
-}
-
 .textHeadBold {
   text-wrap: pretty;
   text-align: center;
-  margin: 4%;
+  margin: 5px;
   font-weight: bold;
   width: 100%;
   /*font-size: 1.5vw;*/
@@ -174,10 +216,10 @@ input[type=number]::-webkit-outer-spin-button {
 .textLeft {
   text-wrap: pretty;
   text-align: left;
-
-  margin: 12px;
+  margin: 5px;
+  line-height: 1.1;
   width: 100%;
-  line-height: 1.25;
+  
   /*font-size: 1vw ;*/
 
 }
@@ -186,7 +228,8 @@ input[type=number]::-webkit-outer-spin-button {
 .textLeftBold {
   text-wrap: balance;
   text-align: left;
-  margin: 1rem;
+  margin: 5px;
+  line-height: 1.1;
   width: 100%;
   font-weight: bold;
   /*font-size: 1vw;*/

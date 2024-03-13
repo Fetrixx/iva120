@@ -1,7 +1,17 @@
+/*
+
+todo:
+- manage json data with form
+- save data on memory
+- 
+
+*/
 import { Component, ElementRef, ViewChild, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DecimalPipe } from '@angular/common';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+
 
 @Component({
   selector: 'app-root',
@@ -11,10 +21,19 @@ import { DecimalPipe } from '@angular/common';
 export class AppComponent {
 
   title = 'iva120';
-  @Input() jsonFile: any = '../assets/test2.json';
+  @Input() jsonFile: any = '../assets/test.json'; // CARGA DEL JSON (temporal)
 
-  constructor(private http: HttpClient, private decimalPipe: DecimalPipe) {
+  rubro1Config = {
+    value: [],
+    config: [{
+      class: 'tile',
+      col: '4',
+      row: '2',
+      classInput: 'inputNEWNumber'
+    }]
+  };
 
+  constructor(private http: HttpClient, private decimalPipe: DecimalPipe, private formBuilder: FormBuilder) {
   }
 
   getJsonData(): Observable<any> {
@@ -26,7 +45,7 @@ export class AppComponent {
   }
 
 
-
+// Objetos del json...obj "rubro1, r2..."
   public rubro1: any[] = [];
   public rubro2: any[] = [];
   public rubro3: any[] = [];
@@ -233,6 +252,70 @@ export class AppComponent {
     this.cargarValores_r4();
     this.cargarValores_r5();
     this.cargarValores_r6();
+    this.calculos_grid();
+  }
+
+  calculos_grid(){
+    // Totales R1: 'r1_12_1', 'r1_12_2', 'r1_12_3'
+    const r1_t3 = [
+      'r1_1_3', 'r1_8_3'  
+    ]
+    // Totales R2: 'r2_4_1', 'r2_8_1', 'r2_9_1'
+    const r2_t1 = [
+      'r2_1_1', 'r2_2_1','r2_3_1'
+    ]
+    
+    /*
+    r2_t1.forEach(id) => {
+    const inputElement = (<HTMLInputElement>document.getElementById('r2_4_1')); // Obtiene el elemento del input
+    
+    const inputElement = (<HTMLInputElement>document.getElementById('r2_4_1')); // Obtiene el elemento del input
+    console.log('r2_4_1: ');
+    console.log(inputElement.value);*/
+
+    
+    r1_t3.forEach((id) => {
+      const r1_t3_O = (<HTMLInputElement>document.getElementById('r1_12_3'));
+      r1_t3_O.value = '0';
+      const [prefix, row, col] = id.split('_'); // Divide el ID en partes separadas
+      const rowIndex = parseInt(row) - 1; // Obtiene el índice de fila restando 1
+      const colIndex = parseInt(col) - 1; // Obtiene el índice de columna restando 1
+      const value = this.retVal(this.r1Values, rowIndex, colIndex); // Obtiene el valor usando el método retVal
+      const inputElement = (<HTMLInputElement>document.getElementById(id)); // Obtiene el elemento del input
+      if (inputElement) { // verifica si el elemento existe, y si esta activado.
+        r1_t3_O.value = (parseFloat(r1_t3_O.value) + value).toString(); // Asigna el valor al input
+        
+        console.log("valor inicial: " + r1_t3_O.value)
+        console.log("valor a sumar: "+ value)
+        console.log( "suma: " + (parseFloat(r1_t3_O.value) + value))
+        
+        //(parseInt(r2_t1_O.value) + value).toString()
+        console.log("VALOR SUMADO r1_t3_O")
+        console.log(r1_t3_O.value)
+      }
+    });
+    
+
+    r2_t1.forEach((id) => {
+      const r2_t1_O = (<HTMLInputElement>document.getElementById('r2_4_1'));
+      const [prefix, row, col] = id.split('_'); // Divide el ID en partes separadas
+      const rowIndex = parseInt(row) - 1; // Obtiene el índice de fila restando 1
+      const colIndex = parseInt(col) - 1; // Obtiene el índice de columna restando 1
+      const value = this.retVal(this.r2Values, rowIndex, colIndex); // Obtiene el valor usando el método retVal
+      const inputElement = (<HTMLInputElement>document.getElementById(id)); // Obtiene el elemento del input
+      if (inputElement && !inputElement.disabled) { // verifica si el elemento existe, y si esta activado.
+        r2_t1_O.value = (parseFloat(r2_t1_O.value) + value).toString(); // Asigna el valor al input
+        //(parseInt(r2_t1_O.value) + value).toString()
+        console.log("VALOR SUMADO r2_t1_O")
+        console.log(r2_t1_O.value)
+        
+      }
+    });
+    
+    
+
+    
+
   }
 
   cargarValores_r1() {
@@ -391,14 +474,14 @@ export class AppComponent {
   }
 
 
-  setValue() {
+  /*setValue() {
     // Obtenemos el valor del input
     //const inputValue = (<HTMLInputElement>document.getElementById(inputId)).value;
     // Asignamos el valor al input
-    /*(<HTMLInputElement>document.getElementById(inputId)).value = "2";
-    console.log("valor asignado: ")*/
+    //(<HTMLInputElement>document.getElementById(inputId)).value = "2";
+    //console.log("valor asignado: ")
     //this.r1_11.nativeElement.value = this.retVal(this.r1Values, 0, 0)
-  }
+  }*/
 
 
 
@@ -497,7 +580,6 @@ export class AppComponent {
 
   }
 
-
   formatNumber(value: number | null): string {
     if (value === null) {
       return '';
@@ -516,10 +598,65 @@ export class AppComponent {
 
   }
 
+  test(e: any, i: number) {
+    //debugger;
+    
+    //console.log(e);
+    //console.log(e.target.value);
+    //console.log(this.r1Values ) // array de valores: [0] = [123,123,123,123]
+    //console.log(this.rubro1)// array de objetos key:val; [0] = {col1: 5164..., col2:...}
+    this.getValue()
+    console.log(this.checkoutForm.get('r1')?.value)
+    this.rubro1[0] = e.target.value;
+    const value = this.retVal(this.r1Values, 0, 0);
+  }
+  
+  checkoutForm = this.formBuilder.group({
+    //r1: ["abc123"], // funca
+    r1: [this.rubro1],
+    r2: [this.jsonFile.r2],
+  });
+
+  logValue(comp='r1'){
+    console.log
+  }
+
+  getValue(comp = 'r1') {
+    //return this.checkoutForm.get
+    console.log(this.checkoutForm.get('r3'));
+    return this.checkoutForm.get(comp)!.value;
+  }
+
+
+  setValue(comp = 'r2', value: any) {
+    //this.checkoutForm.get(comp)!.value = value;
+    this.checkoutForm.get(comp)?.value;
+  }
+
+
 
 }
 
 
+
+
+/*
+
+checkoutForm = this.formBuilder.group({
+    r1: [this.items.r1],
+    r2: [this.items.r2],
+  });
+
+  getValue(comp = 'r1') {
+    return this.formBuilder.get(comp).value;
+  }
+
+  setValue(comp = 'r1', value: any) {
+    this.formBuilder.get(comp).value = value;
+  }
+
+
+*/
 
 /*
 guardar datos en un array, de ahi ir llenando los inputs, desactivar manualmente los que no se usan

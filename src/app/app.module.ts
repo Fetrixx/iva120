@@ -30,6 +30,9 @@ import { DatepickerViewsSelection } from './dateMMYYYY/datepicker-views-selectio
 import { HttpClientModule } from '@angular/common/http';
 
 import { DecimalPipe } from '@angular/common';
+import { JsonService } from './jsonService.service';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -52,9 +55,10 @@ import { DecimalPipe } from '@angular/common';
     MatNativeDateModule,
     MatButtonModule,
     MatCardModule,
-    DatepickerViewsSelection
+    DatepickerViewsSelection,
+    ReactiveFormsModule
   ],
-  providers: [DecimalPipe],
+  providers: [DecimalPipe, JsonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

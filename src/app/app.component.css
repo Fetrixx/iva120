@@ -1,9 +1,11 @@
-.gridHeight_r1{
-  height: 600px;
-}
+
 .labelRubro{
-  font-size: 10px;
+  font-size: 13px;
   font-weight: bold;
+}
+
+.gridHeight_r1{
+  height: 800px;
 }
 
 .gridHeight_r2{
@@ -11,50 +13,132 @@
 }
 
 .gridHeight_r3{
-  height: 300px;
+  height: 450px;
+}
+
+.gridHeight_r4{
+  height: 550px;
+}
+.gridHeight_r5{
+  height: 500px;
+}
+.gridHeight_r6{
+  height: 500px;
+}
+.gridHeight_footer{
+  height: 600px;
+}
+
+/*
+mat-mdc-input-element ng-tns-c2608167813-0 mat-mdc-form-field-input-control mdc-text-field__input cdk-text-field-autofill-monitored
+*/
+mat-mdc-input-element mat-mdc-form-field-input-control{
+font-size: 3px;
+}
+
+
+@media screen and (min-width: 1001px) { /* If the screen size is 901px wide or more, set the font-size to ...px */
+  .labelRubro{
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+}
+@media screen and (max-width: 1000px) { /* If the screen size is 900px wide or less, set the font-size to ...px */
+  .labelRubro{
+    font-size: 10px;
+  } 
+  label {
+		font-size: 11px;
+    line-height: 1;
+    /*text-wrap:pretty;*/
+    
+	}
+  mat-label{
+    font-size: 8px;
+    /*text-wrap:pretty;*/
+  }
+  input{ /* numeros en grid auto*/
+    font-size: 8px;
+  }
+
+}
+@media screen and (max-width: 650px) { /* If the screen size is 900px wide or less, set the font-size to ...px */
+  .labelRubro{
+    font-size: 8px;
+  } 
+  label {
+		font-size: 9px;
+    line-height: 1;
+    /*text-wrap:pretty;*/
+    
+	}
+  mat-label{
+    font-size: 8px;
+    /*text-wrap:pretty;*/
+  }
+
 }
 
 @media print {
 	
+  .gridHeight_r1{
+    height: 400px;
+  }
+  .gridHeight_r2{
+    height: 250px;
+  }
+  .gridHeight_r3{
+    height: 200px;
+  }
+  .gridHeight_r4{
+    height: 250px;
+  }
+  .gridHeight_r5{
+    height: 210px;
+  }
+  .gridHeight_r6{
+    height: 300px;
+  }
+
+  .gridHeight_footer{
+    height: 250px;
+  }
+
   .labelRubro{
-    font-size: 7px;
-    text-wrap: pretty;
+    font-size: 8px;
+    line-height: 1.3;
   }
   label {
-		font-size: 6px;
-    text-wrap:pretty;
-    line-height: 1px;
+    line-height: 1;
+		font-size: 8px;
+    
+    
+    /*line-height: 1px;*/
 	}
   mat-label{
     font-size: 8px;
-    text-wrap:pretty;
+    
   }
-  input{ /* numeros */
-    font-size: 6px;
+
+  input{ /* numeros en grid auto*/
+    font-size: 8px;
   }
 
   mat-input{ /* texto */
-    font-size: 1px;
+    font-size: 6px;
   }
 
   span{
     font-size: 10px;
-    text-wrap:pretty;
+    /*text-wrap:pretty;*/
   }
   
-  .gridHeight_r1{
-    height: 300px;
-  }
-  .gridHeight_r2{
-    height: 150px;
-  }
-  .gridHeight_r3{
-    height: 150px;
-  }
+  
 
   .textLeft {
     margin: 0px;
-    line-height: 1;
+    /*line-height: 1;*/
     /*font-size: 1vw ;*/
   }
   
@@ -149,6 +233,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 
+
 .textTitle {
   background: #e4f4f4;
   width: 100%;
@@ -161,6 +246,7 @@ input[type=number]::-webkit-outer-spin-button {
 
   margin-left: 5%;
   margin-right: 5%;
+  margin-bottom: 10px
   ;
   /*margin-top: 10px*/
   /*margin-top: 1rem;*/

@@ -3,14 +3,14 @@
 todo:
 - manage json data with form
 - save data on memory
-- 
+- css clamp to adapt font size? clamp(12px, 4vw, 32px)?
 
 */
 import { Component, ElementRef, ViewChild, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DecimalPipe } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
 
 @Component({
@@ -21,7 +21,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class AppComponent {
 
   title = 'iva120';
-  @Input() jsonFile: any = '../assets/test.json'; // CARGA DEL JSON (temporal)
+  @Input() jsonFile: any = '../assets/test2.json'; // CARGA DEL JSON (temporal)
 
   rubro1Config = {
     value: [],
@@ -33,19 +33,34 @@ export class AppComponent {
     }]
   };
 
+  jsonFormFile?: FormGroup ;
+  
+
+
   constructor(private http: HttpClient, private decimalPipe: DecimalPipe, private formBuilder: FormBuilder) {
+    this.jsonFormFile = this.formBuilder.group({
+      r1: this.formBuilder.array([]),
+      r2: this.formBuilder.array([]),
+      r3: this.formBuilder.array([]),
+      r4: this.formBuilder.array([]),
+      r5: this.formBuilder.array([]),
+      r6: this.formBuilder.array([]),
+      res: this.formBuilder.array([]),
+    })
   }
 
   getJsonData(): Observable<any> {
     return this.http.get<any>(this.jsonFile);
   }
 
+  jsonObject = this.getJsonData();
+
   log() {
     console.log(this.jsonFile);
   }
 
 
-// Objetos del json...obj "rubro1, r2..."
+  // Objetos del json...obj "rubro1, r2..."
   public rubro1: any[] = [];
   public rubro2: any[] = [];
   public rubro3: any[] = [];
@@ -69,6 +84,16 @@ export class AppComponent {
     this.http.get<{ res: any[], r1: any[], r2: any[], r3: any[], r4: any[], r5: any[], r6: any[] }>(this.jsonFile).subscribe(response => {
 
       this.rubro1 = response.r1;
+      console.log("response.r1[0]: ")
+      console.log(response.r1[0]);
+      console.log("response.r1[0].col1: ")
+      console.log(response.r1[0].col1);
+      /*for (let i = 0; i < this.rubro1.length; i++) {
+        this.jsonDataForm.get('r1')?.setValue(this.rubro1[i])
+      }*/
+
+
+
       //console.log("R1 ES: ")
       //console.log(this.rubro1);
       this.rubro2 = response.r2;
@@ -77,11 +102,16 @@ export class AppComponent {
       this.rubro5 = response.r5;
       this.rubro6 = response.r6;
       this.res = response.res;
+
+
+
+      
+
       //let cols: any ;
       //console.log("r1 obj:")
       //console.log(this.rubro1)
       //console.log(this.rubro1.length)
-      for (let i = 0; i < this.rubro1.length; i++) {  // llenando todos los datos existentes para las casillas
+      /*for (let i = 0; i < this.rubro1.length; i++) {  // llenando todos los datos existentes para las casillas
         this.r1Values.push(Object.values(this.rubro1[i]))
         //console.log(r1[i].col)
       }
@@ -102,7 +132,9 @@ export class AppComponent {
       }
       for (let i = 0; i < this.res.length; i++) {
         this.resValues.push(Object.values(this.res[i]))
-      }
+      }*/
+
+      this.cargarDatosJson()
       /*console.log("this.r1Values") // aray de valores de r1
       console.log(this.r1Values)
       console.log("this.r1Values[0]") // sub array, valores de la fila1[0] de r1
@@ -157,61 +189,37 @@ export class AppComponent {
   public dataFromJson: any;
   ngOnInit() {
     this.loadJsonData()
+    
+
+    this.http.get<any>(this.jsonFile).subscribe(response => {
+      Object.keys(response).forEach(key => {
+        // Obtén el FormArray correspondiente
+        const formArray = this.jsonDataForm.get(key) as FormArray;
+  
+        // Itera sobre los elementos del JSON y agrega controles al FormArray
+        response[key].forEach((item: any) => {
+          const formGroup = this.createFormGroup(item);
+          formArray.push(formGroup);
+        });
+        console.log(`${key}:`, formArray.value);
+      });
+    });
+    // Itera sobre las claves del JSON
+    
+
+    
     //console.log(this.r1Values)
 
-
-
-    /*
-    // Guardar los datos de 'res' en 'resArray'
-    this.dataFromJson.res.forEach((element:any) => {
-      this.resArray.push(element);
-    });
-
-    // Guardar los datos de 'r1' en 'r1Array'
-    this.dataFromJson.r1.forEach((element:any) => {
-      this.r1Array.push(element);
-    });
-
-    // Guardar los datos de 'r2' en 'r2Array'
-    this.dataFromJson.r2.forEach((element:any) => {
-      this.r2Array.push(element);
-    });
-
-    // Guardar los datos de 'r3' en 'r3Array'
-    this.dataFromJson.r3.forEach((element:any) => {
-      this.r3Array.push(element);
-    });
-
-    // Guardar los datos de 'r4' en 'r4Array'
-    this.dataFromJson.r4.forEach((element:any) => {
-      this.r4Array.push(element);
-    });
-
-    // Guardar los datos de 'r5' en 'r5Array'
-    this.dataFromJson.r5.forEach((element:any) => {
-      this.r5Array.push(element);
-    });
-
-    // Guardar los datos de 'r6' en 'r6Array'
-    this.dataFromJson.r6.forEach((element:any) => {
-      this.r6Array.push(element);
-    });
-
-    // Verificar los datos almacenados en los arreglos
-    console.log('resArray:', this.resArray);
-    console.log('r1Array:', this.r1Array);
-    console.log('r2Array:', this.r2Array);
-    console.log('r3Array:', this.r3Array);
-    console.log('r4Array:', this.r4Array);
-    console.log('r5Array:', this.r5Array);
-    console.log('r6Array:', this.r6Array);
-
-    /*this.http.get(this.jsonFile).subscribe(response => {
-      this.dataFromJson = response;
-    })*/
-    //this.loadJsonData()
-
   }
+
+  createFormGroup(item: any): FormGroup {
+    const formGroup = this.formBuilder.group({});
+    Object.keys(item).forEach(key => {
+      formGroup.addControl(key, this.formBuilder.control(item[key]));
+    });
+    return formGroup;
+  }
+
   /*loadJsonData(){
     
     this.http.get
@@ -255,16 +263,29 @@ export class AppComponent {
     this.calculos_grid();
   }
 
-  calculos_grid(){
+
+  cargarTodos2() {
+    this.cargarValores_inputR1();
+    this.cargarValores_inputR2();
+    this.cargarValores_inputR3();
+    this.cargarValores_inputR4();
+    //this.cargarValores_r5();
+    //this.cargarValores_r6();
+    //this.calculos_grid();
+  }
+
+  
+
+  calculos_grid() {
     // Totales R1: 'r1_12_1', 'r1_12_2', 'r1_12_3'
     const r1_t3 = [
-      'r1_1_3', 'r1_8_3'  
+      'r1_1_3', 'r1_8_3'
     ]
     // Totales R2: 'r2_4_1', 'r2_8_1', 'r2_9_1'
     const r2_t1 = [
-      'r2_1_1', 'r2_2_1','r2_3_1'
+      'r2_1_1', 'r2_2_1', 'r2_3_1'
     ]
-    
+
     /*
     r2_t1.forEach(id) => {
     const inputElement = (<HTMLInputElement>document.getElementById('r2_4_1')); // Obtiene el elemento del input
@@ -273,7 +294,7 @@ export class AppComponent {
     console.log('r2_4_1: ');
     console.log(inputElement.value);*/
 
-    
+
     r1_t3.forEach((id) => {
       const r1_t3_O = (<HTMLInputElement>document.getElementById('r1_12_3'));
       r1_t3_O.value = '0';
@@ -284,17 +305,17 @@ export class AppComponent {
       const inputElement = (<HTMLInputElement>document.getElementById(id)); // Obtiene el elemento del input
       if (inputElement) { // verifica si el elemento existe, y si esta activado.
         r1_t3_O.value = (parseFloat(r1_t3_O.value) + value).toString(); // Asigna el valor al input
-        
+
         console.log("valor inicial: " + r1_t3_O.value)
-        console.log("valor a sumar: "+ value)
-        console.log( "suma: " + (parseFloat(r1_t3_O.value) + value))
-        
+        console.log("valor a sumar: " + value)
+        console.log("suma: " + (parseFloat(r1_t3_O.value) + value))
+
         //(parseInt(r2_t1_O.value) + value).toString()
         console.log("VALOR SUMADO r1_t3_O")
         console.log(r1_t3_O.value)
       }
     });
-    
+
 
     r2_t1.forEach((id) => {
       const r2_t1_O = (<HTMLInputElement>document.getElementById('r2_4_1'));
@@ -308,13 +329,37 @@ export class AppComponent {
         //(parseInt(r2_t1_O.value) + value).toString()
         console.log("VALOR SUMADO r2_t1_O")
         console.log(r2_t1_O.value)
-        
+
       }
     });
-    
-    
 
-    
+
+
+
+
+  }
+
+  cargarValores_inputR1() {
+    // Define un arreglo con los IDs de tus inputs
+    const inputIds = [
+      'r1_1_1', 'r1_1_2', 'r1_1_3',
+      'r1_2_1', 'r1_2_2', 'r1_2_3',
+      'r1_3_1', 'r1_3_2', 'r1_3_3',
+      'r1_4_1', 'r1_4_2', 'r1_4_3',
+      'r1_5_1', 'r1_5_2', 'r1_5_3',
+      'r1_6_1', 'r1_6_2', 'r1_6_3',
+      'r1_7_1', 'r1_7_2', 'r1_7_3',
+      'r1_8_1', 'r1_8_2', 'r1_8_3',
+      'r1_9_1', 'r1_9_2', 'r1_9_3',
+      'r1_10_1', 'r1_10_2', 'r1_10_3',
+      'r1_11_1', 'r1_11_2', 'r1_11_3',
+      /*'r1_12_1', 'r1_12_2', 'r1_12_3',*/ // totales
+    ];
+
+    // Recorre los IDs y asigna los valores usando el método retVal
+    inputIds.forEach((id) => {
+      this.getInputValue(id)
+    });
 
   }
 
@@ -349,6 +394,24 @@ export class AppComponent {
 
   }
 
+  cargarValores_inputR2() {
+    // Define un arreglo con los IDs de inputs
+    const inputIds = [
+      'r2_1_1',
+      'r2_2_1',
+      'r2_3_1',
+      'r2_4_1',
+      'r2_5_1',
+      'r2_6_1',
+      'r2_7_1',
+      'r2_8_1'
+    ];
+    
+    inputIds.forEach((id) => {
+      this.getInputValue(id)
+    });
+  }
+
   cargarValores_r2() {
     const inputIds = [
       'r2_1_1',
@@ -373,6 +436,22 @@ export class AppComponent {
     });
   }
 
+  cargarValores_inputR3() {
+    // Define un arreglo con los IDs de inputs
+    const inputIds = [
+      'r3_1_1', 'r3_1_2', 'r3_1_3',
+      'r3_2_1', 'r3_2_2', 'r3_2_3',
+      'r3_3_1', 'r3_3_2', 'r3_3_3',
+      'r3_4_1', 'r3_4_2', 'r3_4_3',
+      'r3_5_1', 'r3_5_2', 'r3_5_3',
+      'r3_6_1', 'r3_6_2', 'r3_6_3',
+    ];
+    
+    inputIds.forEach((id) => {
+      this.getInputValue(id)
+    });
+  }
+
   cargarValores_r3() {
     const inputIds = [
       'r3_1_1', 'r3_1_2', 'r3_1_3',
@@ -392,6 +471,26 @@ export class AppComponent {
       if (inputElement && !inputElement.disabled) {
         inputElement.value = value.toString();
       }
+    });
+  }
+
+  cargarValores_inputR4() {
+    // Define un arreglo con los IDs de inputs
+    const inputIds = [
+      'r4_1_1',
+      'r4_2_1',
+      'r4_3_1',
+      'r4_4_1',
+      'r4_5_1',
+      'r4_6_1',
+      'r4_7_1',
+      'r4_8_1',
+      'r4_9_1',
+      'r4_10_1'
+    ];
+    
+    inputIds.forEach((id) => {
+      this.getInputValue(id)
     });
   }
 
@@ -488,33 +587,7 @@ export class AppComponent {
 
   /*
   @ViewChild('r1_11') r1_11!: ElementRef;     // R es "rubro", 11 es: fila 1, columna 1.
-  @ViewChild('r1_12') r1_12!: ElementRef;
-  @ViewChild('r1_13') r1_13!: ElementRef;
-  @ViewChild('r1_21') r1_21!: ElementRef;
-  @ViewChild('r1_22') r1_22!: ElementRef;
-  @ViewChild('r1_23') r1_23!: ElementRef;
-  @ViewChild('r1_31') r1_31!: ElementRef;
-  @ViewChild('r1_32') r1_32!: ElementRef;
-  @ViewChild('r1_33') r1_33!: ElementRef;
-  @ViewChild('r1_41') r1_41!: ElementRef;
-  @ViewChild('r1_42') r1_42!: ElementRef;
-  @ViewChild('r1_43') r1_43!: ElementRef;
-  @ViewChild('r1_51') r1_51!: ElementRef;
-  @ViewChild('r1_52') r1_52!: ElementRef;
-  @ViewChild('r1_53') r1_53!: ElementRef;
-  @ViewChild('r1_61') r1_61!: ElementRef;
-  @ViewChild('r1_62') r1_62!: ElementRef;
-  @ViewChild('r1_63') r1_63!: ElementRef;
-
-  @ViewChild('r1_71') r1_71!: ElementRef;
-  @ViewChild('r1_72') r1_72!: ElementRef;
-  @ViewChild('r1_73') r1_73!: ElementRef;
-  @ViewChild('r1_81') r1_81!: ElementRef;
-  @ViewChild('r1_82') r1_82!: ElementRef;
-  @ViewChild('r1_83') r1_83!: ElementRef;
-  @ViewChild('r1_91') r1_91!: ElementRef;
-  @ViewChild('r1_92') r1_92!: ElementRef;
-  @ViewChild('r1_93') r1_93!: ElementRef;
+  
   cargarValores() {
     // Obtenemos el valor del input
     //const inputValue = (<HTMLInputElement>document.getElementById(inputId)).value;
@@ -522,34 +595,7 @@ export class AppComponent {
     //(<HTMLInputElement>document.getElementById(inputId)).value = "2";
     //console.log("valor asignado: ")
     this.r1_11.nativeElement.value = this.retVal(this.r1Values, 0, 0)
-    this.r1_12.nativeElement.value = this.retVal(this.r1Values, 0, 1)
-    this.r1_13.nativeElement.value = this.retVal(this.r1Values, 0, 2)
-    this.r1_21.nativeElement.value = this.retVal(this.r1Values, 1, 0)
-    this.r1_22.nativeElement.value = this.retVal(this.r1Values, 1, 1)
-    this.r1_23.nativeElement.value = this.retVal(this.r1Values, 1, 2)
-    this.r1_31.nativeElement.value = this.retVal(this.r1Values, 2, 0)
-    this.r1_32.nativeElement.value = this.retVal(this.r1Values, 2, 1)
-    this.r1_33.nativeElement.value = this.retVal(this.r1Values, 2, 2)
-    this.r1_41.nativeElement.value = this.retVal(this.r1Values, 3, 0)
-    this.r1_42.nativeElement.value = this.retVal(this.r1Values, 3, 1)
-    this.r1_43.nativeElement.value = this.retVal(this.r1Values, 3, 2)
-    this.r1_51.nativeElement.value = this.retVal(this.r1Values, 4, 0)
-    this.r1_52.nativeElement.value = this.retVal(this.r1Values, 4, 1)
-    this.r1_53.nativeElement.value = this.retVal(this.r1Values, 4, 2)
-    this.r1_61.nativeElement.value = this.retVal(this.r1Values, 4, 0)
-    this.r1_62.nativeElement.value = this.retVal(this.r1Values, 4, 1)
-    this.r1_63.nativeElement.value = this.retVal(this.r1Values, 4, 2)
 
-    this.r1_71.nativeElement.value = this.retVal(this.r1Values, 5, 0)
-    this.r1_72.nativeElement.value = this.retVal(this.r1Values, 5, 1)
-    this.r1_73.nativeElement.value = this.retVal(this.r1Values, 5, 2)
-    this.r1_81.nativeElement.value = this.retVal(this.r1Values, 6, 0)
-    this.r1_82.nativeElement.value = this.retVal(this.r1Values, 6, 1)
-    this.r1_83.nativeElement.value = this.retVal(this.r1Values, 6, 2)
-    this.r1_91.nativeElement.value = this.retVal(this.r1Values, 7, 0)
-    this.r1_92.nativeElement.value = this.retVal(this.r1Values, 7, 1)
-    this.r1_93.nativeElement.value = this.retVal(this.r1Values, 7, 2)
-   
     this.cargarValores_r2()
   }
 */
@@ -587,7 +633,7 @@ export class AppComponent {
     return this.decimalPipe.transform(value, '1.0-0') || '';
   }
 
-  printScreen(){
+  printScreen() {
     //Get the print button and put it into a variable
     var cargarTodos_Btn = document.getElementById("cargarTodos");
     //Set the print button visibility to 'hidden' 
@@ -600,49 +646,199 @@ export class AppComponent {
 
   test(e: any, i: number) {
     //debugger;
-    
+
     //console.log(e);
     //console.log(e.target.value);
     //console.log(this.r1Values ) // array de valores: [0] = [123,123,123,123]
     //console.log(this.rubro1)// array de objetos key:val; [0] = {col1: 5164..., col2:...}
+    console.log("this.getValue(): ")
     this.getValue()
-    console.log(this.checkoutForm.get('r1')?.value)
+    this.jsonDataForm.get('r1')?.value //gets values 
+    //console.log("console.log(this.jsonDataForm.get('r1')?.value)")
+    //console.log(this.jsonDataForm.get('r1')?.value)
     this.rubro1[0] = e.target.value;
     const value = this.retVal(this.r1Values, 0, 0);
   }
-  
-  checkoutForm = this.formBuilder.group({
+
+  /*getData(rubro: 'r1') {
+    return this.jsonDataForm.get(rubro)?.value;
+  }*/
+
+  jsonDataForm = this.formBuilder.group({
     //r1: ["abc123"], // funca
-    r1: [this.rubro1],
-    r2: [this.jsonFile.r2],
+    r1: this.formBuilder.array([]),
+    r2: this.formBuilder.array([]),
+    r3: this.formBuilder.array([]),
+    r4: this.formBuilder.array([]),
+    r5: this.formBuilder.array([]),
+    r6: this.formBuilder.array([]),
+    res: this.formBuilder.array([])
+    /*r1: [this.rubro1],
+    r2: [this.jsonFile.r2],*/
   });
 
-  logValue(comp='r1'){
+  logValue(comp = 'r1') {
     console.log
   }
 
-  getValue(comp = 'r1') {
-    //return this.checkoutForm.get
-    console.log(this.checkoutForm.get('r3'));
-    return this.checkoutForm.get(comp)!.value;
+  getValue(comp = 'r2') {
+    //return this.jsonDataForm.get
+    console.log("valor de " + comp)
+    console.log(this.jsonDataForm.get(comp)?.value);
+    //console.log(this.jsonDataForm.get('r3'))
+    return this.jsonDataForm.get(comp)?.value;
   }
 
 
-  setValue(comp = 'r2', value: any) {
-    //this.checkoutForm.get(comp)!.value = value;
-    this.checkoutForm.get(comp)?.value;
+  
+  /*
+  cargarDatosJson() {
+    this.http.get<any>(this.jsonFile).subscribe(response => {
+      this.jsonDataForm.patchValue({
+        
+        r1: response.r1, // response.r1 = array completo de r1 = this.rubro1
+        r2: response.r2,
+        r3: response.r3,
+        r4: response.r4,
+        r5: response.r5,
+        r6: response.r6,
+        res: response.res
+
+
+      });
+    });
   }
 
 
+  //setValue(comp = 'r2', value: any) {
+//    //this.jsonDataForm.get(comp)!.value = value;
+//    this.jsonDataForm.get(comp)?.value;
+  //}
+
+  getData(rubro: 'r1' | 'r2' | 'r3' | 'r4' | 'r5' | 'r6' | 'res') {
+    console.log(this.jsonDataForm.get(rubro)?.value);
+    return this.jsonDataForm.get(rubro)?.value;
+  }
+
+  setValue(comp: 'r1' | 'r2' | 'r3' | 'r4' | 'r5' | 'r6' | 'res', value: any) {
+    this.jsonDataForm.get(comp)?.setValue(value);
+  }*/
+
+  cargarDatosJson() {
+    this.http.get<any>(this.jsonFile).subscribe(response => {
+      // Asegúrate de que la estructura de tu JSON coincida con la estructura esperada por tus formularios
+      // Supongamos que tienes los mismos nombres de claves en tu JSON como en tus formularios
+
+      /*
+      Object.keys(response).forEach(key => {
+        this.jsonDataForm.get(key)?.patchValue(response[key]);
+      });*/
+      
+
+      // Itera sobre las claves de tu JSON y establece los valores correspondientes en el formulario
+      Object.keys(response).forEach(key => {
+        const formArray = this.jsonDataForm.get(key) as FormArray;
+        formArray.clear(); // Limpia el FormArray antes de agregar los nuevos valores
+        response[key].forEach((item: any) => {
+          formArray.push(this.formBuilder.group(item));
+        });
+      });
+    });
+  }
+
+  get r1Control() {
+    return (this.jsonDataForm.get('r1') as FormArray).controls[0].get('col1');
+  }
+
+  getInputValue(id: string){
+      const [prefix, row, col] = id.split('_');
+      const rubro = prefix;
+      const rowIndex = parseInt(row) - 1;
+      const colIndex = parseInt(col) - 1;
+      //console.log(this.jsonDataForm.get(rubro)?.value)
+      //const value = this.retVal(this.jsonDataForm.get(rubro)?.value, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
+      const formArray = this.jsonDataForm.get(rubro) as FormArray;
+      const value = formArray.at(rowIndex).get(`col${colIndex + 1}`)?.value;
+
+      const inputElement = document.getElementById(id) as HTMLInputElement;
+      if (inputElement && !inputElement.disabled) {
+        inputElement.value = value.toString();
+      }
+      //console.log(value)
+    
+
+    //return this.jsonDataForm.get(rubro)?.value;
+  }
+
+  getInputValueLOG(id: string){
+    const [prefix, row, col] = id.split('_');
+    const rubro = prefix;
+    const rowIndex = parseInt(row) - 1;
+    const colIndex = parseInt(col) - 1;
+    //console.log(this.jsonDataForm.get(rubro)?.value)
+    //const value = this.retVal(this.jsonDataForm.get(rubro)?.value, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
+    const formArray = this.jsonDataForm.get(rubro) as FormArray;
+    const value = formArray.at(rowIndex).get(`col${colIndex + 1}`)?.value;
+
+    const inputElement = document.getElementById(id) as HTMLInputElement;
+    if (inputElement && !inputElement.disabled) {
+      inputElement.value = value.toString();
+    }
+    console.log(value)
+  
+
+  //return this.jsonDataForm.get(rubro)?.value;
+}
+
+  cargarValores_inputR1123() {
+    // Define un arreglo con los IDs de tus inputs
+    const inputIds = [
+      'r1_1_1', 'r1_1_2', 'r1_1_3',
+      'r1_2_1', 'r1_2_2', 'r1_2_3',
+      'r1_3_1', 'r1_3_2', 'r1_3_3',
+      'r1_4_1', 'r1_4_2', 'r1_4_3',
+      'r1_5_1', 'r1_5_2', 'r1_5_3',
+      'r1_6_1', 'r1_6_2', 'r1_6_3',
+      'r1_7_1', 'r1_7_2', 'r1_7_3',
+      'r1_8_1', 'r1_8_2', 'r1_8_3',
+      'r1_9_1', 'r1_9_2', 'r1_9_3',
+      'r1_10_1', 'r1_10_2', 'r1_10_3',
+      'r1_11_1', 'r1_11_2', 'r1_11_3',
+      /*'r1_12_1', 'r1_12_2', 'r1_12_3',*/ // totales
+    ];
+
+    // Recorre los IDs y asigna los valores usando el método retVal
+    inputIds.forEach((id) => {
+      this.getInputValue(id)
+    });
+
+  }
+
+
+
+
+
+  getData(rubro: string) {
+    console.log("Rubro: " + rubro)
+    console.log(this.jsonDataForm.get(rubro)?.value)
+    return this.jsonDataForm.get(rubro)?.value;
+  }
+
+  setValue(comp: string, value: any) {
+    this.jsonDataForm.get(comp)?.setValue(value);
+  }
 
 }
 
 
 
 
+
+
+
 /*
 
-checkoutForm = this.formBuilder.group({
+jsonDataForm = this.formBuilder.group({
     r1: [this.items.r1],
     r2: [this.items.r2],
   });
@@ -657,6 +853,7 @@ checkoutForm = this.formBuilder.group({
 
 
 */
+
 
 /*
 guardar datos en un array, de ahi ir llenando los inputs, desactivar manualmente los que no se usan

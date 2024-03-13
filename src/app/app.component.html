@@ -66,7 +66,18 @@ botones:
   <!--
     https://stackoverflow.com/questions/31425557/hide-buttons-when-printing
   -->
+  <button mat-raised-button (click)="getData('r2')"> getData</button>
+
+  <button mat-raised-button (click)="getInputValueLOG('r1_1_1')"> getInputValue</button>
+  <button mat-raised-button (click)="cargarTodos2()"> cargarTodos2 </button>
+  
+  
+  
+
+
+
   <button mat-raised-button id="cargarTodos" (click)="cargarTodos()">Cargar Datos / Leer</button>
+  <button mat-raised-button id="cargarTodos" (click)="cargarDatosJson()">Cargar Datos JSON</button>
   <button style="margin-left: 20px" mat-raised-button disabled="true"> Guardar </button>
   <button style="margin-left: 20px" mat-raised-button onclick="window.print()"> Imprimir </button>
   <button style="margin-left: 20px" mat-raised-button disabled="true"> Exportar </button>
@@ -1406,11 +1417,13 @@ four
   </div>
 </div>
 
-<mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_footer">
+
+<!--mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_footer">
   <div *ngFor="let item of rubro1; let i = index">
     <mat-grid-tile [class]="rubro1Config.config[0].class" [colspan]="rubro1Config.config[0].col" [rowspan]="rubro1Config.config[0].row"> 
 
-      <input type="number" [value]="item"  [class]="rubro1Config.config[0].classInput" (keyup)="test($event, i)"> <!--item = $event.target.value -->
+      <input type="number" [value]="item"  [class]="rubro1Config.config[0].classInput" (keyup)="test($event, i)"> <!--item = $event.target.value 
     </mat-grid-tile>
   </div>
 </mat-grid-list>
+-->

@@ -225,7 +225,7 @@ input[type=number]::-webkit-outer-spin-button {
   border-style: solid;
   border-width: 1px;
   border-color:lightblue;
-  background: whitesmoke;
+  background: white;
 
   text-wrap: pretty;
   text-align: left;

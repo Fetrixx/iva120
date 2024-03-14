@@ -66,15 +66,12 @@ botones:
   <!--
     https://stackoverflow.com/questions/31425557/hide-buttons-when-printing
   -->
+  <button mat-raised-button (click)="asdasdasd('r1')"> getData</button>
   <button mat-raised-button (click)="getData('r2')"> getData</button>
 
-  <button mat-raised-button (click)="getInputValueLOG('r1_1_1')"> getInputValue</button>
+  <button mat-raised-button (click)="getInputValueLOG('r1_1_1')"> getInputValue('r1_1_1')</button>
   <button mat-raised-button (click)="cargarTodos2()"> cargarTodos2 </button>
   
-  
-  
-
-
 
   <button mat-raised-button id="cargarTodos" (click)="cargarTodos()">Cargar Datos / Leer</button>
   <button mat-raised-button id="cargarTodos" (click)="cargarDatosJson()">Cargar Datos JSON</button>
@@ -321,7 +318,7 @@ four
     <div style="margin: 5px;">
 
       <!--mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="5"-->
-      <mat-grid-list class="gridHeight_r1" cols="14" rowHeight="fit" gutterSize="0"> <!-- RUBRO 1 -->
+      <mat-grid-list class="gridHeight_r1" cols="14" rowHeight="fit" gutterSize="0" > <!-- RUBRO 1 -->
 
 
 
@@ -375,8 +372,13 @@ four
 
         <mat-grid-tile class="tile" colspan="4" rowspan="2"> <!-- ingresar texto -->
 
-          <input type="number" value="" #r1_1_1 id="r1_1_1"  class="inputNEWNumber">
+          <!-- *ngFor="let control of jsonDataForm.get('r1').controls; let i = index" -->
+          <!-- [formControlName]="jsonDataForm.get('r1')!.value[0]" -->
+          
+          <!--input type="number"  [value]="jsonDataForm.get('r1')!.value[0].col1 as number" class="inputNEWNumber"-->
 
+          <input type="number"  value="" #r1_1_1 id="r1_1_1" class="inputNEWNumber">
+          
           <!--mat-form-field subscriptSizing="dynamic" style="" class="inputNumber">
             <input matInput type="number" value="" #r1_1_1 id="r1_1_1">
           </mat-form-field-->
@@ -1409,7 +1411,7 @@ four
 
       </mat-grid-list>
 
-    
+      
       
     
 

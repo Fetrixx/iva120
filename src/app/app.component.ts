@@ -33,8 +33,7 @@ export class AppComponent {
     }]
   };
 
-  jsonFormFile?: FormGroup ;
-  
+  jsonFormFile?: FormGroup;
 
 
   constructor(private http: HttpClient, private decimalPipe: DecimalPipe, private formBuilder: FormBuilder) {
@@ -78,6 +77,11 @@ export class AppComponent {
   r5Values: any[] = [];
   r6Values: any[] = [];
 
+
+  /**
+   * DEPRECATED????
+   * 
+   */
   loadJsonData() {
 
     //this.http.get<{ config: any[], data: any[] }>(this.jsonLink) // get "data" y config de type any[] dentro del json
@@ -105,7 +109,7 @@ export class AppComponent {
 
 
 
-      
+
 
       //let cols: any ;
       //console.log("r1 obj:")
@@ -188,14 +192,14 @@ export class AppComponent {
 
   public dataFromJson: any;
   ngOnInit() {
-    this.loadJsonData()
-    
+    //this.loadJsonData()
+
 
     this.http.get<any>(this.jsonFile).subscribe(response => {
       Object.keys(response).forEach(key => {
         // Obtén el FormArray correspondiente
         const formArray = this.jsonDataForm.get(key) as FormArray;
-  
+
         // Itera sobre los elementos del JSON y agrega controles al FormArray
         response[key].forEach((item: any) => {
           const formGroup = this.createFormGroup(item);
@@ -205,9 +209,9 @@ export class AppComponent {
       });
     });
     // Itera sobre las claves del JSON
-    
 
-    
+
+
     //console.log(this.r1Values)
 
   }
@@ -274,7 +278,7 @@ export class AppComponent {
     //this.calculos_grid();
   }
 
-  
+
 
   calculos_grid() {
     // Totales R1: 'r1_12_1', 'r1_12_2', 'r1_12_3'
@@ -406,7 +410,7 @@ export class AppComponent {
       'r2_7_1',
       'r2_8_1'
     ];
-    
+
     inputIds.forEach((id) => {
       this.getInputValue(id)
     });
@@ -446,7 +450,7 @@ export class AppComponent {
       'r3_5_1', 'r3_5_2', 'r3_5_3',
       'r3_6_1', 'r3_6_2', 'r3_6_3',
     ];
-    
+
     inputIds.forEach((id) => {
       this.getInputValue(id)
     });
@@ -488,7 +492,7 @@ export class AppComponent {
       'r4_9_1',
       'r4_10_1'
     ];
-    
+
     inputIds.forEach((id) => {
       this.getInputValue(id)
     });
@@ -690,7 +694,7 @@ export class AppComponent {
   }
 
 
-  
+
   /*
   cargarDatosJson() {
     this.http.get<any>(this.jsonFile).subscribe(response => {
@@ -733,7 +737,7 @@ export class AppComponent {
       Object.keys(response).forEach(key => {
         this.jsonDataForm.get(key)?.patchValue(response[key]);
       });*/
-      
+
 
       // Itera sobre las claves de tu JSON y establece los valores correspondientes en el formulario
       Object.keys(response).forEach(key => {
@@ -750,27 +754,39 @@ export class AppComponent {
     return (this.jsonDataForm.get('r1') as FormArray).controls[0].get('col1');
   }
 
-  getInputValue(id: string){
-      const [prefix, row, col] = id.split('_');
-      const rubro = prefix;
-      const rowIndex = parseInt(row) - 1;
-      const colIndex = parseInt(col) - 1;
-      //console.log(this.jsonDataForm.get(rubro)?.value)
-      //const value = this.retVal(this.jsonDataForm.get(rubro)?.value, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
-      const formArray = this.jsonDataForm.get(rubro) as FormArray;
-      const value = formArray.at(rowIndex).get(`col${colIndex + 1}`)?.value;
+  /**
+   * 
+   * @param id DEPRECATED
+   */
+  getInputValue(id: string) {
+    const [prefix, row, col] = id.split('_');
+    const rubro = prefix;
+    const rowIndex = parseInt(row) - 1;
+    const colIndex = parseInt(col) - 1;
+    //console.log(this.jsonDataForm.get(rubro)?.value)
+    //const value = this.retVal(this.jsonDataForm.get(rubro)?.value, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
+    const formArray = this.jsonDataForm.get(rubro) as FormArray;
+    const value = formArray.at(rowIndex).get(`col${colIndex + 1}`)?.value;
 
-      const inputElement = document.getElementById(id) as HTMLInputElement;
-      if (inputElement && !inputElement.disabled) {
-        inputElement.value = value.toString();
-      }
-      //console.log(value)
-    
+    const inputElement = document.getElementById(id) as HTMLInputElement;
+    if (inputElement && !inputElement.disabled) {
+      inputElement.value = value.toString();
+    }
+    //console.log(value)
+
 
     //return this.jsonDataForm.get(rubro)?.value;
   }
 
-  getInputValueLOG(id: string){
+  /**
+   * 
+   * @param id string: id de la casilla a setear el valor
+   * se busca el "rx" por el id, y su fila y columna corespondiente
+   * se toma el dato de el objeto "jsonDataForm" que es un FormGroup
+   * valores: this.jsonDataForm.value
+   * 
+   */
+  getInputValueLOG(id: string) {
     const [prefix, row, col] = id.split('_');
     const rubro = prefix;
     const rowIndex = parseInt(row) - 1;
@@ -785,11 +801,15 @@ export class AppComponent {
       inputElement.value = value.toString();
     }
     console.log(value)
+    console.log("console.log(this.jsonDataForm)")
+    console.log(this.jsonDataForm.value)
+
+
+    //return this.jsonDataForm.get(rubro)?.value;
+  }
+
   
-
-  //return this.jsonDataForm.get(rubro)?.value;
-}
-
+  
   cargarValores_inputR1123() {
     // Define un arreglo con los IDs de tus inputs
     const inputIds = [
@@ -816,11 +836,17 @@ export class AppComponent {
 
 
 
+  asdasdasd(e:string){
+    console.log("this.jsonDataForm.get(e)?.value[0].col1: ")
+    console.log(this.jsonDataForm.get(e)?.value[0].col1) // obtener el valor col1, r1_1_1
+    console.log("this.jsonDataForm.get(e)?.value[0]: ")
+    console.log(this.jsonDataForm.get(e)?.value[0]) // obtener el valor col1, r1_1_1
+  }
 
 
   getData(rubro: string) {
     console.log("Rubro: " + rubro)
-    console.log(this.jsonDataForm.get(rubro)?.value)
+    console.log(this.jsonDataForm.get(rubro)?.value) // object
     return this.jsonDataForm.get(rubro)?.value;
   }
 

@@ -1,4 +1,29 @@
-<!--div style="">
+<!--
+to make the form work in the input:
+- add the formgroup to the matgridlist
+- add the formgroup name to the div
+- add the formcontrolname to the input
+
+<mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r3" [formGroup]="jsonDataForm">
+
+        <div formGroupName="r1_1">
+          <mat-grid-tile class="tile" colspan="2" rowspan="2">
+                <input type="number" formControlName="col1" class="inputNEWNumber">
+          </mat-grid-tile>
+        </div>
+
+
+        mat-grid-list: [formGroup]="jsonDataForm"
+        div:  formGroupName="r1_1"
+        input: formControlName="col1"
+        
+
+
+
+
+
+-->
+<button (click)="testP()">click</button><!--div style="">
   <div style="display: flex; align-items: center; margin: 40px; flex-direction: column;">
     <div style="background-color: lightblue; border-radius: 5px;  width: 80vw;">
       <div style=" width: 150px; margin: 20px; text-align: center; vertical-align:middle;">
@@ -62,16 +87,20 @@ botones:
 - recalcular
 - asiento
 -->
-<div style="margin-left: 5%; margin-top: 10px ;margin-bottom: 10px; flex-wrap: wrap;" id="botones">
+
+<div style="padding: 5%; flex-wrap: wrap; background-color: lightcyan;">
+  <H2>TESTING BUTTONS</H2>
   <!--
     https://stackoverflow.com/questions/31425557/hide-buttons-when-printing
   -->
-  <button mat-raised-button (click)="asdasdasd('r1')"> getData</button>
+  <button mat-raised-button (click)="obtenerElValor('r1')"> obtenerElValor</button>
   <button mat-raised-button (click)="getData('r2')"> getData</button>
 
-  <button mat-raised-button (click)="getInputValueLOG('r1_1_1')"> getInputValue('r1_1_1')</button>
+  <button mat-raised-button (click)="getInputValue_with_consolelog('r1_1_1')"> getInputValue('r1_1_1')</button>
   <button mat-raised-button (click)="cargarTodos2()"> cargarTodos2 </button>
-  
+  <button mat-raised-button (click)="cargarInputs()"> cargarInputs() (latest) </button>
+</div>
+<div style="margin-left: 5%; margin-top: 10px ;margin-bottom: 10px; flex-wrap: wrap;" id="botones">
 
   <button mat-raised-button id="cargarTodos" (click)="cargarTodos()">Cargar Datos / Leer</button>
   <button mat-raised-button id="cargarTodos" (click)="cargarDatosJson()">Cargar Datos JSON</button>
@@ -79,7 +108,6 @@ botones:
   <button style="margin-left: 20px" mat-raised-button onclick="window.print()"> Imprimir </button>
   <button style="margin-left: 20px" mat-raised-button disabled="true"> Exportar </button>
   <button style="margin-left: 20px" mat-raised-button disabled="true"> Recalcular </button>
-
 </div>
 
 
@@ -318,7 +346,8 @@ four
     <div style="margin: 5px;">
 
       <!--mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="5"-->
-      <mat-grid-list class="gridHeight_r1" cols="14" rowHeight="fit" gutterSize="0" > <!-- RUBRO 1 -->
+      <mat-grid-list class="gridHeight_r1" cols="14" rowHeight="fit" gutterSize="0" [formGroup]="jsonDataForm"> <!-- RUBRO 1 -->
+        
 
 
 
@@ -370,20 +399,21 @@ four
           <label class="textLeft"> Enajenación de bienes y/o prestación de servicios gravados con tasa del 10% </label>
         </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="4" rowspan="2"> <!-- ingresar texto -->
-
-          <!-- *ngFor="let control of jsonDataForm.get('r1').controls; let i = index" -->
-          <!-- [formControlName]="jsonDataForm.get('r1')!.value[0]" -->
-          
-          <!--input type="number"  [value]="jsonDataForm.get('r1')!.value[0].col1 as number" class="inputNEWNumber"-->
-
-          <input type="number"  value="" #r1_1_1 id="r1_1_1" class="inputNEWNumber">
-          
-          <!--mat-form-field subscriptSizing="dynamic" style="" class="inputNumber">
-            <input matInput type="number" value="" #r1_1_1 id="r1_1_1">
-          </mat-form-field-->
-
+        <!--
+        <mat-grid-tile class="tile" colspan="4" rowspan="2"> 
+          <input type="number"  value="" #r1_1_1 id="r1_1_1" class="inputNEWNumber" >
         </mat-grid-tile>
+        -->
+
+        <div formGroupName="r1_1">
+          <mat-grid-tile class="tile" colspan="4" rowspan="2">
+                <input type="number" formControlName="col1" class="inputNEWNumber">
+          </mat-grid-tile>
+        </div>
+
+        
+
+        
 
         <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
           <input type="number" disabled="true" #r1_1_2 id="r1_1_2" class="inputNEWNumber">
@@ -744,7 +774,9 @@ four
   <div class="card"> <!-- CARD WITH INFO  -->
     <div style="margin: 5px;">
 
-      <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r3">
+      <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r3" [formGroup]="jsonDataForm">
+
+        
 
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="6"
           rowspan="2">
@@ -756,7 +788,7 @@ four
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4">
           <label> MONTO IMPONIBLE</label>
         </mat-grid-tile>
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4">
+        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4" rowspan="2">
           <label> IVA CRÉDITO -III-</label>
         </mat-grid-tile>
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="2">
@@ -786,14 +818,35 @@ four
 
         </mat-grid-tile>
 
+        <div formGroupName="r1_1">
+          <mat-grid-tile class="tile" colspan="2" rowspan="2">
+                <input type="number" formControlName="col1" class="inputNEWNumber">
+          </mat-grid-tile>
+        </div>
+
+        <!--
         <mat-grid-tile class="tile" colspan="2" rowspan="2">
-          <input type="number" value="" #r3_1_1 id="r3_1_1" class="inputNEWNumber">
+          <span formArrayName="r1" >
+            <span formGroupName="col1">
+              <input type="number" formControlName="col1" #r3_1_1 id="r3_1_1" class="inputNEWNumber">
+            </span>
+          </span>
         </mat-grid-tile>
+-->
 
 
+        <div formGroupName="r1_1">
+          <mat-grid-tile class="tile" colspan="2" rowspan="2">
+                <input type="number" formControlName="col2" class="inputNEWNumber">
+          </mat-grid-tile>
+        </div>
+        <!--
         <mat-grid-tile class="tile" colspan="2" rowspan="2">
-          <input type="number" value="" #r3_1_2 id="r3_1_2" class="inputNEWNumber">
+          <span>
+            <input type="number" value="" #r3_1_2 id="r3_1_2" class="inputNEWNumber">
+          </span>
         </mat-grid-tile>
+        -->
 
         <mat-grid-tile class="tile" colspan="4" rowspan="2">
           <input type="number" value="" #r3_1_3 id="r3_1_3" class="inputNEWNumber">

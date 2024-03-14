@@ -5,8 +5,23 @@ todo:
 - save data on memory
 - css clamp to adapt font size? clamp(12px, 4vw, 32px)?
 
+alt ways to manage data?
+ways to load the data instead of id per id
+reactive forms
+formgroup?
+formcontrol?
+validator
+
+http post (crud)
+json pipe
+
+agregar validacion para comprobar los cambios del usuario
+
+
+r3_1_1 funciona, replicar eso en todos los campos
+
 */
-import { Component, ElementRef, ViewChild, Input } from '@angular/core';
+import { Component, ElementRef, ViewChild, Input, OnInit, OnChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DecimalPipe } from '@angular/common';
@@ -18,10 +33,29 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnChanges {
 
   title = 'iva120';
   @Input() jsonFile: any = '../assets/test2.json'; // CARGA DEL JSON (temporal)
+  // jsonDataForm: FormGroup;
+
+  formArray = new FormArray([]);
+
+  jsonDataForm = new FormGroup({
+    r1_1: new FormGroup({ // values here
+      col1: new FormControl(1123),
+      col2: new FormControl(2),
+      col3: new FormControl(3),
+      col4: new FormControl(4),
+    })
+    /*,
+    r2: this.formBuilder.array([]),
+    r3: this.formBuilder.array([]),
+    r4: this.formBuilder.array([]),
+    r5: this.formBuilder.array([]),
+    r6: this.formBuilder.array([]),
+    res: this.formBuilder.array([])*/
+  });
 
   rubro1Config = {
     value: [],
@@ -36,16 +70,75 @@ export class AppComponent {
   jsonFormFile?: FormGroup;
 
 
-  constructor(private http: HttpClient, private decimalPipe: DecimalPipe, private formBuilder: FormBuilder) {
-    this.jsonFormFile = this.formBuilder.group({
-      r1: this.formBuilder.array([]),
-      r2: this.formBuilder.array([]),
-      r3: this.formBuilder.array([]),
-      r4: this.formBuilder.array([]),
-      r5: this.formBuilder.array([]),
-      r6: this.formBuilder.array([]),
-      res: this.formBuilder.array([]),
-    })
+  constructor(private http: HttpClient, private decimalPipe: DecimalPipe
+    , private formBuilder: FormBuilder) {
+
+  // this.
+  }
+
+  ngOnInit() {
+    //this.loadJsonData()
+    this.jsonDataForm.valueChanges.forEach(value => console.log(value));
+
+    this.addItem();
+
+
+    this.http.get<any>(this.jsonFile).subscribe(response => {
+      Object.keys(response).forEach(key => {
+        // Obtén el FormArray correspondiente
+        const formArray = this.jsonDataForm.get(key) as FormArray;
+
+        // Itera sobre los elementos del JSON y agrega controles al FormArray
+        response[key].forEach((item: any) => {
+          const formGroup = this.createFormGroup(item);
+          // formArray.push(formGroup);
+        });
+        // console.log(`${key}:`, formArray.value);
+      });
+    });
+
+  }
+
+  ngOnChanges(e: any) {
+    console.log(e);
+  }
+
+  addItem() {
+    const item = this.formBuilder.group({
+      col1: new FormControl('1234'),
+      col2: new FormControl('2'),
+      col3: new FormControl('3'),
+      col4: new FormControl('4'),
+    });  
+    // this.r1.push(item);
+    console.log("this.r1_1: ")
+    console.log(this.r1_1);
+    console.log("item: ")
+    console.log(item);
+    /*console.log(this.subr1);
+    console.log(this.subr1?.value);*/
+  }
+/*
+  get r1() {
+    return this.jsonDataForm.get('r1') as FormArray;
+  }
+
+  get subr1(): FormControl {
+    // return this.r1.at(0).get('col1') as FormControl;
+    return this.r1.controls.at(0) as FormControl;
+  }*/
+
+  get r1_1() {
+    return this.jsonDataForm.get('r1_1');
+  }
+
+  logForm(e: any) {
+    console.log(e);
+    return e.value;
+  }
+
+  testP() {
+    console.log(this.r1_1);
   }
 
   getJsonData(): Observable<any> {
@@ -57,6 +150,11 @@ export class AppComponent {
   log() {
     console.log(this.jsonFile);
   }
+
+
+
+
+
 
 
   // Objetos del json...obj "rubro1, r2..."
@@ -92,14 +190,6 @@ export class AppComponent {
       console.log(response.r1[0]);
       console.log("response.r1[0].col1: ")
       console.log(response.r1[0].col1);
-      /*for (let i = 0; i < this.rubro1.length; i++) {
-        this.jsonDataForm.get('r1')?.setValue(this.rubro1[i])
-      }*/
-
-
-
-      //console.log("R1 ES: ")
-      //console.log(this.rubro1);
       this.rubro2 = response.r2;
       this.rubro3 = response.r3;
       this.rubro4 = response.r4;
@@ -107,113 +197,8 @@ export class AppComponent {
       this.rubro6 = response.r6;
       this.res = response.res;
 
-
-
-
-
-      //let cols: any ;
-      //console.log("r1 obj:")
-      //console.log(this.rubro1)
-      //console.log(this.rubro1.length)
-      /*for (let i = 0; i < this.rubro1.length; i++) {  // llenando todos los datos existentes para las casillas
-        this.r1Values.push(Object.values(this.rubro1[i]))
-        //console.log(r1[i].col)
-      }
-      for (let i = 0; i < this.rubro2.length; i++) {
-        this.r2Values.push(Object.values(this.rubro2[i]))
-      }
-      for (let i = 0; i < this.rubro3.length; i++) {
-        this.r3Values.push(Object.values(this.rubro3[i]))
-      }
-      for (let i = 0; i < this.rubro4.length; i++) {
-        this.r4Values.push(Object.values(this.rubro4[i]))
-      }
-      for (let i = 0; i < this.rubro5.length; i++) {
-        this.r5Values.push(Object.values(this.rubro5[i]))
-      }
-      for (let i = 0; i < this.rubro6.length; i++) {
-        this.r6Values.push(Object.values(this.rubro6[i]))
-      }
-      for (let i = 0; i < this.res.length; i++) {
-        this.resValues.push(Object.values(this.res[i]))
-      }*/
-
       this.cargarDatosJson()
-      /*console.log("this.r1Values") // aray de valores de r1
-      console.log(this.r1Values)
-      console.log("this.r1Values[0]") // sub array, valores de la fila1[0] de r1
-      console.log(this.r1Values[0])
-      console.log("this.r1Values[0][2]") // valor de la fila 1 [0], elemento3 [2]
-      console.log(this.r1Values[0][2])
-      //for (const col in cols){
-        //console.log(this.r1Values)
-      //}
-      //console.log("\nres: ")
-      //console.log(r1)
-
-
-      this.dataFromJson = response;
-      console.log("data from json: ")
-      console.log(this.dataFromJson); // Verifica en la consola que los datos se hayan cargado correctamente
-      console.log("this.dataFromJson.r1[0]: ")
-      console.log(this.dataFromJson.r1[0])
-      console.log("this.dataFromJson.r1[0].col1: ")
-      console.log(this.dataFromJson.r1[0].col1)
-
-
-      console.log("this.dataFromJson.r1: ")
-      console.log(this.dataFromJson.r1)*/
-      //this.rubro1 = this.dataFromJson.r1;
-      /*
-      console.log("this.rubro1: ")
-      console.log(this.rubro1)
-
-      console.log("\nthis.rubro1[10].col1: ")
-      console.log(this.rubro1[10].col1)
-
-      console.log("VALOREEES this.r1Values: ")
-      console.log(this.r1Values)
-
-      /*
-      this.dataFromJson.r1[0].col1
-      dataFromJson tiene los atributos "res, y r1 a r6"
-      cada uno de estos tiene elementos, algunos mas, otros menos, el minimo es 
-      
-      json:
-      array de objetos:
-      objetos: res, r1, r2... r6
-      cara objeto tiene:
-      objeto?, array?
-      con col1, col2, col3... en formato key:value
-      
-      */
     });
-  }
-
-  public dataFromJson: any;
-  ngOnInit() {
-    //this.loadJsonData()
-
-
-    this.http.get<any>(this.jsonFile).subscribe(response => {
-      Object.keys(response).forEach(key => {
-        // Obtén el FormArray correspondiente
-        const formArray = this.jsonDataForm.get(key) as FormArray;
-
-        // Itera sobre los elementos del JSON y agrega controles al FormArray
-        response[key].forEach((item: any) => {
-          const formGroup = this.createFormGroup(item);
-          formArray.push(formGroup);
-        });
-        console.log(`${key}:`, formArray.value);
-      });
-    });
-    // Itera sobre las claves del JSON
-
-
-
-    //console.log(this.r1Values)
-
   }
 
   createFormGroup(item: any): FormGroup {
@@ -223,20 +208,6 @@ export class AppComponent {
     });
     return formGroup;
   }
-
-  /*loadJsonData(){
-    
-    this.http.get
-    this.http.get(this.jsonFile).subscribe(response => {
-      this.dataFromJson = response
-      console.log(response)
-    });
-    console.log("test")
-    console.log(this.dataFromJson)
-    return this.dataFromJson
-
-  }*/
-
 
   columns: string[] = []; // Array para almacenar los nombres de las columnas
   show: boolean = false;
@@ -257,6 +228,9 @@ export class AppComponent {
   }
 
 
+  /**
+   * DEPRECATED
+   */
   cargarTodos() {
     this.cargarValores_r1();
     this.cargarValores_r2();
@@ -268,18 +242,11 @@ export class AppComponent {
   }
 
 
-  cargarTodos2() {
-    this.cargarValores_inputR1();
-    this.cargarValores_inputR2();
-    this.cargarValores_inputR3();
-    this.cargarValores_inputR4();
-    //this.cargarValores_r5();
-    //this.cargarValores_r6();
-    //this.calculos_grid();
-  }
 
 
-
+  /**
+   * Calcula los campos totales
+   */
   calculos_grid() {
     // Totales R1: 'r1_12_1', 'r1_12_2', 'r1_12_3'
     const r1_t3 = [
@@ -289,15 +256,6 @@ export class AppComponent {
     const r2_t1 = [
       'r2_1_1', 'r2_2_1', 'r2_3_1'
     ]
-
-    /*
-    r2_t1.forEach(id) => {
-    const inputElement = (<HTMLInputElement>document.getElementById('r2_4_1')); // Obtiene el elemento del input
-    
-    const inputElement = (<HTMLInputElement>document.getElementById('r2_4_1')); // Obtiene el elemento del input
-    console.log('r2_4_1: ');
-    console.log(inputElement.value);*/
-
 
     r1_t3.forEach((id) => {
       const r1_t3_O = (<HTMLInputElement>document.getElementById('r1_12_3'));
@@ -343,300 +301,6 @@ export class AppComponent {
 
   }
 
-  cargarValores_inputR1() {
-    // Define un arreglo con los IDs de tus inputs
-    const inputIds = [
-      'r1_1_1', 'r1_1_2', 'r1_1_3',
-      'r1_2_1', 'r1_2_2', 'r1_2_3',
-      'r1_3_1', 'r1_3_2', 'r1_3_3',
-      'r1_4_1', 'r1_4_2', 'r1_4_3',
-      'r1_5_1', 'r1_5_2', 'r1_5_3',
-      'r1_6_1', 'r1_6_2', 'r1_6_3',
-      'r1_7_1', 'r1_7_2', 'r1_7_3',
-      'r1_8_1', 'r1_8_2', 'r1_8_3',
-      'r1_9_1', 'r1_9_2', 'r1_9_3',
-      'r1_10_1', 'r1_10_2', 'r1_10_3',
-      'r1_11_1', 'r1_11_2', 'r1_11_3',
-      /*'r1_12_1', 'r1_12_2', 'r1_12_3',*/ // totales
-    ];
-
-    // Recorre los IDs y asigna los valores usando el método retVal
-    inputIds.forEach((id) => {
-      this.getInputValue(id)
-    });
-
-  }
-
-  cargarValores_r1() {
-    // Define un arreglo con los IDs de tus inputs
-    const inputIds = [
-      'r1_1_1', 'r1_1_2', 'r1_1_3',
-      'r1_2_1', 'r1_2_2', 'r1_2_3',
-      'r1_3_1', 'r1_3_2', 'r1_3_3',
-      'r1_4_1', 'r1_4_2', 'r1_4_3',
-      'r1_5_1', 'r1_5_2', 'r1_5_3',
-      'r1_6_1', 'r1_6_2', 'r1_6_3',
-      'r1_7_1', 'r1_7_2', 'r1_7_3',
-      'r1_8_1', 'r1_8_2', 'r1_8_3',
-      'r1_9_1', 'r1_9_2', 'r1_9_3',
-      'r1_10_1', 'r1_10_2', 'r1_10_3',
-      'r1_11_1', 'r1_11_2', 'r1_11_3',
-      /*'r1_12_1', 'r1_12_2', 'r1_12_3',*/ // totales
-    ];
-
-    // Recorre los IDs y asigna los valores usando el método retVal
-    inputIds.forEach((id) => {
-      const [prefix, row, col] = id.split('_'); // Divide el ID en partes separadas
-      const rowIndex = parseInt(row) - 1; // Obtiene el índice de fila restando 1
-      const colIndex = parseInt(col) - 1; // Obtiene el índice de columna restando 1
-      const value = this.retVal(this.r1Values, rowIndex, colIndex); // Obtiene el valor usando el método retVal
-      const inputElement = (<HTMLInputElement>document.getElementById(id)); // Obtiene el elemento del input
-      if (inputElement && !inputElement.disabled) { // verifica si el elemento existe, y si esta activado.
-        inputElement.value = value.toString(); // Asigna el valor al input
-      }
-    });
-
-  }
-
-  cargarValores_inputR2() {
-    // Define un arreglo con los IDs de inputs
-    const inputIds = [
-      'r2_1_1',
-      'r2_2_1',
-      'r2_3_1',
-      'r2_4_1',
-      'r2_5_1',
-      'r2_6_1',
-      'r2_7_1',
-      'r2_8_1'
-    ];
-
-    inputIds.forEach((id) => {
-      this.getInputValue(id)
-    });
-  }
-
-  cargarValores_r2() {
-    const inputIds = [
-      'r2_1_1',
-      'r2_2_1',
-      'r2_3_1',
-      'r2_4_1',
-      'r2_5_1',
-      'r2_6_1',
-      'r2_7_1',
-      'r2_8_1'
-    ];
-
-    inputIds.forEach((id) => {
-      const [prefix, row, col] = id.split('_');
-      const rowIndex = parseInt(row) - 1;
-      const colIndex = parseInt(col) - 1;
-      const value = this.retVal(this.r2Values, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
-      const inputElement = document.getElementById(id) as HTMLInputElement;
-      if (inputElement && !inputElement.disabled) {
-        inputElement.value = value.toString();
-      }
-    });
-  }
-
-  cargarValores_inputR3() {
-    // Define un arreglo con los IDs de inputs
-    const inputIds = [
-      'r3_1_1', 'r3_1_2', 'r3_1_3',
-      'r3_2_1', 'r3_2_2', 'r3_2_3',
-      'r3_3_1', 'r3_3_2', 'r3_3_3',
-      'r3_4_1', 'r3_4_2', 'r3_4_3',
-      'r3_5_1', 'r3_5_2', 'r3_5_3',
-      'r3_6_1', 'r3_6_2', 'r3_6_3',
-    ];
-
-    inputIds.forEach((id) => {
-      this.getInputValue(id)
-    });
-  }
-
-  cargarValores_r3() {
-    const inputIds = [
-      'r3_1_1', 'r3_1_2', 'r3_1_3',
-      'r3_2_1', 'r3_2_2', 'r3_2_3',
-      'r3_3_1', 'r3_3_2', 'r3_3_3',
-      'r3_4_1', 'r3_4_2', 'r3_4_3',
-      'r3_5_1', 'r3_5_2', 'r3_5_3',
-      'r3_6_1', 'r3_6_2', 'r3_6_3',
-    ];
-
-    inputIds.forEach((id) => {
-      const [prefix, row, col] = id.split('_');
-      const rowIndex = parseInt(row) - 1;
-      const colIndex = parseInt(col) - 1;
-      const value = this.retVal(this.r3Values, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
-      const inputElement = document.getElementById(id) as HTMLInputElement;
-      if (inputElement && !inputElement.disabled) {
-        inputElement.value = value.toString();
-      }
-    });
-  }
-
-  cargarValores_inputR4() {
-    // Define un arreglo con los IDs de inputs
-    const inputIds = [
-      'r4_1_1',
-      'r4_2_1',
-      'r4_3_1',
-      'r4_4_1',
-      'r4_5_1',
-      'r4_6_1',
-      'r4_7_1',
-      'r4_8_1',
-      'r4_9_1',
-      'r4_10_1'
-    ];
-
-    inputIds.forEach((id) => {
-      this.getInputValue(id)
-    });
-  }
-
-  cargarValores_r4() {
-    // Define un arreglo con los IDs de tus inputs
-    const inputIds = [
-      'r4_1_1',
-      'r4_2_1',
-      'r4_3_1',
-      'r4_4_1',
-      'r4_5_1',
-      'r4_6_1',
-      'r4_7_1',
-      'r4_8_1',
-      'r4_9_1',
-      'r4_10_1'
-      /*'r1_12_1', 'r1_12_2', 'r1_12_3',*/ // totales
-    ];
-
-    // Recorre los IDs y asigna los valores usando el método retVal
-    inputIds.forEach((id) => {
-      const [prefix, row, col] = id.split('_'); // Divide el ID en partes separadas
-      const rowIndex = parseInt(row) - 1; // Obtiene el índice de fila restando 1
-      const colIndex = parseInt(col) - 1; // Obtiene el índice de columna restando 1
-      const value = this.retVal(this.r4Values, rowIndex, colIndex); // Obtiene el valor usando el método retVal
-      const inputElement = (<HTMLInputElement>document.getElementById(id)); // Obtiene el elemento del input
-      if (inputElement && !inputElement.disabled) { // Verifica si el elemento existe
-        inputElement.value = value.toString(); // Asigna el valor al input
-      }
-    });
-
-  }
-
-
-  cargarValores_r5() {
-    const inputIds = [
-      'r5_1_1', 'r5_1_2',
-      'r5_2_1', 'r5_2_2',
-      'r5_3_1', 'r5_3_2',
-      'r5_4_1', 'r5_4_2',
-      'r5_5_1', 'r5_5_2',
-      'r5_6_1', 'r5_6_2',
-      'r5_7_1', 'r5_7_2',
-      'r5_8_1', 'r5_8_2',
-    ];
-
-    inputIds.forEach((id) => {
-      const [prefix, row, col] = id.split('_');
-      const rowIndex = parseInt(row) - 1;
-      const colIndex = parseInt(col) - 1;
-      const value = this.retVal(this.r5Values, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
-      const inputElement = document.getElementById(id) as HTMLInputElement;
-      if (inputElement && !inputElement.disabled) {
-        inputElement.value = value.toString();
-      }
-    });
-  }
-
-  cargarValores_r6() {
-    const inputIds = [
-      'r6_1_1', 'r6_1_2',
-      'r6_2_1', 'r6_2_2',
-      'r6_3_1', 'r6_3_2',
-      'r6_4_1', 'r6_4_2',
-      'r6_5_1', 'r6_5_2',
-      'r6_6_1', 'r6_6_2',
-      'r6_7_1', 'r6_7_2',
-    ];
-
-    inputIds.forEach((id) => {
-      const [prefix, row, col] = id.split('_');
-      const rowIndex = parseInt(row) - 1;
-      const colIndex = parseInt(col) - 1;
-      const value = this.retVal(this.r6Values, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
-      const inputElement = document.getElementById(id) as HTMLInputElement;
-      if (inputElement && !inputElement.disabled) {
-        inputElement.value = value.toString();
-      }
-    });
-  }
-
-
-  /*setValue() {
-    // Obtenemos el valor del input
-    //const inputValue = (<HTMLInputElement>document.getElementById(inputId)).value;
-    // Asignamos el valor al input
-    //(<HTMLInputElement>document.getElementById(inputId)).value = "2";
-    //console.log("valor asignado: ")
-    //this.r1_11.nativeElement.value = this.retVal(this.r1Values, 0, 0)
-  }*/
-
-
-
-
-  /*
-  @ViewChild('r1_11') r1_11!: ElementRef;     // R es "rubro", 11 es: fila 1, columna 1.
-  
-  cargarValores() {
-    // Obtenemos el valor del input
-    //const inputValue = (<HTMLInputElement>document.getElementById(inputId)).value;
-    // Asignamos el valor al input
-    //(<HTMLInputElement>document.getElementById(inputId)).value = "2";
-    //console.log("valor asignado: ")
-    this.r1_11.nativeElement.value = this.retVal(this.r1Values, 0, 0)
-
-    this.cargarValores_r2()
-  }
-*/
-
-  @ViewChild('r2_1_1') r2_1_1!: ElementRef;
-  @ViewChild('r2_2_1') r2_2_1!: ElementRef;
-  @ViewChild('r2_3_1') r2_3_1!: ElementRef;
-  @ViewChild('r2_4_1') r2_4_1!: ElementRef;
-  @ViewChild('r2_5_1') r2_5_1!: ElementRef;
-  @ViewChild('r2_6_1') r2_6_1!: ElementRef;
-  @ViewChild('r2_7_1') r2_7_1!: ElementRef;
-  @ViewChild('r2_8_1') r2_8_1!: ElementRef;
-
-  cargarValores__() {
-    // Obtenemos el valor del input
-    //const inputValue = (<HTMLInputElement>document.getElementById(inputId)).value;
-    // Asignamos el valor al input
-    /*(<HTMLInputElement>document.getElementById(inputId)).value = "2";
-    console.log("valor asignado: ")*/
-    this.r2_1_1.nativeElement.value = this.retVal(this.r2Values, 0, 0)
-    this.r2_2_1.nativeElement.value = this.retVal(this.r2Values, 1, 0)
-    this.r2_3_1.nativeElement.value = this.retVal(this.r2Values, 2, 0)
-    this.r2_4_1.nativeElement.value = this.retVal(this.r2Values, 3, 0)
-    this.r2_5_1.nativeElement.value = this.retVal(this.r2Values, 4, 0)
-    this.r2_6_1.nativeElement.value = this.retVal(this.r2Values, 5, 0)
-    this.r2_7_1.nativeElement.value = this.retVal(this.r2Values, 6, 0)
-    this.r2_8_1.nativeElement.value = this.retVal(this.r2Values, 7, 0)
-
-  }
-
-  formatNumber(value: number | null): string {
-    if (value === null) {
-      return '';
-    }
-    return this.decimalPipe.transform(value, '1.0-0') || '';
-  }
-
   printScreen() {
     //Get the print button and put it into a variable
     var cargarTodos_Btn = document.getElementById("cargarTodos");
@@ -668,19 +332,6 @@ export class AppComponent {
     return this.jsonDataForm.get(rubro)?.value;
   }*/
 
-  jsonDataForm = this.formBuilder.group({
-    //r1: ["abc123"], // funca
-    r1: this.formBuilder.array([]),
-    r2: this.formBuilder.array([]),
-    r3: this.formBuilder.array([]),
-    r4: this.formBuilder.array([]),
-    r5: this.formBuilder.array([]),
-    r6: this.formBuilder.array([]),
-    res: this.formBuilder.array([])
-    /*r1: [this.rubro1],
-    r2: [this.jsonFile.r2],*/
-  });
-
   logValue(comp = 'r1') {
     console.log
   }
@@ -692,41 +343,6 @@ export class AppComponent {
     //console.log(this.jsonDataForm.get('r3'))
     return this.jsonDataForm.get(comp)?.value;
   }
-
-
-
-  /*
-  cargarDatosJson() {
-    this.http.get<any>(this.jsonFile).subscribe(response => {
-      this.jsonDataForm.patchValue({
-        
-        r1: response.r1, // response.r1 = array completo de r1 = this.rubro1
-        r2: response.r2,
-        r3: response.r3,
-        r4: response.r4,
-        r5: response.r5,
-        r6: response.r6,
-        res: response.res
-
-
-      });
-    });
-  }
-
-
-  //setValue(comp = 'r2', value: any) {
-//    //this.jsonDataForm.get(comp)!.value = value;
-//    this.jsonDataForm.get(comp)?.value;
-  //}
-
-  getData(rubro: 'r1' | 'r2' | 'r3' | 'r4' | 'r5' | 'r6' | 'res') {
-    console.log(this.jsonDataForm.get(rubro)?.value);
-    return this.jsonDataForm.get(rubro)?.value;
-  }
-
-  setValue(comp: 'r1' | 'r2' | 'r3' | 'r4' | 'r5' | 'r6' | 'res', value: any) {
-    this.jsonDataForm.get(comp)?.setValue(value);
-  }*/
 
   cargarDatosJson() {
     this.http.get<any>(this.jsonFile).subscribe(response => {
@@ -749,22 +365,22 @@ export class AppComponent {
       });
     });
   }
-
+/*
   get r1Control() {
     return (this.jsonDataForm.get('r1') as FormArray).controls[0].get('col1');
-  }
+  }*/
 
   /**
-   * 
-   * @param id DEPRECATED
+   * @param id string: id de la casilla a setear el valor
+   * se busca el "rx": (r1,r2,r3) por el id, y su fila y columna corespondiente
+   * se toma el dato de el objeto "jsonDataForm" que es un FormGroup
+   * valores: this.jsonDataForm.value
    */
   getInputValue(id: string) {
     const [prefix, row, col] = id.split('_');
     const rubro = prefix;
     const rowIndex = parseInt(row) - 1;
     const colIndex = parseInt(col) - 1;
-    //console.log(this.jsonDataForm.get(rubro)?.value)
-    //const value = this.retVal(this.jsonDataForm.get(rubro)?.value, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
     const formArray = this.jsonDataForm.get(rubro) as FormArray;
     const value = formArray.at(rowIndex).get(`col${colIndex + 1}`)?.value;
 
@@ -772,21 +388,16 @@ export class AppComponent {
     if (inputElement && !inputElement.disabled) {
       inputElement.value = value.toString();
     }
-    //console.log(value)
-
-
-    //return this.jsonDataForm.get(rubro)?.value;
   }
 
   /**
-   * 
+   * CONSOLE.LOG
    * @param id string: id de la casilla a setear el valor
-   * se busca el "rx" por el id, y su fila y columna corespondiente
+   * se busca el "rx": (r1,r2,r3) por el id, y su fila y columna corespondiente
    * se toma el dato de el objeto "jsonDataForm" que es un FormGroup
    * valores: this.jsonDataForm.value
-   * 
    */
-  getInputValueLOG(id: string) {
+  getInputValue_with_consolelog(id: string) {
     const [prefix, row, col] = id.split('_');
     const rubro = prefix;
     const rowIndex = parseInt(row) - 1;
@@ -810,6 +421,428 @@ export class AppComponent {
 
   
   
+
+
+  /**
+   * @param e rubro.
+   * muestra valores en consola.
+   */
+  obtenerElValor(e:string){
+    console.log("this.jsonDataForm.get(e)?.value[0].col1: ")
+    console.log(this.jsonDataForm.get(e)?.value[0].col1) // obtener el valor col1, r1_1_1
+    console.log("this.jsonDataForm.get(e)?.value[0]: ")
+    console.log(this.jsonDataForm.get(e)?.value[0]) // obtener el valor col1, r1_1_1
+  }
+
+  /**
+   * 
+   * @param rubro indica el rubro "r1, r2, r3" tal como: 'r1'
+   * @returns objeto del rubro con todos sus items
+   */
+  getData(rubro: string) {
+    console.log("Rubro: " + rubro)
+    console.log(this.jsonDataForm.get(rubro)?.value) // object
+    return this.jsonDataForm.get(rubro)?.value;
+  }
+
+
+
+
+  /**
+   * @param comp "Rubro", puede ser r1, r2, r3, etc. 
+   * @param value valor por el que se reemplazara el rubro seleccionado
+   * reemplaza el elemento completo, no solo un elemento en el array
+   */
+  setValue(comp: string, value: any) {
+    this.jsonDataForm.get(comp)?.setValue(value);
+  }
+
+
+
+
+
+  
+  cargarTodos2() {
+    this.cargarValores_inputR1();
+    this.cargarValores_inputR2();
+    this.cargarValores_inputR3();
+    this.cargarValores_inputR4();
+    //this.cargarValores_r5();
+    //this.cargarValores_r6();
+    //this.calculos_grid();
+  }
+
+  cargarValores_inputR1() {
+    // Define un arreglo con los IDs de los inputs
+    const inputIds = [
+      'r1_1_1', 'r1_1_2', 'r1_1_3',
+      'r1_2_1', 'r1_2_2', 'r1_2_3',
+      'r1_3_1', 'r1_3_2', 'r1_3_3',
+      'r1_4_1', 'r1_4_2', 'r1_4_3',
+      'r1_5_1', 'r1_5_2', 'r1_5_3',
+      'r1_6_1', 'r1_6_2', 'r1_6_3',
+      'r1_7_1', 'r1_7_2', 'r1_7_3',
+      'r1_8_1', 'r1_8_2', 'r1_8_3',
+      'r1_9_1', 'r1_9_2', 'r1_9_3',
+      'r1_10_1', 'r1_10_2', 'r1_10_3',
+      'r1_11_1', 'r1_11_2', 'r1_11_3',
+      /*'r1_12_1', 'r1_12_2', 'r1_12_3',*/ // totales
+    ];
+
+    // Recorre los IDs y asigna los valores 
+    inputIds.forEach((id) => {
+      this.getInputValue(id)
+    });
+
+  }
+
+  cargarValores_inputR2() {
+    // Define un arreglo con los IDs de los inputs
+    const inputIds = [
+      'r2_1_1',
+      'r2_2_1',
+      'r2_3_1',
+      'r2_4_1',
+      'r2_5_1',
+      'r2_6_1',
+      'r2_7_1',
+      'r2_8_1'
+    ];
+
+    inputIds.forEach((id) => {
+      this.getInputValue(id)
+    });
+  }
+
+  cargarValores_inputR3() {
+    // Define un arreglo con los IDs de inputs
+    const inputIds = [
+      'r3_1_1', 'r3_1_2', 'r3_1_3',
+      'r3_2_1', 'r3_2_2', 'r3_2_3',
+      'r3_3_1', 'r3_3_2', 'r3_3_3',
+      'r3_4_1', 'r3_4_2', 'r3_4_3',
+      'r3_5_1', 'r3_5_2', 'r3_5_3',
+      'r3_6_1', 'r3_6_2', 'r3_6_3',
+    ];
+
+    inputIds.forEach((id) => {
+      this.getInputValue(id)
+    });
+  }
+
+  cargarValores_inputR4() {
+    // Define un arreglo con los IDs de inputs
+    const inputIds = [
+      'r4_1_1',
+      'r4_2_1',
+      'r4_3_1',
+      'r4_4_1',
+      'r4_5_1',
+      'r4_6_1',
+      'r4_7_1',
+      'r4_8_1',
+      'r4_9_1',
+      'r4_10_1'
+    ];
+
+    inputIds.forEach((id) => {
+      this.getInputValue(id)
+    });
+  }
+
+
+  cargarInputs(){
+    const r1_inputs= [
+      'r1_1_1', 'r1_1_2', 'r1_1_3',
+      'r1_2_1', 'r1_2_2', 'r1_2_3',
+      'r1_3_1', 'r1_3_2', 'r1_3_3',
+      'r1_4_1', 'r1_4_2', 'r1_4_3',
+      'r1_5_1', 'r1_5_2', 'r1_5_3',
+      'r1_6_1', 'r1_6_2', 'r1_6_3',
+      'r1_7_1', 'r1_7_2', 'r1_7_3',
+      'r1_8_1', 'r1_8_2', 'r1_8_3',
+      'r1_9_1', 'r1_9_2', 'r1_9_3',
+      'r1_10_1', 'r1_10_2', 'r1_10_3',
+      'r1_11_1', 'r1_11_2', 'r1_11_3',
+      /*'r1_12_1', 'r1_12_2', 'r1_12_3',*/ // totales
+    ];
+
+    const r2_inputs= [
+      'r2_1_1',
+      'r2_2_1',
+      'r2_3_1',
+      'r2_4_1',
+      'r2_5_1',
+      'r2_6_1',
+      'r2_7_1',
+      'r2_8_1'
+    ];
+    const r3_inputs= [
+      'r3_1_1', 'r3_1_2', 'r3_1_3',
+      'r3_2_1', 'r3_2_2', 'r3_2_3',
+      'r3_3_1', 'r3_3_2', 'r3_3_3',
+      'r3_4_1', 'r3_4_2', 'r3_4_3',
+      'r3_5_1', 'r3_5_2', 'r3_5_3',
+      'r3_6_1', 'r3_6_2', 'r3_6_3',
+    ];
+
+    const r4_inputs= [
+      'r4_1_1',
+      'r4_2_1',
+      'r4_3_1',
+      'r4_4_1',
+      'r4_5_1',
+      'r4_6_1',
+      'r4_7_1',
+      'r4_8_1',
+      'r4_9_1',
+      'r4_10_1'
+    ];
+
+    const r5_inputs= [
+      'r5_1_1', 'r5_1_2',
+      'r5_2_1', 'r5_2_2',
+      'r5_3_1', 'r5_3_2',
+      'r5_4_1', 'r5_4_2',
+      'r5_5_1', 'r5_5_2',
+      'r5_6_1', 'r5_6_2',
+      'r5_7_1', 'r5_7_2',
+      'r5_8_1', 'r5_8_2',
+    ];
+    const r6_inputs= [
+      'r6_1_1', 'r6_1_2',
+      'r6_2_1', 'r6_2_2',
+      'r6_3_1', 'r6_3_2',
+      'r6_4_1', 'r6_4_2',
+      'r6_5_1', 'r6_5_2',
+      'r6_6_1', 'r6_6_2',
+      'r6_7_1', 'r6_7_2',      
+    ];
+
+    r1_inputs.forEach((id) => {
+      this.getInputValue(id)
+    });
+    r2_inputs.forEach((id) => {
+      this.getInputValue(id)
+    });
+    r3_inputs.forEach((id) => {
+      this.getInputValue(id)
+    });
+    r4_inputs.forEach((id) => {
+      this.getInputValue(id)
+    });
+    r5_inputs.forEach((id) => {
+      this.getInputValue(id)
+    });
+    r6_inputs.forEach((id) => {
+      this.getInputValue(id)
+    });
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  /**
+   * DEPRECATED
+   */
+  cargarValores_r1() {
+    // Define un arreglo con los IDs de tus inputs
+    const inputIds = [
+      'r1_1_1', 'r1_1_2', 'r1_1_3',
+      'r1_2_1', 'r1_2_2', 'r1_2_3',
+      'r1_3_1', 'r1_3_2', 'r1_3_3',
+      'r1_4_1', 'r1_4_2', 'r1_4_3',
+      'r1_5_1', 'r1_5_2', 'r1_5_3',
+      'r1_6_1', 'r1_6_2', 'r1_6_3',
+      'r1_7_1', 'r1_7_2', 'r1_7_3',
+      'r1_8_1', 'r1_8_2', 'r1_8_3',
+      'r1_9_1', 'r1_9_2', 'r1_9_3',
+      'r1_10_1', 'r1_10_2', 'r1_10_3',
+      'r1_11_1', 'r1_11_2', 'r1_11_3',
+      /*'r1_12_1', 'r1_12_2', 'r1_12_3',*/ // totales
+    ];
+
+    // Recorre los IDs y asigna los valores usando el método retVal
+    inputIds.forEach((id) => {
+      const [prefix, row, col] = id.split('_'); // Divide el ID en partes separadas
+      const rowIndex = parseInt(row) - 1; // Obtiene el índice de fila restando 1
+      const colIndex = parseInt(col) - 1; // Obtiene el índice de columna restando 1
+      const value = this.retVal(this.r1Values, rowIndex, colIndex); // Obtiene el valor usando el método retVal
+      const inputElement = (<HTMLInputElement>document.getElementById(id)); // Obtiene el elemento del input
+      if (inputElement && !inputElement.disabled) { // verifica si el elemento existe, y si esta activado.
+        inputElement.value = value.toString(); // Asigna el valor al input
+      }
+    });
+
+  }
+
+  /**
+   * DEPRECATED
+   */
+  cargarValores_r2() {
+    const inputIds = [
+      'r2_1_1',
+      'r2_2_1',
+      'r2_3_1',
+      'r2_4_1',
+      'r2_5_1',
+      'r2_6_1',
+      'r2_7_1',
+      'r2_8_1'
+    ];
+
+    inputIds.forEach((id) => {
+      const [prefix, row, col] = id.split('_');
+      const rowIndex = parseInt(row) - 1;
+      const colIndex = parseInt(col) - 1;
+      const value = this.retVal(this.r2Values, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
+      const inputElement = document.getElementById(id) as HTMLInputElement;
+      if (inputElement && !inputElement.disabled) {
+        inputElement.value = value.toString();
+      }
+    });
+  }
+  /**
+   * DEPRECATED
+   */
+  cargarValores_r3() {
+    const inputIds = [
+      'r3_1_1', 'r3_1_2', 'r3_1_3',
+      'r3_2_1', 'r3_2_2', 'r3_2_3',
+      'r3_3_1', 'r3_3_2', 'r3_3_3',
+      'r3_4_1', 'r3_4_2', 'r3_4_3',
+      'r3_5_1', 'r3_5_2', 'r3_5_3',
+      'r3_6_1', 'r3_6_2', 'r3_6_3',
+    ];
+
+    inputIds.forEach((id) => {
+      const [prefix, row, col] = id.split('_');
+      const rowIndex = parseInt(row) - 1;
+      const colIndex = parseInt(col) - 1;
+      const value = this.retVal(this.r3Values, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
+      const inputElement = document.getElementById(id) as HTMLInputElement;
+      if (inputElement && !inputElement.disabled) {
+        inputElement.value = value.toString();
+      }
+    });
+  }
+  /**
+   * DEPRECATED
+   */
+  cargarValores_r4() {
+    // Define un arreglo con los IDs de tus inputs
+    const inputIds = [
+      'r4_1_1',
+      'r4_2_1',
+      'r4_3_1',
+      'r4_4_1',
+      'r4_5_1',
+      'r4_6_1',
+      'r4_7_1',
+      'r4_8_1',
+      'r4_9_1',
+      'r4_10_1'
+      /*'r1_12_1', 'r1_12_2', 'r1_12_3',*/ // totales
+    ];
+
+    // Recorre los IDs y asigna los valores usando el método retVal
+    inputIds.forEach((id) => {
+      const [prefix, row, col] = id.split('_'); // Divide el ID en partes separadas
+      const rowIndex = parseInt(row) - 1; // Obtiene el índice de fila restando 1
+      const colIndex = parseInt(col) - 1; // Obtiene el índice de columna restando 1
+      const value = this.retVal(this.r4Values, rowIndex, colIndex); // Obtiene el valor usando el método retVal
+      const inputElement = (<HTMLInputElement>document.getElementById(id)); // Obtiene el elemento del input
+      if (inputElement && !inputElement.disabled) { // Verifica si el elemento existe
+        inputElement.value = value.toString(); // Asigna el valor al input
+      }
+    });
+
+  }
+
+  /**
+   * DEPRECATED
+   */
+  cargarValores_r5() {
+    const inputIds = [
+      'r5_1_1', 'r5_1_2',
+      'r5_2_1', 'r5_2_2',
+      'r5_3_1', 'r5_3_2',
+      'r5_4_1', 'r5_4_2',
+      'r5_5_1', 'r5_5_2',
+      'r5_6_1', 'r5_6_2',
+      'r5_7_1', 'r5_7_2',
+      'r5_8_1', 'r5_8_2',
+    ];
+
+    inputIds.forEach((id) => {
+      const [prefix, row, col] = id.split('_');
+      const rowIndex = parseInt(row) - 1;
+      const colIndex = parseInt(col) - 1;
+      const value = this.retVal(this.r5Values, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
+      const inputElement = document.getElementById(id) as HTMLInputElement;
+      if (inputElement && !inputElement.disabled) {
+        inputElement.value = value.toString();
+      }
+    });
+  }
+  /**
+   * DEPRECATED
+   */
+  cargarValores_r6() {
+    const inputIds = [
+      'r6_1_1', 'r6_1_2',
+      'r6_2_1', 'r6_2_2',
+      'r6_3_1', 'r6_3_2',
+      'r6_4_1', 'r6_4_2',
+      'r6_5_1', 'r6_5_2',
+      'r6_6_1', 'r6_6_2',
+      'r6_7_1', 'r6_7_2',
+    ];
+
+    inputIds.forEach((id) => {
+      const [prefix, row, col] = id.split('_');
+      const rowIndex = parseInt(row) - 1;
+      const colIndex = parseInt(col) - 1;
+      const value = this.retVal(this.r6Values, rowIndex, colIndex); // Suponiendo que tienes r2Values definido
+      const inputElement = document.getElementById(id) as HTMLInputElement;
+      if (inputElement && !inputElement.disabled) {
+        inputElement.value = value.toString();
+      }
+    });
+  }
+
+  /**
+   * DEPRECATED
+   */
   cargarValores_inputR1123() {
     // Define un arreglo con los IDs de tus inputs
     const inputIds = [
@@ -834,25 +867,6 @@ export class AppComponent {
 
   }
 
-
-
-  asdasdasd(e:string){
-    console.log("this.jsonDataForm.get(e)?.value[0].col1: ")
-    console.log(this.jsonDataForm.get(e)?.value[0].col1) // obtener el valor col1, r1_1_1
-    console.log("this.jsonDataForm.get(e)?.value[0]: ")
-    console.log(this.jsonDataForm.get(e)?.value[0]) // obtener el valor col1, r1_1_1
-  }
-
-
-  getData(rubro: string) {
-    console.log("Rubro: " + rubro)
-    console.log(this.jsonDataForm.get(rubro)?.value) // object
-    return this.jsonDataForm.get(rubro)?.value;
-  }
-
-  setValue(comp: string, value: any) {
-    this.jsonDataForm.get(comp)?.setValue(value);
-  }
 
 }
 

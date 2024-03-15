@@ -102,17 +102,20 @@ botones:
   <!--
     https://stackoverflow.com/questions/31425557/hide-buttons-when-printing
   -->
-  <button mat-raised-button (click)="obtenerElValor('r1')"> obtenerElValor</button>
-  <button mat-raised-button (click)="getData('r2')"> getData</button>
+  <!--button mat-raised-button (click)="obtenerElValor('r1')"> obtenerElValor</button>
+  <button mat-raised-button (click)="getData('r2')"> getData</button-->
 
-  <button mat-raised-button (click)="getInputValue_with_consolelog('r1_1_1')"> getInputValue('r1_1_1')</button>
-  <button mat-raised-button (click)="cargarTodos2()"> cargarTodos2 </button>
+  <!--button mat-raised-button (click)="getInputValue_with_consolelog('r1_1_1')"> getInputValue('r1_1_1')</button-->
+  <!--utton mat-raised-button (click)="cargarTodos2()"> cargarTodos2 </button-->
   <button mat-raised-button (click)="cargarInputs()"> cargarInputs() (latest) </button>
 </div>
 <div style="margin-left: 5%; margin-top: 10px ;margin-bottom: 10px; flex-wrap: wrap;" id="botones">
 
-  <button mat-raised-button id="cargarTodos" (click)="cargarTodos()">Cargar Datos / Leer</button>
+  <!--button mat-raised-button id="cargarTodos" (click)="cargarTodos()">Cargar Datos / Leer</button-->
+  <!--
   <button mat-raised-button id="cargarTodos" (click)="cargarDatosJson()">Cargar Datos JSON</button>
+  -->
+  <button mat-raised-button id="cargarTodos" (click)="cargarInputs()">Cargar Datos JSON</button>
   <button style="margin-left: 20px" mat-raised-button disabled="true"> Guardar </button>
   <button style="margin-left: 20px" mat-raised-button onclick="window.print()"> Imprimir </button>
   <button style="margin-left: 20px" mat-raised-button disabled="true"> Exportar </button>

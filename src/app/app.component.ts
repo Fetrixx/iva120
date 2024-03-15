@@ -635,102 +635,6 @@ export class AppComponent implements OnInit, OnChanges {
 
 
 
-
-
-
-
-  cerarInputs() {
-
-
-    const r1_inputs = [
-      ['r1_1_1', 'r1_1_2', 'r1_1_3'],
-      ['r1_2_1', 'r1_2_2', 'r1_2_3'],
-      ['r1_3_1', 'r1_3_2', 'r1_3_3'],
-      ['r1_4_1', 'r1_4_2', 'r1_4_3'],
-      ['r1_5_1', 'r1_5_2', 'r1_5_3'],
-      ['r1_6_1', 'r1_6_2', 'r1_6_3'],
-      ['r1_7_1', 'r1_7_2', 'r1_7_3'],
-      ['r1_8_1', 'r1_8_2', 'r1_8_3'],
-      ['r1_9_1', 'r1_9_2', 'r1_9_3'],
-      ['r1_10_1', 'r1_10_2', 'r1_10_3'],
-      ['r1_11_1', 'r1_11_2', 'r1_11_3'],
-      /*'r12_1', 'r12_2', 'r12_3',*/ // totales
-    ];
-
-    const r2_inputs = [
-      ['r2_1_1'],
-      ['r2_2_1'],
-      ['r2_3_1'],
-      ['r2_4_1'],
-      ['r2_5_1'],
-      ['r2_6_1'],
-      ['r2_7_1'],
-      ['r2_8_1']
-    ];
-    const r3_inputs = [
-      ['r3_1_1', 'r3_1_2', 'r3_1_3'],
-      ['r3_2_1', 'r3_2_2', 'r3_2_3'],
-      ['r3_3_1', 'r3_3_2', 'r3_3_3'],
-      ['r3_4_1', 'r3_4_2', 'r3_4_3'],
-      ['r3_5_1', 'r3_5_2', 'r3_5_3'],
-      ['r3_6_1', 'r3_6_2', 'r3_6_3'],
-    ];
-
-    const r4_inputs = [
-      ['r4_1_1'],
-      ['r4_2_1'],
-      ['r4_3_1'],
-      ['r4_4_1'],
-      ['r4_5_1'],
-      ['r4_6_1'],
-      ['r4_7_1'],
-      ['r4_8_1'],
-      ['r4_9_1'],
-      ['r4_10_1']
-    ];
-
-    const r5_inputs = [
-      ['r5_1_1', 'r5_1_2'],
-      ['r5_2_1', 'r5_2_2'],
-      ['r5_3_1', 'r5_3_2'],
-      ['r5_4_1', 'r5_4_2'],
-      ['r5_5_1', 'r5_5_2'],
-      ['r5_6_1', 'r5_6_2'],
-      ['r5_7_1', 'r5_7_2'],
-      ['r5_8_1', 'r5_8_2'],
-    ];
-    const r6_inputs = [
-      ['r6_1_1', 'r6_1_2'],
-      ['r6_2_1', 'r6_2_2'],
-      ['r6_3_1', 'r6_3_2'],
-      ['r6_4_1', 'r6_4_2'],
-      ['r6_5_1', 'r6_5_2'],
-      ['r6_6_1', 'r6_6_2'],
-      'r6_7_1', 'r6_7_2',
-    ];
-
-    r1_inputs.forEach((fila) => {
-      this.agregarItem_alForm('r1', 0, 0, 0)
-    });
-    r2_inputs.forEach((fila) => {
-      this.agregarItem_alForm('r2', 0, 0, 0)
-    });
-    r3_inputs.forEach((fila) => {
-      this.agregarItem_alForm('r3', 0, 0, 0)
-    });
-    r4_inputs.forEach((fila) => {
-      this.agregarItem_alForm('r4', 0, 0, 0)
-    });
-    r5_inputs.forEach((fila) => {
-      this.agregarItem_alForm('r5', 0, 0, 0)
-    });
-    r6_inputs.forEach((fila) => {
-      this.agregarItem_alForm('r6', 0, 0, 0)
-    });
-
-  }
-
-
   cargarInputs() {
 
 
@@ -771,19 +675,20 @@ export class AppComponent implements OnInit, OnChanges {
           v1 =  this.getInputValue(fila[columna]);
           console.log(v1)
         }
-        if (columna === 1) {
+        else if (columna === 1) {
           //v2 = this.getInputValue(fila[columna]);
           v2 =  this.getInputValue(fila[columna]);
         }
-        if (columna === 2) {
+        else if (columna === 2) {
           v3 =  this.getInputValue(fila[columna]);
         }
 
 
       }
-      
-      //this.agregarItem_alForm('r1', v1, v2, v3)
-      this.agregarItem_alForm('r1', 101, 101, 101)
+    
+
+      this.agregarItem_alForm('r1', v1, v2, v3)
+      //this.agregarItem_alForm('r1', 101, 101, 101)
       console.log("this.agregarItem_alForm('r1',v1,v2,v3): ")
       console.log(v1, v2, v3)
     }
@@ -904,6 +809,97 @@ export class AppComponent implements OnInit, OnChanges {
       this.getInputValue(id)
     });
     */
+
+  }
+
+  cerarInputs() {
+
+
+    const r1_inputs = [
+      ['r1_1_1', 'r1_1_2', 'r1_1_3'],
+      ['r1_2_1', 'r1_2_2', 'r1_2_3'],
+      ['r1_3_1', 'r1_3_2', 'r1_3_3'],
+      ['r1_4_1', 'r1_4_2', 'r1_4_3'],
+      ['r1_5_1', 'r1_5_2', 'r1_5_3'],
+      ['r1_6_1', 'r1_6_2', 'r1_6_3'],
+      ['r1_7_1', 'r1_7_2', 'r1_7_3'],
+      ['r1_8_1', 'r1_8_2', 'r1_8_3'],
+      ['r1_9_1', 'r1_9_2', 'r1_9_3'],
+      ['r1_10_1', 'r1_10_2', 'r1_10_3'],
+      ['r1_11_1', 'r1_11_2', 'r1_11_3'],
+      /*'r12_1', 'r12_2', 'r12_3',*/ // totales
+    ];
+
+    const r2_inputs = [
+      ['r2_1_1'],
+      ['r2_2_1'],
+      ['r2_3_1'],
+      ['r2_4_1'],
+      ['r2_5_1'],
+      ['r2_6_1'],
+      ['r2_7_1'],
+      ['r2_8_1']
+    ];
+    const r3_inputs = [
+      ['r3_1_1', 'r3_1_2', 'r3_1_3'],
+      ['r3_2_1', 'r3_2_2', 'r3_2_3'],
+      ['r3_3_1', 'r3_3_2', 'r3_3_3'],
+      ['r3_4_1', 'r3_4_2', 'r3_4_3'],
+      ['r3_5_1', 'r3_5_2', 'r3_5_3'],
+      ['r3_6_1', 'r3_6_2', 'r3_6_3'],
+    ];
+
+    const r4_inputs = [
+      ['r4_1_1'],
+      ['r4_2_1'],
+      ['r4_3_1'],
+      ['r4_4_1'],
+      ['r4_5_1'],
+      ['r4_6_1'],
+      ['r4_7_1'],
+      ['r4_8_1'],
+      ['r4_9_1'],
+      ['r4_10_1']
+    ];
+
+    const r5_inputs = [
+      ['r5_1_1', 'r5_1_2'],
+      ['r5_2_1', 'r5_2_2'],
+      ['r5_3_1', 'r5_3_2'],
+      ['r5_4_1', 'r5_4_2'],
+      ['r5_5_1', 'r5_5_2'],
+      ['r5_6_1', 'r5_6_2'],
+      ['r5_7_1', 'r5_7_2'],
+      ['r5_8_1', 'r5_8_2'],
+    ];
+    const r6_inputs = [
+      ['r6_1_1', 'r6_1_2'],
+      ['r6_2_1', 'r6_2_2'],
+      ['r6_3_1', 'r6_3_2'],
+      ['r6_4_1', 'r6_4_2'],
+      ['r6_5_1', 'r6_5_2'],
+      ['r6_6_1', 'r6_6_2'],
+      'r6_7_1', 'r6_7_2',
+    ];
+
+    r1_inputs.forEach((fila) => {
+      this.agregarItem_alForm('r1', 0, 0, 0)
+    });
+    r2_inputs.forEach((fila) => {
+      this.agregarItem_alForm('r2', 0, 0, 0)
+    });
+    r3_inputs.forEach((fila) => {
+      this.agregarItem_alForm('r3', 0, 0, 0)
+    });
+    r4_inputs.forEach((fila) => {
+      this.agregarItem_alForm('r4', 0, 0, 0)
+    });
+    r5_inputs.forEach((fila) => {
+      this.agregarItem_alForm('r5', 0, 0, 0)
+    });
+    r6_inputs.forEach((fila) => {
+      this.agregarItem_alForm('r6', 0, 0, 0)
+    });
 
   }
 

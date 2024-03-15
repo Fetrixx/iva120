@@ -30,7 +30,9 @@ to make the form work in the input:
 
 
 -->
-<button (click)="testP()">click</button><!--div style="">
+<button (click)="testP()">click</button>
+
+<!--div style="">
   <div style="display: flex; align-items: center; margin: 40px; flex-direction: column;">
     <div style="background-color: lightblue; border-radius: 5px;  width: 80vw;">
       <div style=" width: 150px; margin: 20px; text-align: center; vertical-align:middle;">
@@ -413,7 +415,7 @@ four
         </mat-grid-tile>
         -->
 
-        <div formArrayName="r1_1">
+        <div formArrayName="r1">
           <div [formGroupName]="0"> <!--index 0, obj1-->
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
               <input type="number" formControlName="col1" class="inputNEWNumber">

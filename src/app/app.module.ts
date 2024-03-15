@@ -58,7 +58,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     DatepickerViewsSelection,
     ReactiveFormsModule
   ],
-  providers: [DecimalPipe, JsonService],
+  providers: [DecimalPipe, JsonService, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

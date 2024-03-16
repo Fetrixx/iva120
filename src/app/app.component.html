@@ -10,7 +10,7 @@ to make the form work in the input:
 - add the formgroup to the matgridlist
 - add the formgroup name to the div
 - add the formcontrolname to the input
-
+<!--
 <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r3" [formGroup]="jsonDataForm">
 
         <div formGroupName="r1_1">
@@ -23,69 +23,7 @@ to make the form work in the input:
         mat-grid-list: [formGroup]="jsonDataForm"
         div:  formGroupName="r1_1"
         input: formControlName="col1"
-        
-
-
-
-
-
 -->
-<button (click)="testP()">click</button>
-
-<!--div style="">
-  <div style="display: flex; align-items: center; margin: 40px; flex-direction: column;">
-    <div style="background-color: lightblue; border-radius: 5px;  width: 80vw;">
-      <div style=" width: 150px; margin: 20px; text-align: center; vertical-align:middle;">
-        <h2 style="text-align: center; vertical-align: middle; line-height: 200px; border-style: solid; background-color: white;">
-          Iva 120
-        </h2>
-        
-        <span>
-          
-        </span>
-        <!--span style="justify-content: center; align-items: center;">
-          
-        </span-->
-<!--span style="font-size: 12px; ">
-          PARA CONTRIBUYENTES QUE REALICEN OPERACIONES GRAVADAS Y EXONERADAS
-          (INCLUIDAS LAS EXPORTACIONES)
-        </span>
-      </div>
-      
-  
-  
-    </div>
-    
-  </div>
-  <div style="flex-direction: row;">
-    <mat-form-field subscriptSizing="dynamic" class="inputText">
-      <mat-label class="textLeft">Numero de Orden </mat-label>
-
-      <input matInput placeholder="" type="number">
-    </mat-form-field>
-  </div>
-</div>
-
-<mat-card style="background-color: lightblue; margin: 1em;"> <!-- CARD WITH INFO  >
-  <mat-card-content>
-    <mat-grid-list cols="1" rowHeight="1.5rem">
-      <mat-grid-tile class="tile" colspan="1">
-        <span style="font-size: 1vw;">
-          PARA CONTRIBUYENTES QUE REALICEN OPERACIONES GRAVADAS Y EXONERADAS
-          (INCLUIDAS LAS EXPORTACIONES)
-        </span>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </mat-card-content>
-</mat-card-->
-
-<!-- retval -->
-
-
-<!--button (click)="retVal(this.r1Values,0,0)">asdasd </button>
-<button (click)="cargarValores()">set Values
-</button>
-<button (click)="cargarTodos()">set Values 2 </button-->
 
 <!--
 botones:
@@ -97,7 +35,7 @@ botones:
 - asiento
 -->
 
-<div style="padding: 5%; flex-wrap: wrap; background-color: lightcyan;">
+<div style="padding: 5%; flex-wrap: wrap; background-color: lightcyan;" id="botones_test">
   <H2>TESTING BUTTONS</H2>
   <!--
     https://stackoverflow.com/questions/31425557/hide-buttons-when-printing
@@ -107,8 +45,13 @@ botones:
 
   <!--button mat-raised-button (click)="getInputValue_with_consolelog('r1_1_1')"> getInputValue('r1_1_1')</button-->
   <!--utton mat-raised-button (click)="cargarTodos2()"> cargarTodos2 </button-->
-  <button mat-raised-button (click)="cargarInputs()"> cargarInputs() (latest) </button>
+  <button style="margin-left: 20px" mat-raised-button (click)="cargarInputs()"> cargarInputs() </button>
+  <button style="margin-left: 20px" mat-raised-button (click)="updateFormsToZero()"> updateFormsToZero() </button>
+  <button style="margin-left: 20px" mat-raised-button (click)="testP()"> log Form Array R1 </button>
+  <button style="margin-left: 20px" mat-raised-button (click)="logForm()"> log Form </button>
 </div>
+
+
 <div style="margin-left: 5%; margin-top: 10px ;margin-bottom: 10px; flex-wrap: wrap;" id="botones">
 
   <!--button mat-raised-button id="cargarTodos" (click)="cargarTodos()">Cargar Datos / Leer</button-->
@@ -123,67 +66,10 @@ botones:
 </div>
 
 
-<!--div style="display: flex; flex-direction: row; margin: 40px; background-color: lightblue; border-radius: 5px;">
-  <div style="display: flex; flex-direction: column;">
-    <div style="height: 100px; width: 100px;  background-color: yellow; margin: 10px;">
-
-    </div>
-  </div>
-</div>
-
-<div style="display: flex; flex-direction: row; margin: 40px; background-color: lightblue; border-radius: 5px;">
-  <div style="display: flex; flex-direction: column;">
-    <div style="height: 100px; width: 100px;  background-color: yellow; margin: 10px;">
-      <span style="font-size: 1vw; text-wrap:pretty;">
-        PARA CONTRIBUYENTES QUE REALICEN OPERACIONES GRAVADAS Y EXONERADAS
-        (INCLUIDAS LAS EXPORTACIONES)
-      </span>
-    </div>
-  </div>
-</div>
-
-<!--
-  <div style="display: grid;
-grid-template-columns: repeat(10, 1fr);
-grid-auto-rows: auto;
-column-gap: 0.5em;
-row-gap: 0.5em;
-margin-left: 10vw;
-margin-right: 10vw;
-">
-  <div style="background-color: lightblue;
-  grid-column-start: 1; 
-  grid-column-end: 3; 
-  grid-row-start: 1;
-  grid-row-end: 4;
-  grid-auto-rows: 100px;
-  "> 
-    hola
-
-  </div>
-  <div style="background-color: lightblue;
-  grid-column-start: 3; 
-  grid-column-end: 7; 
-  grid-row-start: 1;
-  grid-row-end: 1;
-  
-  "> 
-    hola
-
-  </div>
-  <div style="background-color: pink;
-  grid-column-start: 3; 
-  grid-column-end: 5; 
-  grid-row-start: 2;
-  grid-row-end: 4; ">
-four
-  </div>
-</div>
--->
 
 <div class="cardsDiv">
   <div style="display: flex; flex-direction: column; background-color: lightblue;"> <!-- CARD WITH INFO  -->
-    <div style="margin: 5px;"> 
+    <div style="margin: 5px;">
       <mat-grid-list cols="10" rowHeight="1.8rem" gutterSize="0">
 
         <mat-grid-tile class="tile" colspan="2" rowspan="10">
@@ -353,6 +239,8 @@ four
 </div>
 
 
+
+
 <div class="cardsDiv">
   <div class="card"> <!-- CARD WITH INFO  -->
     <div style="margin: 5px;">
@@ -361,14 +249,6 @@ four
       <mat-grid-list class="gridHeight_r1" cols="14" rowHeight="fit" gutterSize="0" [formGroup]="jsonDataForm">
         <!-- RUBRO 1 -->
 
-          
-
-
-        <!--mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%;" colspan="6" rowspan="2">
-          <label class="labelRubro">
-            RUBRO 1 - ENAJENACIÓN DE BIENES Y/O PRESTACIÓN DE SERVICIOS DEL PERIODO
-          </label>
-        </mat-grid-tile-->
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%;" colspan="6" rowspan="2">
           <label style="font-weight: bold;" class="labelRubro">
             RUBRO 1 - ENAJENACIÓN DE BIENES Y/O PRESTACIÓN DE SERVICIOS DEL PERIODO
@@ -386,12 +266,6 @@ four
             IVA DEBITO
           </label>
         </mat-grid-tile>
-        <!--mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="2">AL 5%
-          -II-
-        </mat-grid-tile>
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="2">
-          AL 10% -III-
-        </mat-grid-tile-->
 
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="2">
           <label style="font-weight: bold;">
@@ -405,43 +279,29 @@ four
           </label>
         </mat-grid-tile>
 
-
-
-
         <mat-grid-tile class="tile" colspan="6" rowspan="2">
           <label class="textLeft"> Enajenación de bienes y/o prestación de servicios gravados con tasa del 10% </label>
         </mat-grid-tile>
 
         <!--
-        <mat-grid-tile class="tile" colspan="4" rowspan="2"> 
-          <input type="number"  value="" #r1_1_1 id="r1_1_1" class="inputNEWNumber" >
-        </mat-grid-tile>
+        {{"1000000" | number: '1.0-0' }}
         -->
 
         <div formArrayName="r1">
           <div [formGroupName]="0"> <!--index 0, obj1-->
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" formControlName="col1" class="inputNEWNumber">
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_1_1 id="r1_1_1">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true">
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_1_2 id="r1_1_2">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2">
-              <input type="number" formControlName="col3" class="inputNEWNumber">
+              <input type="number" formControlName="col3" class="inputNEWNumber" #r1_1_3 id="r1_1_3">
             </mat-grid-tile>
           </div>
 
-          
-
-
-
-
-
-          <!--mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" disabled="true" #r1_1_2 id="r1_1_2" class="inputNEWNumber">
-        </mat-grid-tile-->
 
 
           <mat-grid-tile class="tile" colspan="6" rowspan="3">
@@ -454,15 +314,15 @@ four
 
           <div [formGroupName]="1"> <!--index 0, obj1-->
             <mat-grid-tile class="tile" colspan="4" rowspan="3">
-              <input type="number" formControlName="col1" class="inputNEWNumber">
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_2_1 id="r1_2_1">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="3">
-              <input type="number" formControlName="col2" class="inputNEWNumber">
+              <input type="number" formControlName="col2" class="inputNEWNumber" #r1_2_2 id="r1_2_2">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="3" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true">
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_2_3 id="r1_2_3">
             </mat-grid-tile>
           </div>
 
@@ -475,15 +335,15 @@ four
 
           <div [formGroupName]="2"> <!--index 0, obj1-->
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" formControlName="col1" class="inputNEWNumber">
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_3_1 id="r1_3_1">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2">
-              <input type="number" formControlName="col2" class="inputNEWNumber">
+              <input type="number" formControlName="col2" class="inputNEWNumber" #r1_3_2 id="r1_3_2">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true">
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_3_3 id="r1_3_3">
             </mat-grid-tile>
           </div>
 
@@ -493,17 +353,17 @@ four
             </label>
           </mat-grid-tile>
 
-          <div [formGroupName]="3"> 
+          <div [formGroupName]="3">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" formControlName="col1" class="inputNEWNumber">
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_4_1 id="r1_4_1">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true">
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_4_2 id="r1_4_2">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true">
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_4_3 id="r1_4_3">
             </mat-grid-tile>
           </div>
 
@@ -514,17 +374,17 @@ four
             </label>
           </mat-grid-tile>
 
-          <div [formGroupName]="4"> 
+          <div [formGroupName]="4">
             <mat-grid-tile class="tile" colspan="4" rowspan="2.5">
-              <input type="number" formControlName="col1" class="inputNEWNumber">
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_5_1 id="r1_5_1">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2.5" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true">
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_5_2 id="r1_5_2">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2.5" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true">
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_5_3 id="r1_5_3">
             </mat-grid-tile>
           </div>
 
@@ -534,17 +394,17 @@ four
             </label>
           </mat-grid-tile>
 
-          <div [formGroupName]="5"> 
+          <div [formGroupName]="5">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" formControlName="col1" class="inputNEWNumber">
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_6_1 id="r1_6_1">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true">
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_6_2 id="r1_6_2">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true">
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_6_3 id="r1_6_3">
             </mat-grid-tile>
           </div>
 
@@ -554,17 +414,17 @@ four
             </label>
           </mat-grid-tile>
 
-          <div [formGroupName]="6"> 
+          <div [formGroupName]="6">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" formControlName="col1" class="inputNEWNumber">
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_7_1 id="r1_7_1">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true">
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_7_2 id="r1_7_2">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true">
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_7_3 id="r1_7_3">
             </mat-grid-tile>
           </div>
 
@@ -575,17 +435,17 @@ four
             </label>
           </mat-grid-tile>
 
-          <div [formGroupName]="7"> 
+          <div [formGroupName]="7">
             <mat-grid-tile class="tile" colspan="4" rowspan="2.5">
-              <input type="number" formControlName="col1" class="inputNEWNumber">
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_8_1 id="r1_8_1">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2.5" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true">
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_8_2 id="r1_8_2">
             </mat-grid-tile>
 
-            <mat-grid-tile class="tile" colspan="2" rowspan="2.5" >
-              <input type="number" formControlName="col3" class="inputNEWNumber">
+            <mat-grid-tile class="tile" colspan="2" rowspan="2.5">
+              <input type="number" formControlName="col3" class="inputNEWNumber" #r1_8_3 id="r1_8_3">
             </mat-grid-tile>
           </div>
 
@@ -599,20 +459,20 @@ four
             </label>
           </mat-grid-tile>
 
-          <div [formGroupName]="8"> 
+          <div [formGroupName]="8">
             <mat-grid-tile class="tile" colspan="4" rowspan="4">
-              <input type="number" formControlName="col1" class="inputNEWNumber">
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_9_1 id="r1_9_1">
             </mat-grid-tile>
 
-            <mat-grid-tile class="tile" colspan="2" rowspan="4" >
-              <input type="number"  formControlName="col2"  class="inputNEWNumber" >
+            <mat-grid-tile class="tile" colspan="2" rowspan="4">
+              <input type="number" formControlName="col2" class="inputNEWNumber" #r1_9_2 id="r1_9_2">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="4" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true" >
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_9_3 id="r1_9_3">
             </mat-grid-tile>
           </div>
-          
+
 
           <mat-grid-tile class="tile" colspan="6" rowspan="3">
             <label class="textLeft"> Ajustes de precios, devoluciones realizadas,
@@ -624,17 +484,17 @@ four
           </mat-grid-tile>
 
 
-          <div [formGroupName]="9"> 
+          <div [formGroupName]="9">
             <mat-grid-tile class="tile" colspan="4" rowspan="3">
-              <input type="number" formControlName="col1" class="inputNEWNumber">
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_10_1 id="r1_10_1">
             </mat-grid-tile>
 
-            <mat-grid-tile class="tile" colspan="2" rowspan="3" >
-              <input type="number"  formControlName="col2"  class="inputNEWNumber" >
+            <mat-grid-tile class="tile" colspan="2" rowspan="3">
+              <input type="number" formControlName="col2" class="inputNEWNumber" #r1_10_2 id="r1_10_2">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="3" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true" >
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_10_3 id="r1_10_3">
             </mat-grid-tile>
           </div>
 
@@ -646,17 +506,17 @@ four
             </label>
           </mat-grid-tile>
 
-          <div [formGroupName]="10"> 
+          <div [formGroupName]="10">
             <mat-grid-tile class="tile" colspan="4" rowspan="3">
-              <input type="number" formControlName="col1" class="inputNEWNumber">
-            </mat-grid-tile>
-
-            <mat-grid-tile class="tile" colspan="2" rowspan="3" style="background: rgb(231, 231, 231)" >
-              <input type="number"  class="inputNEWNumber"  disabled="true">
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_11_1 id="r1_11_1">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="3" style="background: rgb(231, 231, 231)">
-              <input type="number" class="inputNEWNumber" disabled="true" >
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_11_2 id="r1_11_2">
+            </mat-grid-tile>
+
+            <mat-grid-tile class="tile" colspan="2" rowspan="3" style="background: rgb(231, 231, 231)">
+              <input type="number" class="inputNEWNumber" disabled="true" #r1_11_3 id="r1_11_3">
             </mat-grid-tile>
           </div>
 
@@ -668,17 +528,17 @@ four
             </label>
           </mat-grid-tile>
 
-          <div [formGroupName]="11"> 
+          <div [formGroupName]="11">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" formControlName="col1" class="inputNEWNumber">
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_12_1 id="r1_12_1" readonly>
             </mat-grid-tile>
 
-            <mat-grid-tile class="tile" colspan="2" rowspan="2" >
-              <input type="number"  formControlName="col2" class="inputNEWNumber">
+            <mat-grid-tile class="tile" colspan="2" rowspan="2">
+              <input type="number" formControlName="col2" class="inputNEWNumber" #r1_12_2 id="r1_12_2" readonly>
             </mat-grid-tile>
 
-            <mat-grid-tile class="tile" colspan="2" rowspan="2" >
-              <input type="number" formControlName="col3" class="inputNEWNumber">
+            <mat-grid-tile class="tile" colspan="2" rowspan="2">
+              <input type="number" formControlName="col3" class="inputNEWNumber" #r1_12_3 id="r1_12_3" readonly>
             </mat-grid-tile>
           </div>
 
@@ -695,115 +555,137 @@ four
 
 
 
-      <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r2">
+      <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r2" [formGroup]="jsonDataForm">
 
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="10"
-          rowspan="2">
-          <label class="labelRubro"> RUBRO 2 - ENAJENACIÓN DE BIENES Y/O PRESTACIÓN DE SERVICIOS DE LOS ÚLTIMOS SEIS
-            (6) MESES (INCLUIDO EL PERIODO QUE SE DECLARA) </label>
-        </mat-grid-tile>
+        <div formArrayName="r2">
+
+          <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="10"
+            rowspan="2">
+            <label class="labelRubro"> RUBRO 2 - ENAJENACIÓN DE BIENES Y/O PRESTACIÓN DE SERVICIOS DE LOS ÚLTIMOS SEIS
+              (6) MESES (INCLUIDO EL PERIODO QUE SE DECLARA) </label>
+          </mat-grid-tile>
+
+          <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4"
+            rowspan="2">
+            <label>
+              MONTO ACUMULADO
+            </label>
+          </mat-grid-tile>
+
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeft"> Enajenación de bienes y/o prestación de servicios gravados en el mercado interno,
+              con
+              excepción de los
+              productos agrícolas en estado natural </label>
+          </mat-grid-tile>
+
+          <div [formGroupName]="0">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col1" #r2_1_1 id="r2_1_1" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
+
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeft"> Enajenación de productos agrícolas en estado natural y sus derivados del primer
+              proceso de elaboración
+              o industrialización en el mercado interno </label>
+          </mat-grid-tile>
 
 
+          <div [formGroupName]="1">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col1" #r2_2_1 id="r2_2_1" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4"
-          rowspan="2">
-          <label>
-            MONTO ACUMULADO
-          </label>
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeft"> Enajenación de bienes y/o prestación de servicios exonerados o no alcanzados
+            </label>
+          </mat-grid-tile>
+
+          <div [formGroupName]="2">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col1" #r2_3_1 id="r2_3_1" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
+
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeftBold"> TOTAL DE OPERACIONES EN EL MERCADO INTERNO </label>
+          </mat-grid-tile>
+
+          <div [formGroupName]="3">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col1" #r2_4_1 id="r2_4_1" class="inputNEWNumber"
+                style="font-weight: bold !important;" readonly>
+            </mat-grid-tile>
+          </div>
+
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeft"> Exportación de productos agrícolas en estado natural y sus derivados del primer
+              proceso de elaboración o industrialización </label>
+          </mat-grid-tile>
+
+          <div [formGroupName]="4">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col1" #r2_5_1 id="r2_5_1" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
+
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeft"> Servicios de flete internacional prestados por empresas transportadoras para la
+              exportación de bienes </label>
+          </mat-grid-tile>
+
+          <div [formGroupName]="5">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col1" #r2_6_1 id="r2_6_1" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
+
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeft"> Exportación de otros bienes </label>
+          </mat-grid-tile>
+
+          <div [formGroupName]="6">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col1" #r2_7_1 id="r2_7_1" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
+
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeftBold"> TOTAL DE OPERACIONES DE EXPORTACIÓN </label>
+          </mat-grid-tile>
 
 
-
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-
-          <label class="textLeft"> Enajenación de bienes y/o prestación de servicios gravados en el mercado interno, con
-            excepción de los
-            productos agrícolas en estado natural </label>
-
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r2_1_1 id="r2_1_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <div [formGroupName]="7">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col1" #r2_8_1 id="r2_8_1" class="inputNEWNumber"
+                style="font-weight: bold !important;" readonly>
+            </mat-grid-tile>
+          </div>
 
 
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeft"> Enajenación de productos agrícolas en estado natural y sus derivados del primer
-            proceso de elaboración
-            o industrialización en el mercado interno </label>
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeftBold"> TOTAL DE OPERACIONES ACUMULADAS </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r2_2_1 id="r2_2_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <div [formGroupName]="8">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col1" #r2_9_1 id="r2_9_1" class="inputNEWNumber"
+                style="font-weight: bold !important;" readonly>
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeft"> Enajenación de bienes y/o prestación de servicios exonerados o no alcanzados </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r2_3_1 id="r2_3_1" class="inputNEWNumber">
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeftBold"> TOTAL DE OPERACIONES EN EL MERCADO INTERNO </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r2_4_1 id="r2_4_1" class="inputNEWNumber"
-            style="font-weight: bold !important;">
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeft"> Exportación de productos agrícolas en estado natural y sus derivados del primer
-            proceso de elaboración o industrialización </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r2_5_1 id="r2_5_1" class="inputNEWNumber">
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeft"> Servicios de flete internacional prestados por empresas transportadoras para la
-            exportación de bienes </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r2_6_1 id="r2_6_1" class="inputNEWNumber">
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeft"> Exportación de otros bienes </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r2_7_1 id="r2_7_1" class="inputNEWNumber">
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeftBold"> TOTAL DE OPERACIONES DE EXPORTACIÓN </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r2_8_1 id="r2_8_1" class="inputNEWNumber"
-            style="font-weight: bold !important;">
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeftBold"> TOTAL DE OPERACIONES ACUMULADAS </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r2_9_1 id="r2_9_1" class="inputNEWNumber"
-            style="font-weight: bold !important;">
-        </mat-grid-tile>
-
+        </div>
 
       </mat-grid-list>
 
     </div>
   </div>
 </div>
+
+
+
 
 
 <div class="cardsDiv">
@@ -835,160 +717,131 @@ four
           <label> AL 10% -II- </label>
         </mat-grid-tile>
 
-        <!--mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4">MONTO
-          IMPONIBLE </mat-grid-tile>
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4"
-          rowspan="2"> IVA CRÉDITO -III- </mat-grid-tile>
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="2">
-          AL 5% -I-
-        </mat-grid-tile>
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="2">
-          AL 10% -II- 
-        </mat-grid-tile-->
-
-
-
-
         <mat-grid-tile class="tile" colspan="6" rowspan="2">
           <label class="textLeft"> IVA Crédito atribuido directamente a operaciones gravadas en el mercado interno
           </label>
 
         </mat-grid-tile>
+        <div formArrayName="r3">
+          <div [formGroupName]="0">
 
-        <!--div formGroupName="r1_1">
-          <mat-grid-tile class="tile" colspan="2" rowspan="2">
-              <input type="number" formControlName="col1" class="inputNEWNumber">
-          </mat-grid-tile>
-        </div-->
-
-
-        <!--
-        <mat-grid-tile class="tile" colspan="2" rowspan="2">
-          <span formArrayName="r1" >
-            <span formGroupName="col1">
+            <mat-grid-tile class="tile" colspan="2" rowspan="2">
               <input type="number" formControlName="col1" #r3_1_1 id="r3_1_1" class="inputNEWNumber">
-            </span>
-          </span>
-        </mat-grid-tile>
--->
+            </mat-grid-tile>
 
+            <mat-grid-tile class="tile" colspan="2" rowspan="2">
+              <input type="number" formControlName="col2" #r3_1_2 id="r3_1_2" class="inputNEWNumber">
+            </mat-grid-tile>
 
-        <!--div formGroupName="r1_1">
-          <mat-grid-tile class="tile" colspan="2" rowspan="2">
-                <input type="number" formControlName="col2" class="inputNEWNumber">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col3" #r3_1_3 id="r3_1_3" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
+
+          <mat-grid-tile class="tile" colspan="6" rowspan="2">
+            <label class="textLeft">
+              IVA Crédito atribuido indistintamente a operaciones gravadas, exoneradas o no alcanzadas
+            </label>
           </mat-grid-tile>
-        </div-->
-        <!--
-        <mat-grid-tile class="tile" colspan="2" rowspan="2">
-          <span>
-            <input type="number" value="" #r3_1_2 id="r3_1_2" class="inputNEWNumber">
-          </span>
-        </mat-grid-tile>
-        -->
 
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r3_1_3 id="r3_1_3" class="inputNEWNumber">
-        </mat-grid-tile>
+          <div [formGroupName]="1">
 
-        <mat-grid-tile class="tile" colspan="6" rowspan="2">
-          <label class="textLeft">
-            IVA Crédito atribuido indistintamente a operaciones gravadas, exoneradas o no alcanzadas
-          </label>
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="2" rowspan="2">
+              <input type="number" formControlName="col1" #r3_2_1 id="r3_2_1" class="inputNEWNumber">
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="2" rowspan="2">
-          <input type="number" value="" #r3_2_1 id="r3_2_1" class="inputNEWNumber">
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="2" rowspan="2">
+              <input type="number" formControlName="col2" #r3_2_2 id="r3_2_2" class="inputNEWNumber">
+            </mat-grid-tile>
 
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col3" #r3_2_3 id="r3_2_3" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="2" rowspan="2">
-          <input type="number" value="" #r3_2_2 id="r3_2_2" class="inputNEWNumber">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="6" rowspan="2">
+            <label class="textLeft">
+              IVA Crédito atribuido proporcionalmente a operaciones gravadas en el mercado interno
+            </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r3_2_3 id="r3_2_3" class="inputNEWNumber">
-        </mat-grid-tile>
+          <div [formGroupName]="2">
 
-        <mat-grid-tile class="tile" colspan="6" rowspan="2">
-          <label class="textLeft">
-            IVA Crédito atribuido proporcionalmente a operaciones gravadas en el mercado interno
-          </label>
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" #r3_3_1 id="r3_3_1" class="inputNEWNumber" disabled="true">
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r3_3_1 id="r3_3_1" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" #r3_3_2 id="r3_3_2" class="inputNEWNumber" disabled="true">
+            </mat-grid-tile>
 
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col3" #r3_3_3 id="r3_3_3" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r3_3_2 id="r3_3_2" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="6" rowspan="2">
+            <label class="textLeft">
+              IVA Crédito atribuido proporcionalmente a operaciones gravadas en el mercado interno y a exportación
+            </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r3_3_3 id="r3_3_3" class="inputNEWNumber">
-        </mat-grid-tile>
+          <div [formGroupName]="3">
+            <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" #r3_4_1 id="r3_4_1" class="inputNEWNumber" disabled="true">
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="6" rowspan="2">
-          <label class="textLeft">
-            IVA Crédito atribuido proporcionalmente a operaciones gravadas en el mercado interno y a exportación
-          </label>
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" #r3_4_2 id="r3_4_2" class="inputNEWNumber" disabled="true">
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r3_4_1 id="r3_4_1" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col3" #r3_4_3 id="r3_4_3" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
 
+          <mat-grid-tile class="tile" colspan="6" rowspan="2.5">
+            <label class="textLeft">
+              IVA Crédito por ajustes de precios, devoluciones y descuentos otorgados, por ventas ya declaradas y
+              operaciones declaradas incobrables
+            </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r3_4_2 id="r3_4_2" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
+          <div [formGroupName]="4">
+            <mat-grid-tile class="tile" colspan="2" rowspan="2.5">
+              <input type="number" formControlName="col1" #r3_5_1 id="r3_5_1" class="inputNEWNumber">
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r3_4_3 id="r3_4_3" class="inputNEWNumber">
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="2" rowspan="2.5">
+              <input type="number" formControlName="col2" #r3_5_2 id="r3_5_2" class="inputNEWNumber">
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="6" rowspan="2.5">
-          <label class="textLeft">
-            IVA Crédito por ajustes de precios, devoluciones y descuentos otorgados, por ventas ya declaradas y
-            operaciones declaradas incobrables
-          </label>
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="4" rowspan="2.5">
+              <input type="number" formControlName="col3" #r3_5_3 id="r3_5_3" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="2" rowspan="2.5">
-          <input type="number" value="" #r3_5_1 id="r3_5_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="6" rowspan="2">
+            <label class="textLeftBold">
+              TOTAL DE IVA CRÉDITO PARA OPERACIONES EN EL MERCADO INTERNO
+            </label>
+          </mat-grid-tile>
 
+          <div [formGroupName]="5">
+            <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" #r3_6_1 id="r3_6_1" class="inputNEWNumber" disabled="true" readonly>
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="2" rowspan="2.5">
-          <input type="number" value="" #r3_5_2 id="r3_5_2" class="inputNEWNumber">
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" #r3_6_2 id="r3_6_2" class="inputNEWNumber" disabled="true" readonly>
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="4" rowspan="2.5">
-          <input type="number" value="" #r3_5_3 id="r3_5_3" class="inputNEWNumber">
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col3" #r3_6_3 id="r3_6_3" class="inputNEWNumber" readonly>
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="6" rowspan="2">
-          <label class="textLeftBold">
-            TOTAL DE IVA CRÉDITO PARA OPERACIONES EN EL MERCADO INTERNO
-          </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r3_6_1 id="r3_6_1" class="inputNEWNumber" style="font-weight: bold !important;"
-            disabled="true">
-        </mat-grid-tile>
-
-
-        <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r3_6_2 id="r3_6_2" class="inputNEWNumber" style="font-weight: bold !important;"
-            disabled="true">
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r3_6_3 id="r3_6_3" class="inputNEWNumber"
-            style="font-weight: bold !important;">
-        </mat-grid-tile>
-
+        </div>
       </mat-grid-list>
 
     </div>
@@ -999,131 +852,152 @@ four
 <div class="cardsDiv">
   <div class="card"> <!-- CARD WITH INFO  -->
     <div style="margin: 5px;">
-      <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r4">
-
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="10"
-          rowspan="2">
-          <label class="labelRubro">
-            RUBRO 4 - DETERMINACIÓN DEL IMPUESTO O DEL SALDO TÉCNICO
-          </label>
-        </mat-grid-tile>
-
-
-        <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4"
-          rowspan="2">
-          <label>
-            MONTO
-          </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-
-          <label class="textLeft">
-            IVA Débito
-          </label>
-
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r4_1_1 id="r4_1_1" class="inputNEWNumber">
-        </mat-grid-tile>
+      <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r4" [formGroup]="jsonDataForm">
+        <div formArrayName="r4">
+          <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="10"
+            rowspan="2">
+            <label class="labelRubro">
+              RUBRO 4 - DETERMINACIÓN DEL IMPUESTO O DEL SALDO TÉCNICO
+            </label>
+          </mat-grid-tile>
 
 
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeft">
-            IVA Crédito
-          </label>
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4"
+            rowspan="2">
+            <label>
+              MONTO
+            </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r4_2_1 id="r4_2_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
 
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeft">
-            Saldo a favor del contribuyente del período anterior por operaciones en el mercado interno
-          </label>
-        </mat-grid-tile>
+            <label class="textLeft">
+              IVA Débito
+            </label>
 
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r4_3_1 id="r4_3_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeftBold"> SALDO A FAVOR DEL CONTRIBUYENTE </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r4_4_1 id="r4_4_1" class="inputNEWNumber">
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeft">
-            Saldo a favor del contribuyente a remitir en beneficio del Fisco
-          </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r4_5_1 id="r4_5_1" class="inputNEWNumber">
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeftBold">
-            SALDO A FAVOR DEL CONTRIBUYENTE
-          </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r4_6_1 id="r4_6_1" class="inputNEWNumber">
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeft">
-            Saldo a favor del fisco
-          </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r4_7_1 id="r4_7_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <div [formGroupName]="0">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col1" #r4_1_1 id="r4_1_1" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
 
 
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeft">
+              IVA Crédito
+            </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeft">
-            Monto del IVA Crédito utilizado en el periodo que se liquida para operaciones gravadas
-          </label>
-        </mat-grid-tile>
+          <div [formGroupName]="1">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" value="" formControlName="col1" #r4_2_1 id="r4_2_1" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r4_8_1 id="r4_8_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeft">
+              Saldo a favor del contribuyente del período anterior por operaciones en el mercado interno
+            </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="10" rowspan="2.5">
-          <label class="textLeft">
-            Deducción conforme al Art. 7° y 8° de la Ley N° 4.96_2/201_3 por incorporación de personas con
-            discapacidad y en concepto de gastos y costos por adecuación del entorno físico, tecnológica, etc. y
-            contratación de facilitadores laborales (No trasladable)
-          </label>
-        </mat-grid-tile>
+          <div [formGroupName]="2">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" value="" formControlName="col1" #r4_3_1 id="r4_3_1" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="4" rowspan="2.5">
-          <input type="number" value="" #r4_9_1 id="r4_9_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeftBold"> SALDO A FAVOR DEL CONTRIBUYENTE </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="10" rowspan="2">
-          <label class="textLeftBold">
-            IMPUESTO DETERMINADO
-          </label>
-        </mat-grid-tile>
+          <div [formGroupName]="3">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" value="" formControlName="col1" #r4_4_1 id="r4_4_1" class="inputNEWNumber" readonly>
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="4" rowspan="2">
-          <input type="number" value="" #r4_10_1 id="r4_10_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeft">
+              Saldo a favor del contribuyente a remitir en beneficio del Fisco
+            </label>
+          </mat-grid-tile>
+
+          <div [formGroupName]="4">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" value="" formControlName="col1" #r4_5_1 id="r4_5_1" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
+
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeftBold">
+              SALDO A FAVOR DEL CONTRIBUYENTE
+            </label>
+          </mat-grid-tile>
+
+          <div [formGroupName]="5">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" value="" formControlName="col1" #r4_6_1 id="r4_6_1" class="inputNEWNumber" readonly>
+            </mat-grid-tile>
+          </div>
+
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeft">
+              Saldo a favor del fisco
+            </label>
+          </mat-grid-tile>
+
+          <div [formGroupName]="6">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" value="" formControlName="col1" #r4_7_1 id="r4_7_1" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
 
 
+
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeft">
+              Monto del IVA Crédito utilizado en el periodo que se liquida para operaciones gravadas
+            </label>
+          </mat-grid-tile>
+
+          <div [formGroupName]="7">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col1" #r4_8_1 id="r4_8_1" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
+
+
+          <mat-grid-tile class="tile" colspan="10" rowspan="2.5">
+            <label class="textLeft">
+              Deducción conforme al Art. 7° y 8° de la Ley N° 4.96_2/201_3 por incorporación de personas con
+              discapacidad y en concepto de gastos y costos por adecuación del entorno físico, tecnológica, etc. y
+              contratación de facilitadores laborales (No trasladable)
+            </label>
+          </mat-grid-tile>
+
+          <div [formGroupName]="8">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2.5">
+              <input type="number" formControlName="col1" #r4_9_1 id="r4_9_1" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
+
+          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <label class="textLeftBold">
+              IMPUESTO DETERMINADO
+            </label>
+          </mat-grid-tile>
+
+          <div [formGroupName]="9">
+            <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <input type="number" formControlName="col1" #r4_10_1 id="r4_10_1" class="inputNEWNumber" readonly>
+            </mat-grid-tile>
+          </div>
+
+
+        </div>
       </mat-grid-list>
-
     </div>
   </div>
 </div>
@@ -1131,7 +1005,8 @@ four
 <div class="cardsDiv">
   <div class="card"> <!-- CARD WITH INFO  -->
     <div style="margin: 5px;">
-      <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r5">
+      <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r5" [formGroup]="jsonDataForm">
+
 
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="8"
           rowspan="2">
@@ -1159,111 +1034,153 @@ four
           <label class="textLeft"> Impuesto determinado para operaciones gravadas </label>
         </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r5_1_1 id="r5_1_1" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
+        <div formArrayName="r5">
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r5_1_2 id="r5_1_2" class="inputNEWNumber">
-        </mat-grid-tile>
+          <div [formGroupName]="0">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" #r5_1_1 id="r5_1_1" class="inputNEWNumber" disabled="true">
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="8" rowspan="2">
-          <label class="textLeft"> Saldo a favor del contribuyente del período anterior </label>
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col2" #r5_1_2 id="r5_1_2" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r5_2_1 id="r5_2_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="8" rowspan="2">
+            <label class="textLeft"> Saldo a favor del contribuyente del período anterior </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r5_2_2 id="r5_2_2" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
+          <div [formGroupName]="1">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col1" #r5_2_1 id="r5_2_1" class="inputNEWNumber">
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="8" rowspan="2">
-          <label class="textLeft"> Retenciones computables por operaciones gravadas </label>
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" #r5_2_2 id="r5_2_2" class="inputNEWNumber" disabled="true">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r5_3_1 id="r5_3_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="8" rowspan="2">
+            <label class="textLeft"> Retenciones computables por operaciones gravadas </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r5_3_2 id="r5_3_2" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
+          <div [formGroupName]="2">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col1" #r5_3_1 id="r5_3_1" class="inputNEWNumber">
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="8" rowspan="2">
-          <label class="textLeft"> Percepciones computables por operaciones gravadas </label>
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" #r5_3_2 id="r5_3_2" class="inputNEWNumber" disabled="true">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r5_4_1 id="r5_4_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="8" rowspan="2">
+            <label class="textLeft"> Percepciones computables por operaciones gravadas </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r5_4_2 id="r5_4_2" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="8" rowspan="2">
-          <label class="textLeft"> Multa por presentar la Declaración Jurada con posterioridad al vencimiento </label>
-        </mat-grid-tile>
+          <div [formGroupName]="3">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col1" #r5_4_1 id="r5_4_1" class="inputNEWNumber">
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r5_5_1 id="r5_5_1" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" #r5_4_2 id="r5_4_2" class="inputNEWNumber" disabled="true">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r5_5_2 id="r5_5_2" class="inputNEWNumber">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="8" rowspan="2">
+            <label class="textLeft"> Multa por presentar la Declaración Jurada con posterioridad al vencimiento </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="8" rowspan="2">
-          <label class="textLeftBold"> SUBTOTALES </label>
-        </mat-grid-tile>
+          <div [formGroupName]="4">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" #r5_5_1 id="r5_5_1" class="inputNEWNumber" disabled="true">
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r5_6_1 id="r5_6_1" class="inputNEWNumber"
-            style="font-weight: bold !important;">
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col1" #r5_5_2 id="r5_5_2" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r5_6_2 id="r5_6_2" class="inputNEWNumber"
-            style="font-weight: bold !important;">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="8" rowspan="2">
+            <label class="textLeftBold"> SUBTOTALES </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="8" rowspan="2">
-          <label class="textLeftBold"> SALDO A FAVOR DEL CONTRIBUYENTE </label>
-        </mat-grid-tile>
+          <div [formGroupName]="5">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col1" #r5_6_1 id="r5_6_1" class="inputNEWNumber"
+                style="font-weight: bold !important;" readonly>
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r5_7_1 id="r5_7_1" class="inputNEWNumber">
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col2" #r5_6_2 id="r5_6_2" class="inputNEWNumber"
+                style="font-weight: bold !important;" readonly>
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r5_7_2 id="r5_7_2" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="8" rowspan="2">
+            <label class="textLeftBold"> SALDO A FAVOR DEL CONTRIBUYENTE </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="8" rowspan="2">
-          <label class="textLeftBold"> SALDO A PAGAR A FAVOR DEL FISCO </label>
-        </mat-grid-tile>
+          <div [formGroupName]="6">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col1" #r5_7_1 id="r5_7_1" class="inputNEWNumber" readonly>
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r5_8_1 id="r5_8_1" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" #r5_7_2 id="r5_7_2" class="inputNEWNumber" disabled="true" readonly>
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r5_8_2 id="r5_8_2" class="inputNEWNumber">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="8" rowspan="2">
+            <label class="textLeftBold"> SALDO A PAGAR A FAVOR DEL FISCO </label>
+          </mat-grid-tile>
 
+
+          <div [formGroupName]="7">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" #r5_8_1 id="r5_8_1" class="inputNEWNumber" disabled="true" readonly>
+            </mat-grid-tile>
+
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col1" #r5_8_2 id="r5_8_2" class="inputNEWNumber" readonly>
+            </mat-grid-tile>
+          </div>
+
+
+        </div>
       </mat-grid-list>
 
     </div>
   </div>
 </div>
 
+
+
+<!--
+            lisst: [formGroup]="jsonDataForm"
+            <div formArrayName="r1">
+            <div [formGroupName]="0">
+              <mat-grid-tile class="tile" colspan="4" rowspan="2">
+                <input type="number" formControlName="col1" class="inputNEWNumber" #r1_1_1 id="r1_1_1">
+              </mat-grid-tile>
+
+              <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
+                <input type="number" class="inputNEWNumber" disabled="true" #r1_1_2 id="r1_1_2">
+              </mat-grid-tile>
+
+              <mat-grid-tile class="tile" colspan="2" rowspan="2">
+                <input type="number" formControlName="col3" class="inputNEWNumber" #r1_1_3 id="r1_1_3">
+              </mat-grid-tile>
+            </div>
+          -->
+
+
 <div class="cardsDiv">
   <div class="card"> <!-- CARD WITH INFO  -->
     <div style="margin: 5px;">
-      <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r6">
-
+      <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r6" [formGroup]="jsonDataForm">
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="8"
           rowspan="2">
           <label class="labelRubro">
@@ -1290,103 +1207,119 @@ four
             exoneradas o no alcanzadas por el Impuesto
           </label>
         </mat-grid-tile>
+        <div formArrayName="r6">
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r6_1_1 id="r6_1_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <div [formGroupName]="0">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col1" #r6_1_1 id="r6_1_1" class="inputNEWNumber">
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r6_1_2 id="r6_1_2" class="inputNEWNumber">
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col2" #r6_1_2 id="r6_1_2" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="8" rowspan="2">
-          <label class="textLeft">
-            Compras con IVA Crédito del 5% relacionadas directamente a operaciones
-            exoneradas o no alcanzadas por el Impuesto
-          </label>
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="8" rowspan="2">
+            <label class="textLeft">
+              Compras con IVA Crédito del 5% relacionadas directamente a operaciones
+              exoneradas o no alcanzadas por el Impuesto
+            </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r6_2_1 id="r6_2_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <div [formGroupName]="1">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col1" #r6_2_1 id="r6_2_1" class="inputNEWNumber">
+            </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r6_2_2 id="r6_2_2" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col2" #r6_2_2 id="r6_2_2" class="inputNEWNumber">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="8" rowspan="2">
-          <label class="textLeft">
-            Compras exentas relacionadas a operaciones exoneradas, no alcanzadas y a exportaciones
-          </label>
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="8" rowspan="2">
+            <label class="textLeft">
+              Compras exentas relacionadas a operaciones exoneradas, no alcanzadas y a exportaciones
+            </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r6_3_1 id="r6_3_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <div [formGroupName]="2">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col1" #r6_3_1 id="r6_3_1" class="inputNEWNumber">
+            </mat-grid-tile>
+  
+            <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" #r6_3_2 id="r6_3_2" class="inputNEWNumber" disabled="true">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r6_3_2 id="r6_3_2" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="8" rowspan="2">
+            <label class="textLeft">
+              Compras exentas relacionadas a operaciones exoneradas o no alcanzadas por el Impuesto
+            </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="8" rowspan="2">
-          <label class="textLeft">
-            Compras exentas relacionadas a operaciones exoneradas o no alcanzadas por el Impuesto
-          </label>
-        </mat-grid-tile>
+          <div [formGroupName]="3">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col1" #r6_4_1 id="r6_4_1" class="inputNEWNumber">
+            </mat-grid-tile>
+  
+            <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" value="" #r6_4_2 id="r6_4_2" class="inputNEWNumber" disabled="true">
+            </mat-grid-tile>
+          </div>
+          
+          <mat-grid-tile class="tile" colspan="8" rowspan="2">
+            <label class="textLeft">
+              Ajustes de precios, descuentos otorgados y/o devoluciones recibidas, por
+              enajenación de bienes o prestación de servicios exonerados o no alcanzados por
+              el Impuesto
+            </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r6_4_1 id="r6_4_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <div [formGroupName]="4">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col1" #r6_5_1 id="r6_5_1" class="inputNEWNumber">
+            </mat-grid-tile>
+  
+            <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" value="" #r6_5_2 id="r6_5_2" class="inputNEWNumber" disabled="true">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r6_4_2 id="r6_4_2" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="8" rowspan="2">
+            <label class="textLeft">
+              Impuesto al Valor Agregado - Costo o Gasto deducible en el IRE o IRP
+            </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="8" rowspan="2">
-          <label class="textLeft">
-            Ajustes de precios, descuentos otorgados y/o devoluciones recibidas, por
-            enajenación de bienes o prestación de servicios exonerados o no alcanzados por
-            el Impuesto
-          </label>
-        </mat-grid-tile>
+          <div [formGroupName]="5">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col1" #r6_6_1 id="r6_6_1" class="inputNEWNumber">
+            </mat-grid-tile>
+  
+            <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" value="" #r6_6_2 id="r6_6_2" class="inputNEWNumber" disabled="true">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r6_5_1 id="r6_5_1" class="inputNEWNumber">
-        </mat-grid-tile>
+          <mat-grid-tile class="tile" colspan="8" rowspan="2">
+            <label class="textLeft">
+              Impuesto al Valor Agregado - Costo o Gasto por remisión del saldo IVA Crédito al
+              fisco, no deducible en el IRE o IRP
+            </label>
+          </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r6_5_2 id="r6_5_2" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
+          <div [formGroupName]="5">
+            <mat-grid-tile class="tile" colspan="3" rowspan="2">
+              <input type="number" formControlName="col1"  #r6_7_1 id="r6_7_1" class="inputNEWNumber">
+            </mat-grid-tile>
+  
+            <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
+              <input type="number" value="" #r6_7_2 id="r6_7_2" class="inputNEWNumber" disabled="true">
+            </mat-grid-tile>
+          </div>
 
-        <mat-grid-tile class="tile" colspan="8" rowspan="2">
-          <label class="textLeft">
-            Impuesto al Valor Agregado - Costo o Gasto deducible en el IRE o IRP
-          </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r6_6_1 id="r6_6_1" class="inputNEWNumber">
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r6_6_2 id="r6_6_2" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="8" rowspan="2">
-          <label class="textLeft">
-            Impuesto al Valor Agregado - Costo o Gasto por remisión del saldo IVA Crédito al
-            fisco, no deducible en el IRE o IRP
-          </label>
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="3" rowspan="2">
-          <input type="number" value="" #r6_7_1 id="r6_7_1" class="inputNEWNumber">
-        </mat-grid-tile>
-
-        <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
-          <input type="number" value="" #r6_7_2 id="r6_7_2" class="inputNEWNumber" disabled="true">
-        </mat-grid-tile>
-
+        </div>
       </mat-grid-list>
 
     </div>

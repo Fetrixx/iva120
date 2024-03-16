@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, OnChanges {
   /**
    * link to the json
    */
-  @Input() jsonFile: any = '../assets/test2.json'; // CARGA DEL JSON (temporal)
+  @Input() jsonFile: any = '../assets/datos.json'; // CARGA DEL JSON (temporal)
   // jsonDataForm: FormGroup;
 
   formArray = new FormArray([]);
@@ -68,24 +68,24 @@ export class AppComponent implements OnInit, OnChanges {
       });
       (this.jsonDataForm.get(rubro) as FormArray).push(nuevoItem);
     }
-    
+
   }
 
-  constructor(private http: HttpClient, private decimalPipe: DecimalPipe, private formBuilder: FormBuilder, private jsonService: JsonService) {    
+  constructor(private http: HttpClient, private decimalPipe: DecimalPipe, private formBuilder: FormBuilder, private jsonService: JsonService) {
     //this.addItem('r1', 111, 222, 333) // añadir un item al form
     this.cerarInputs(); // cera todos.
-    
+
     //this.cargarInputs(); // 4242 , tiene que ser del  json
 
     //this.cerarInputs()
 
   }
 
-  cnt:number = 0;
-   ngOnInit() {
+  cnt: number = 0;
+  ngOnInit() {
     //this.loadJsonData()
-    
-    this.jsonDataForm.valueChanges.forEach(value => {  
+
+    this.jsonDataForm.valueChanges.forEach(value => {
       console.log(`(valueChanges ${this.cnt} ) Valores cambiados: `)
       console.log(value)
       this.cnt++;
@@ -101,7 +101,7 @@ export class AppComponent implements OnInit, OnChanges {
     return this.jsonDataForm.get('r1');
   }
 
-  get form(){
+  get form() {
     return this.jsonDataForm
   }
 
@@ -110,12 +110,12 @@ export class AppComponent implements OnInit, OnChanges {
     console.log(e);
     return e.value;
   }*/
-  
-  
+
+
   /**
    * Crea un log del Form completo con todos sus elementos.
    */
-  logForm(){ 
+  logForm() {
     console.log(this.jsonDataForm)
   }
 
@@ -166,14 +166,14 @@ export class AppComponent implements OnInit, OnChanges {
       });
     });
   }
-  
+
   /**
    * @param id string: id de la casilla a setear el valor
    * se busca el "rx": (r1,r2,r3) por el id, y su fila y columna corespondiente
    * se toma el dato de el objeto "jsonDataForm" que es un FormGroup
    * valores: this.jsonDataForm.value
    */
-  
+
 
   async getInputValue(id: string): Promise<number> {
     const [prefix, row, col] = id.split('_');
@@ -194,10 +194,10 @@ export class AppComponent implements OnInit, OnChanges {
 
   }
 
-  getInputValue_TEMP(id: string){
+  getInputValue_TEMP(id: string) {
     return 404
   }
-  
+
   get() {
     this.http.get<any>(this.jsonFile).subscribe(response => {
       Object.keys(response).forEach(key => {
@@ -222,11 +222,167 @@ export class AppComponent implements OnInit, OnChanges {
     const rubro = prefix
     const rowIndex = parseInt(row) - 1;
     const colJSON = "col" + col;
-    
+
     const formArray = this.jsonDataForm.get(rubro) as FormArray;
     //const control = formArray.at(rowIndex).get(`col${colIndex + 1}`) as FormControl;
     const control = formArray.at(rowIndex).get(colJSON) as FormControl;
-    control.patchValue(newValue); // or use setValue() if you want to replace the value entirely
+    control.setValue(newValue); // or use setValue() if you want to replace the value entirely
+  }
+
+
+  async cargarInputs() {
+
+    try {
+
+      const r1_inputs = [
+        ['r1_1_1', 'r1_1_2', 'r1_1_3'],
+        ['r1_2_1', 'r1_2_2', 'r1_2_3'],
+        ['r1_3_1', 'r1_3_2', 'r1_3_3'],
+        ['r1_4_1', 'r1_4_2', 'r1_4_3'],
+        ['r1_5_1', 'r1_5_2', 'r1_5_3'],
+        ['r1_6_1', 'r1_6_2', 'r1_6_3'],
+        ['r1_7_1', 'r1_7_2', 'r1_7_3'],
+        ['r1_8_1', 'r1_8_2', 'r1_8_3'],
+        ['r1_9_1', 'r1_9_2', 'r1_9_3'],
+        ['r1_10_1', 'r1_10_2', 'r1_10_3'],
+        ['r1_11_1', 'r1_11_2', 'r1_11_3'],
+        /*'r12_1', 'r12_2', 'r12_3',*/ // totales
+      ];
+
+      for (const fila of r1_inputs) {
+
+        for (let columna = 0; columna < fila.length; columna++) {
+          let valor = await this.getInputValue(fila[columna]);
+          this.updateControlValue(fila[columna], valor);
+        }
+
+      }
+
+    } catch (error) {
+      console.log("Error al cargar los inputs R1")
+      console.log(error)
+    }
+
+
+    try {
+      const r2_inputs = [
+        ['r2_1_1'],
+        ['r2_2_1'],
+        ['r2_3_1'],
+        ['r2_4_1'],
+        ['r2_5_1'],
+        ['r2_6_1'],
+        ['r2_7_1'],
+        ['r2_8_1']
+      ];
+      for (const fila of r2_inputs) {
+
+        for (let columna = 0; columna < fila.length; columna++) {
+          let valor = await this.getInputValue(fila[columna]);
+          this.updateControlValue(fila[columna], valor);
+        }
+      }
+    } catch (error) {
+      console.log("Error al cargar los inputs R2")
+      console.log(error)
+    }
+
+    try {
+      const r3_inputs = [
+        ['r3_1_1', 'r3_1_2', 'r3_1_3'],
+        ['r3_2_1', 'r3_2_2', 'r3_2_3'],
+        ['r3_3_1', 'r3_3_2', 'r3_3_3'],
+        ['r3_4_1', 'r3_4_2', 'r3_4_3'],
+        ['r3_5_1', 'r3_5_2', 'r3_5_3'],
+        ['r3_6_1', 'r3_6_2', 'r3_6_3'],
+      ];
+
+      for (const fila of r3_inputs) {
+
+        for (let columna = 0; columna < fila.length; columna++) {
+          let valor = await this.getInputValue(fila[columna]);
+          this.updateControlValue(fila[columna], valor);
+        }
+      }
+    } catch (error) {
+      console.log("Error al cargar los inputs R3")
+      console.log(error)
+    }
+
+    try {
+      const r4_inputs = [
+        ['r4_1_1'],
+        ['r4_2_1'],
+        ['r4_3_1'],
+        ['r4_4_1'],
+        ['r4_5_1'],
+        ['r4_6_1'],
+        ['r4_7_1'],
+        ['r4_8_1'],
+        ['r4_9_1'],
+        ['r4_10_1']
+      ];
+      for (const fila of r4_inputs) {
+
+        for (let columna = 0; columna < fila.length; columna++) {
+          let valor = await this.getInputValue(fila[columna]);
+          this.updateControlValue(fila[columna], valor);
+        }
+      }
+    } catch (error) {
+      console.log("Error al cargar los inputs R4")
+      console.log(error)
+    }
+
+
+
+    try {
+      const r5_inputs = [
+        ['r5_1_1', 'r5_1_2'],
+        ['r5_2_1', 'r5_2_2'],
+        ['r5_3_1', 'r5_3_2'],
+        ['r5_4_1', 'r5_4_2'],
+        ['r5_5_1', 'r5_5_2'],
+        ['r5_6_1', 'r5_6_2'],
+        ['r5_7_1', 'r5_7_2'],
+        ['r5_8_1', 'r5_8_2'],
+      ];
+      for (const fila of r5_inputs) {
+
+        for (let columna = 0; columna < fila.length; columna++) {
+          let valor = await this.getInputValue(fila[columna]);
+          this.updateControlValue(fila[columna], valor);
+        }
+      }
+    } catch (error) {
+      console.log("Error al cargar los inputs R5")
+      console.log(error)
+    }
+
+
+
+    try {
+      const r6_inputs = [
+        ['r6_1_1', 'r6_1_2'],
+        ['r6_2_1', 'r6_2_2'],
+        ['r6_3_1', 'r6_3_2'],
+        ['r6_4_1', 'r6_4_2'],
+        ['r6_5_1', 'r6_5_2'],
+        ['r6_6_1', 'r6_6_2'],
+        ['r6_7_1', 'r6_7_2'],
+      ];
+      for (const fila of r6_inputs) {
+
+        for (let columna = 0; columna < fila.length; columna++) {
+          let valor = await this.getInputValue(fila[columna]);
+          this.updateControlValue(fila[columna], valor);
+        }
+      }
+    } catch (error) {
+      console.log("Error al cargar los inputs R6")
+      console.log(error)
+    }
+
   }
 
   /**
@@ -244,7 +400,7 @@ export class AppComponent implements OnInit, OnChanges {
       ['r1_8_1', 'r1_8_2', 'r1_8_3'],
       ['r1_9_1', 'r1_9_2', 'r1_9_3'],
       ['r1_10_1', 'r1_10_2', 'r1_10_3'],
-      ['r1_11_1', 'r1_11_2', 'r1_11_3'], 
+      ['r1_11_1', 'r1_11_2', 'r1_11_3'],
       ['r1_12_1', 'r1_12_2', 'r1_12_3'], // total
       /*'r12_1', 'r12_2', 'r12_3',*/ // totales
     ];
@@ -323,11 +479,10 @@ export class AppComponent implements OnInit, OnChanges {
 
   }
 
-  
-  async updateFormsToZero(){
+  updateFormsToZero() {
 
     try {
-    
+
       const r1_inputs = [
         ['r1_1_1', 'r1_1_2', 'r1_1_3'],
         ['r1_2_1', 'r1_2_2', 'r1_2_3'],
@@ -346,55 +501,17 @@ export class AppComponent implements OnInit, OnChanges {
 
 
 
-      for (const fila of r1_inputs){
-        console.log(`elementos de la fila: ${ fila[0] },   ${ fila[1] },   ${ fila[2] }` )
+      for (const fila of r1_inputs) {
+        console.log(`elementos de la fila: ${fila[0]},   ${fila[1]},   ${fila[2]}`)
         for (let columna = 0; columna < fila.length; columna++) {
           this.updateControlValue(fila[columna], 0);
         }
 
       }
-
-
     } catch (error) {
-      console.log("ERROR AL OBTENER EL INPUT VAL")
-    }
-    
-    
-  }
-
-  async cargarInputs() {
-
-    try {
-    
-      const r1_inputs = [
-        ['r1_1_1', 'r1_1_2', 'r1_1_3'],
-        ['r1_2_1', 'r1_2_2', 'r1_2_3'],
-        ['r1_3_1', 'r1_3_2', 'r1_3_3'],
-        ['r1_4_1', 'r1_4_2', 'r1_4_3'],
-        ['r1_5_1', 'r1_5_2', 'r1_5_3'],
-        ['r1_6_1', 'r1_6_2', 'r1_6_3'],
-        ['r1_7_1', 'r1_7_2', 'r1_7_3'],
-        ['r1_8_1', 'r1_8_2', 'r1_8_3'],
-        ['r1_9_1', 'r1_9_2', 'r1_9_3'],
-        ['r1_10_1', 'r1_10_2', 'r1_10_3'],
-        ['r1_11_1', 'r1_11_2', 'r1_11_3'],
-        /*'r12_1', 'r12_2', 'r12_3',*/ // totales
-      ];
-
-      for (const fila of r1_inputs){
-        //console.log(`elementos de la fila: ${ fila[0] },   ${ fila[1] },   ${ fila[2] }` )
-        for (let columna = 0; columna < fila.length; columna++) {
-          let valor = await this.getInputValue(fila[columna]);
-          this.updateControlValue(fila[columna], valor);
-        }
-
-      }
-      
-    } catch (error) {
-      console.log("Error al cargar los inputs R1")
+      console.log("Error al cerar valores R1")
       console.log(error)
     }
-
 
     try {
       const r2_inputs = [
@@ -407,15 +524,14 @@ export class AppComponent implements OnInit, OnChanges {
         ['r2_7_1'],
         ['r2_8_1']
       ];
-      for (const fila of r2_inputs){
-        //console.log(`elementos de la fila: ${ fila[0] },   ${ fila[1] },   ${ fila[2] }` )
+      for (const fila of r2_inputs) {
+
         for (let columna = 0; columna < fila.length; columna++) {
-          let valor = await this.getInputValue(fila[columna]);
-          this.updateControlValue(fila[columna], valor);
+          this.updateControlValue(fila[columna], 0);
         }
       }
     } catch (error) {
-      console.log("Error al cargar los inputs R2")
+      console.log("Error al cerar valores R2")
       console.log(error)
     }
 
@@ -428,16 +544,15 @@ export class AppComponent implements OnInit, OnChanges {
         ['r3_5_1', 'r3_5_2', 'r3_5_3'],
         ['r3_6_1', 'r3_6_2', 'r3_6_3'],
       ];
-      
-      for (const fila of r3_inputs){
-        //console.log(`elementos de la fila: ${ fila[0] },   ${ fila[1] },   ${ fila[2] }` )
+
+      for (const fila of r3_inputs) {
+
         for (let columna = 0; columna < fila.length; columna++) {
-          let valor = await this.getInputValue(fila[columna]);
-          this.updateControlValue(fila[columna], valor);
+          this.updateControlValue(fila[columna], 0);
         }
       }
     } catch (error) {
-      console.log("Error al cargar los inputs R2")
+      console.log("Error al cerar valores R3")
       console.log(error)
     }
 
@@ -454,19 +569,16 @@ export class AppComponent implements OnInit, OnChanges {
         ['r4_9_1'],
         ['r4_10_1']
       ];
-      for (const fila of r4_inputs){
-        //console.log(`elementos de la fila: ${ fila[0] },   ${ fila[1] },   ${ fila[2] }` )
+      for (const fila of r4_inputs) {
+
         for (let columna = 0; columna < fila.length; columna++) {
-          let valor = await this.getInputValue(fila[columna]);
-          this.updateControlValue(fila[columna], valor);
+          this.updateControlValue(fila[columna], 0);
         }
       }
     } catch (error) {
-      console.log("Error al cargar los inputs R2")
+      console.log("Error al cerar valores R4")
       console.log(error)
     }
-
-    
 
     try {
       const r5_inputs = [
@@ -479,19 +591,15 @@ export class AppComponent implements OnInit, OnChanges {
         ['r5_7_1', 'r5_7_2'],
         ['r5_8_1', 'r5_8_2'],
       ];
-      for (const fila of r5_inputs){
-        //console.log(`elementos de la fila: ${ fila[0] },   ${ fila[1] },   ${ fila[2] }` )
+      for (const fila of r5_inputs) {
         for (let columna = 0; columna < fila.length; columna++) {
-          let valor = await this.getInputValue(fila[columna]);
-          this.updateControlValue(fila[columna], valor);
+          this.updateControlValue(fila[columna], 0);
         }
       }
     } catch (error) {
-      console.log("Error al cargar los inputs R2")
+      console.log("Error al cerar valores R5")
       console.log(error)
     }
-
-    
 
     try {
       const r6_inputs = [
@@ -503,55 +611,91 @@ export class AppComponent implements OnInit, OnChanges {
         ['r6_6_1', 'r6_6_2'],
         ['r6_7_1', 'r6_7_2'],
       ];
-      for (const fila of r6_inputs){
-        //console.log(`elementos de la fila: ${ fila[0] },   ${ fila[1] },   ${ fila[2] }` )
+      for (const fila of r6_inputs) {
         for (let columna = 0; columna < fila.length; columna++) {
-          let valor = await this.getInputValue(fila[columna]);
-          this.updateControlValue(fila[columna], valor);
+          this.updateControlValue(fila[columna], 0);
         }
       }
     } catch (error) {
-      console.log("Error al cargar los inputs R2")
+      console.log("Error al cerar valores R6")
       console.log(error)
     }
 
 
-
-
-
   }
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   
+  
+  calcularDatos(){
+    //this.calcularSumatoriaR1()
+    this.actualizarSumatoriaR1()
+  }
+
+  async calcularSumatoriaRubro(rubro:string, col:string) {
+    const r1FormArray = this.jsonDataForm.get(rubro) as FormArray;
+    let sumatoria = 0;
+    r1FormArray.controls.forEach(control => {
+      sumatoria += control.get(col)!.value || 0;
+    });
+    return sumatoria;
+  }
+
+  async actualizarSumatoriaR1() {
+    try {
+      const inputs = [
+        'r1_12_1', 'r1_12_2', 'r1_12_3'
+      ];
+      let cols : string[] = [];
+      inputs.forEach(inp => {
+        const [rubro, row, col] = inp.split('_');
+        const colJson = "col"+ col.toString();
+        cols.push(colJson)
+      });
+
+      const T1 = await this.calcularSumatoriaRubro('r1', 'col1');
+      const T2 = await this.calcularSumatoriaRubro('r1', 'col2');
+      const T3 = await this.calcularSumatoriaRubro('r1', 'col3');
+      this.updateControlValue(inputs[0], T1);
+      this.updateControlValue(inputs[1], T2);
+      this.updateControlValue(inputs[2], T3);
+
+    } catch (error) {
+      console.log("Error al actualizar sumatoria R1")
+      console.log(error)
+    }
+    ///this.jsonDataForm.get('res')!.patchValue({ r1_12_1: sumatoria });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   /**
   * DEPRECATED????
   * 
@@ -579,7 +723,7 @@ export class AppComponent implements OnInit, OnChanges {
 
 
 
-      
+
   /**
    * @param id toma un id y lo deconstruye para tomar un valor del json
    * retorna el valor del json
@@ -721,5 +865,8 @@ pero no se actualizan los valores en los inputs
 
 Debounce time para cargar los inputs?
 debounce time para los cambios en input
+
+al dar a calcular varias veces se incrementa el valor en vez de calcularlo desde 0.
+
 
 */

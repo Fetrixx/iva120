@@ -15,7 +15,7 @@ export class JsonService {
   }
 }
 */
-
+/*
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -42,7 +42,9 @@ export class JsonService {
       })
     );
   }
+}
 
+*/
   /*
   getDataData(jsonLink: string): Observable<any[]> {
     return this.http.get<any>(jsonLink).pipe(
@@ -63,8 +65,8 @@ export class JsonService {
         return [];
       })
     );
-  }*/
-}
+  }
+}*/
 
 /*import { Injectable } from '@angular/core';
 

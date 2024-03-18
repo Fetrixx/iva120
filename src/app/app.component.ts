@@ -1,10 +1,10 @@
 
-import { Component, ElementRef, ViewChild, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, ElementRef, ViewChild, Input, OnInit, OnChanges, HostListener } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, debounceTime, distinctUntilChanged, lastValueFrom, switchMap, timestamp } from 'rxjs';
 import { DecimalPipe } from '@angular/common';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
-import { JsonService } from './jsonService.service';
+//import { JsonService } from './jsonService.service';
 
 
 @Component({
@@ -14,12 +14,31 @@ import { JsonService } from './jsonService.service';
 })
 export class AppComponent implements OnInit, OnChanges {
 
+
   title = 'iva120';
   /**
    * link to the json
    */
   @Input() jsonFile: any = '../assets/datos.json'; // CARGA DEL JSON (temporal)
+  formattedValue: string = '';
   // jsonDataForm: FormGroup;
+  
+  @HostListener('document:keypress', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.calcularDatos();
+      
+    }
+  }
+
+   // Función para formatear el valor con separadores de miles
+   formatNumber(value: string): void {
+    // Eliminar todos los puntos y comas del valor
+    value = value.replace(/[.,]/g, '');
+
+    // Formatear el valor con puntos como separadores de miles
+    this.formattedValue = parseFloat(value).toLocaleString('es-ES');
+  }
 
   formArray = new FormArray([]);
 
@@ -71,7 +90,7 @@ export class AppComponent implements OnInit, OnChanges {
 
   }
 
-  constructor(private http: HttpClient, private decimalPipe: DecimalPipe, private formBuilder: FormBuilder, private jsonService: JsonService) {
+  constructor(private http: HttpClient, private decimalPipe: DecimalPipe, private formBuilder: FormBuilder, /*private jsonService: JsonService*/) {
     //this.addItem('r1', 111, 222, 333) // añadir un item al form
     this.cerarInputs(); // cera todos.
 
@@ -81,20 +100,43 @@ export class AppComponent implements OnInit, OnChanges {
 
   }
 
+ 
   cnt: number = 0;
   ngOnInit() {
     //this.loadJsonData()
+    /*this.jsonDataForm.valueChanges.forEach(value => {
 
-    this.jsonDataForm.valueChanges.forEach(value => {
       console.log(`(valueChanges ${this.cnt} ) Valores cambiados: `)
       console.log(value)
       this.cnt++;
+      //this.calcularDatos()
     });
+    */
+
+    this.jsonDataForm.valueChanges.pipe(
+      debounceTime(1000),
+      distinctUntilChanged(),
+      
+
+      ).subscribe(value => {
+      console.log(`(valueChanges nro. ${this.cnt} ) Valores cambiados: `)
+      console.log(value)
+      this.cnt++;
+      //this.calcularDatos()
+    })
+
+    /*this.jsonDataForm.valueChanges.pipe(debounceTime(1000)).subscribe(value => {
+      console.log(`(valueChanges ${this.cnt} ) Valores cambiados: `)
+      console.log(value)
+      this.cnt++;
+
+    })*/
   }
 
 
   ngOnChanges(e: any) {
     console.log(e);
+    this.calcularDatos();
   }
 
   get r1() {
@@ -123,15 +165,7 @@ export class AppComponent implements OnInit, OnChanges {
     console.log(this.r1);
   }
 
-  // Objetos del json...obj "rubro1, r2..."
-  public rubro1: any[] = [];
-  public rubro2: any[] = [];
-  public rubro3: any[] = [];
-  public rubro4: any[] = [];
-  public rubro5: any[] = [];
-  public rubro6: any[] = [];
-  public res: any[] = [];
-
+  
   printScreen() {
     //Get the print button and put it into a variable
     var cargarTodos_Btn = document.getElementById("cargarTodos");
@@ -174,14 +208,18 @@ export class AppComponent implements OnInit, OnChanges {
    * valores: this.jsonDataForm.value
    */
 
-
+  /**
+   * 
+   * @param id id del valor a buscar
+   * @returns retorna el valor del item con el id correspondiente
+   */
   async getInputValue(id: string): Promise<number> {
     const [prefix, row, col] = id.split('_');
     const rowIndex = parseInt(row) - 1;
     const colJSON = "col" + col;
 
     try {
-      const response: any = await this.http.get(this.jsonFile).toPromise();
+      const response: any = await lastValueFrom(this.http.get(this.jsonFile)); //this.http.get(this.jsonFile).toPromise();
       const value = response[prefix][rowIndex][colJSON];
       //console.log("Valor obtenido:", value);
       //console.log(typeof(value));
@@ -228,6 +266,96 @@ export class AppComponent implements OnInit, OnChanges {
     const control = formArray.at(rowIndex).get(colJSON) as FormControl;
     control.setValue(newValue); // or use setValue() if you want to replace the value entirely
   }
+
+
+  updateControlValueList(id: string, suma:string[]) {
+
+    const [prefix, row, col] = id.split('_');
+    const rubro = prefix
+    const rowIndex = parseInt(row) - 1;
+    const colJSON = "col" + col;
+    let total = 0;
+    
+    const formArray = this.jsonDataForm.get(rubro) as FormArray;
+    
+
+    suma.forEach(id=> {
+      const [prefix, row, col] = id.split('_');
+      //const rubro = prefix
+      const rowIndex = parseInt(row) - 1;
+      const colJSON = "col" + col;
+
+      const control = formArray.at(rowIndex).get(colJSON) as FormControl;
+      total += control.value;
+      //console.log("valores sumados:")
+      //console.log(control.value)
+    });
+
+    //const formArray = this.jsonDataForm.get(rubro) as FormArray;
+    //const control = formArray.at(rowIndex).get(`col${colIndex + 1}`) as FormControl;
+    const control = formArray.at(rowIndex).get(colJSON) as FormControl;
+    control.setValue(total); // or use setValue() if you want to replace the value entirely
+  }
+
+
+  updateControlValueList_resta(id: string, suma:string[]) {
+
+    const [prefix, row, col] = id.split('_');
+    const rubro = prefix
+    const rowIndex = parseInt(row) - 1;
+    const colJSON = "col" + col;
+    let total = 0;
+    
+    const formArray = this.jsonDataForm.get(rubro) as FormArray;
+    
+
+    suma.forEach((id, index)=> {
+      const [prefix, row, col] = id.split('_');
+      //const rubro = prefix
+      const rowIndex = parseInt(row) - 1;
+      const colJSON = "col" + col;
+
+      const control = formArray.at(rowIndex).get(colJSON) as FormControl;
+      if (index === 0){
+        total = control.value;
+      } else{
+        total -= control.value;
+      }
+      
+      //console.log("valores sumados:")
+      //console.log(control.value)
+    });
+
+    //const formArray = this.jsonDataForm.get(rubro) as FormArray;
+    //const control = formArray.at(rowIndex).get(`col${colIndex + 1}`) as FormControl;
+    const control = formArray.at(rowIndex).get(colJSON) as FormControl;
+    control.setValue(total); // or use setValue() if you want to replace the value entirely
+  }
+
+
+  exportJson() {
+    const now = new Date();
+    const day = now.getDate().toString().padStart(2, '0');
+    const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Los meses comienzan desde 0
+    const year = now.getFullYear().toString();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    let ampm = parseInt(hours) < 12 ? 'AM' : 'PM';
+    let fileName = ''
+    fileName = `IVA_120_v4_${day}-${month}-${year}__${hours}.${minutes}.${seconds}_${ampm}.json`;
+    const jsonData = JSON.stringify(this.jsonDataForm.value, null, 2);
+    const blob = new Blob([jsonData], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }
+  
 
 
   async cargarInputs() {
@@ -383,7 +511,10 @@ export class AppComponent implements OnInit, OnChanges {
       console.log(error)
     }
 
+    this.calcularDatos()
+
   }
+
 
   /**
    * Crea nuevos objetos en el Form,  les asigna un valor 0, a ser cambiados en un update
@@ -462,19 +593,19 @@ export class AppComponent implements OnInit, OnChanges {
       this.addItem('r1', 0, 0, 0)
     });
     r2_inputs.forEach((fila) => {
-      this.addItem('r2', 0, 0, 0)
+      this.addItem('r2', 0)
     });
     r3_inputs.forEach((fila) => {
       this.addItem('r3', 0, 0, 0)
     });
     r4_inputs.forEach((fila) => {
-      this.addItem('r4', 0, 0, 0)
+      this.addItem('r4', 0)
     });
     r5_inputs.forEach((fila) => {
-      this.addItem('r5', 0, 0, 0)
+      this.addItem('r5', 0, 0)
     });
     r6_inputs.forEach((fila) => {
-      this.addItem('r6', 0, 0, 0)
+      this.addItem('r6', 0, 0)
     });
 
   }
@@ -625,40 +756,107 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
 
-  
-  
-  calcularDatos(){
-    //this.calcularSumatoriaR1()
-    this.actualizarSumatoriaR1()
+
+
+
+
+  async especiales(){
+    let r3_3_3 = await this.getInputValue('r3_2_3') * ((await this.getInputValue('r2_1_1') + await this.getInputValue('r2_2_1')) / await this.getInputValue('r2_4_1'));
+    this.updateControlValue('r3_3_3',r3_3_3);
+
   }
 
-  async calcularSumatoriaRubro(rubro:string, col:string) {
-    const r1FormArray = this.jsonDataForm.get(rubro) as FormArray;
+
+  calcularDatos() {
+    //this.calcularSumatoriaR1()
+
+    // casillas especiales
+
+    
+    
+    
+
+
+    const r1_total = [
+      'r1_12_1', 'r1_12_2', 'r1_12_3'
+    ]
+    r1_total.forEach(id => {
+      this.actualizarSumatoriaIndividual(id, 1, 11)
+    })
+    //this.actualizarSumatoria(r1_total)
+    this.actualizarSumatoriaIndividual('r2_4_1',1,3) // primer total R2
+    this.actualizarSumatoriaIndividual('r2_8_1',5,7) // 2do total R2
+
+    //this.updateControlValue('r2_9_1',(await r2_t + await r2_t2)) // 3er total R2
+    this.updateControlValueList('r2_9_1', ['r2_4_1','r2_8_1']) // tarda en cargarse
+
+    const r3_total = [
+      'r3_6_1','r3_6_2','r3_6_3',
+    ]
+    r3_total.forEach(id => {
+      this.actualizarSumatoriaIndividual(id, 1, 5)
+    })
+    
+
+    this.updateControlValueList_resta('r4_10_1', ['r4_7_1','r4_8_1','r4_9_1']) // tarda en cargarse
+
+
+
+
+
+
+    
+  }
+
+  /**
+   * Suma los datos de una columna del rubroX, colX, desde la fila x hasta la fila y.
+   * @param rubro 
+   * @param col 
+   * @param sumDesde se calcula una suma desde (incluye)
+   * @param sumHasta se calcula una suma hasta (incluye)
+   * @returns 
+   */
+  async calcularSumatoriaRubro(rubro: string, col: string, sumDesde: number, sumHasta: number) {
+    //console.log("-------------------- Suma --------------------")
     let sumatoria = 0;
-    r1FormArray.controls.forEach(control => {
-      sumatoria += control.get(col)!.value || 0;
+    const rubroFormArray = this.jsonDataForm.get(rubro) as FormArray;
+    let cnt = sumDesde - 1;
+    rubroFormArray.controls.forEach((control, index) => {
+      if (index >= cnt){
+        if (cnt < sumHasta) { // sumar los primeros x (11) elementos de 
+          //console.log("control: ");
+          //console.log(control)
+          sumatoria += control.get(col)!.value || 0;
+          //console.log(`VALOR A SUMA: ${rubro}, ${col}`)
+          //console.log(control.get(col)!.value)
+        }
+        cnt++;
+      }
+      
     });
     return sumatoria;
   }
 
-  async actualizarSumatoriaR1() {
+  /**
+   * (MULTIPLES VALORES A LA VEZ)
+   * Actualiza el valor de los campos "total"
+   * @param inputsTotal: string array de los valores considerados "total"
+   */
+  async actualizarSumatoria(inputsTotal: string[]) {
     try {
-      const inputs = [
-        'r1_12_1', 'r1_12_2', 'r1_12_3'
-      ];
-      let cols : string[] = [];
-      inputs.forEach(inp => {
+      let cols: string[] = [];
+      inputsTotal.forEach(inp => {
         const [rubro, row, col] = inp.split('_');
-        const colJson = "col"+ col.toString();
+        const colJson = "col" + col.toString();
         cols.push(colJson)
       });
 
-      const T1 = await this.calcularSumatoriaRubro('r1', 'col1');
-      const T2 = await this.calcularSumatoriaRubro('r1', 'col2');
-      const T3 = await this.calcularSumatoriaRubro('r1', 'col3');
-      this.updateControlValue(inputs[0], T1);
-      this.updateControlValue(inputs[1], T2);
-      this.updateControlValue(inputs[2], T3);
+      const T1 = await this.calcularSumatoriaRubro('r1', 'col1', 0, 11);
+      const T2 = await this.calcularSumatoriaRubro('r1', 'col2', 0, 11);
+      const T3 = await this.calcularSumatoriaRubro('r1', 'col3', 0, 11);
+      this.updateControlValue(inputsTotal[0], T1);
+      this.updateControlValue(inputsTotal[1], T2);
+      this.updateControlValue(inputsTotal[2], T3);
 
     } catch (error) {
       console.log("Error al actualizar sumatoria R1")
@@ -670,111 +868,27 @@ export class AppComponent implements OnInit, OnChanges {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   /**
-  * DEPRECATED????
-  * 
-  */
-  loadJsonData() {
-
-    //this.http.get<{ config: any[], data: any[] }>(this.jsonLink) // get "data" y config de type any[] dentro del json
-    this.http.get<{ res: any[], r1: any[], r2: any[], r3: any[], r4: any[], r5: any[], r6: any[] }>(this.jsonFile).subscribe(response => {
-
-      this.rubro1 = response.r1;
-      console.log("response.r1[0]: ")
-      console.log(response.r1[0]);
-      console.log("response.r1[0].col1: ")
-      console.log(response.r1[0].col1);
-      this.rubro2 = response.r2;
-      this.rubro3 = response.r3;
-      this.rubro4 = response.r4;
-      this.rubro5 = response.r5;
-      this.rubro6 = response.r6;
-      this.res = response.res;
-
-      this.cargarDatosJson()
-    });
-  }
-
-
-
-
-  /**
-   * @param id toma un id y lo deconstruye para tomar un valor del json
-   * retorna el valor del json
+   * actualiza el valor de un campo input
+   * @param id string identificadora del input destino
+   * @param sumDesde se calcula una suma desde (incluye)
+   * @param sumHasta se calcula una suma hasta (incluye)
    */
-  /*
-  getInputValue(id: string): number {
-    // id viene bien
-    const [prefix, row, col] = id.split('_');
-    console.log("EL SPLIT ES: ")
-    console.log([prefix, row, col])
-    const rubroSplit = prefix;
-    const rowIndex = parseInt(row) - 1;
-    //const colIndex = parseInt(col) - 1;
-    const colJSON = "col" + col
-    
-    let value: number;
-    this.http.get<any>(this.jsonFile).subscribe(response => {
-      //console.log("ljkvblkdfvbldfvb")
-      const rubroData = response[prefix];
-      //console.log("r1 REsponse")
-      //console.log(colJSON)
-      
-      
-      //ejemplo:  response en r1, en 0, en col1 o... response.r1[0].col1
-      const value:number = response[prefix][rowIndex][colJSON];
-      console.log("getInputValue retornando :   " )
-      console.log(response[prefix][rowIndex][colJSON]) 
-      //resp = valueIN;
-      return value
-      //console.log(response.rubro[rowIndex])
-    });
-
-
-    return 404;
-
-
-    //console.log(this.jsonObject)
-
-    //const formArray = this.jsonDataForm.get(rubro) as FormArray;
-    //const value = formArray.at(rowIndex).get(`col${colIndex + 1}`)?.value;
-
-    /*const inputElement = document.getElementById(id) as HTMLInputElement;
-    if (inputElement && !inputElement.disabled) {
-      inputElement.value = value.toString();
+  async actualizarSumatoriaIndividual(id: string, sumDesde: number, sumHasta: number) {
+    try {
+      let cols: string[] = [];
+      const [rubro, row, col] = id.split('_');
+      const colJson = "col" + col.toString();
+      const total = await this.calcularSumatoriaRubro(rubro, colJson, sumDesde, sumHasta);
+      this.updateControlValue(id, total);
+      return total;
+    } catch (error) {
+      console.log(`Error al actualizar sumatoria de \"${id}\"`)
+      console.log(error)
+      return error
     }
-    //console.log("EL VALOR GET ES: " + value)
-  }*/
-
-
-
-
+    ///this.jsonDataForm.get('res')!.patchValue({ r1_12_1: sumatoria });
+  }
 
 }
 
@@ -784,23 +898,26 @@ export class AppComponent implements OnInit, OnChanges {
 
 
 
-/*
-
-jsonDataForm = this.formBuilder.group({
-    r1: [this.items.r1],
-    r2: [this.items.r2],
-  });
-
-  getValue(comp = 'r1') {
-    return this.formBuilder.get(comp).value;
-  }
-
-  setValue(comp = 'r1', value: any) {
-    this.formBuilder.get(comp).value = value;
-  }
 
 
-*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
@@ -817,14 +934,6 @@ botones:
 - asiento
 
 */
-
-
-
-
-
-
-
-
 
 
 

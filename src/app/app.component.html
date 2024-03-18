@@ -35,7 +35,7 @@ botones:
 - asiento
 -->
 
-<div style="padding: 5%; flex-wrap: wrap; background-color: lightcyan;" id="botones_test">
+<div style="padding: 5%; padding-bottom: 20px; flex-wrap: wrap; background-color: lightcyan;" id="botones_test">
   <H2>TESTING BUTTONS</H2>
   <!--
     https://stackoverflow.com/questions/31425557/hide-buttons-when-printing
@@ -51,7 +51,9 @@ botones:
   <button style="margin-left: 20px" mat-raised-button (click)="logForm()"> log Form </button>
 
   <button style="margin-left: 20px" mat-raised-button (click)="calcularDatos()"> calcularDatos</button>
+
 </div>
+
 
 
 <div style="margin-left: 5%; margin-top: 10px ;margin-bottom: 10px; flex-wrap: wrap;" id="botones">
@@ -63,8 +65,8 @@ botones:
   <button mat-raised-button id="cargarTodos" (click)="cargarInputs()">Cargar Datos JSON</button>
   <button style="margin-left: 20px" mat-raised-button disabled="true"> Guardar </button>
   <button style="margin-left: 20px" mat-raised-button onclick="window.print()"> Imprimir </button>
-  <button style="margin-left: 20px" mat-raised-button disabled="true"> Exportar </button>
-  <button style="margin-left: 20px" mat-raised-button disabled="true"> Recalcular </button>
+  <button style="margin-left: 20px" mat-raised-button (click)="exportJson()" > Exportar </button>
+  <button style="margin-left: 20px" mat-raised-button (click)="calcularDatos()"> Recalcular </button>
 </div>
 
 
@@ -144,18 +146,19 @@ botones:
           <div style="display: flex; flex-direction: column; height: 100%;">
             <label
               style="border-bottom-style: solid; border-color: lightblue; border-bottom-width: 1px; height: 25%; justify-content: center; align-items: center;">
-              <input type="checkbox">
-              Declaración Jurada Original
+              <input type="radio" name="DJ" checked>
+              <label> Declaración Jurada Original</label>
             </label>
 
             <label style="border-bottom-style: solid; border-color: lightblue; border-bottom-width: 1px; height: 25%;">
-              <input type="checkbox">
-              Declaración Jurada Rectificativa
+              <input type="radio" name="DJ">
+              <label> Declaración Jurada Rectificativa </label>
             </label>
 
             <label style="height: 50%;">
-              <input type="checkbox">
-              Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre Definitivo
+              <input type="radio" name="DJ">
+              <label>Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre Definitivo</label>
+              
             </label>
           </div>
           <!--mat-radio-group>
@@ -292,7 +295,7 @@ botones:
         <div formArrayName="r1">
           <div [formGroupName]="0"> <!--index 0, obj1-->
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_1_1 id="r1_1_1">
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_1_1 id="r1_1_1" >
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">

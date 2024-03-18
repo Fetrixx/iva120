@@ -30,14 +30,14 @@ import { DatepickerViewsSelection } from './dateMMYYYY/datepicker-views-selectio
 import { HttpClientModule } from '@angular/common/http';
 
 import { DecimalPipe } from '@angular/common';
-import { JsonService } from './jsonService.service';
+//import { JsonService } from './jsonService.service';
 import { ReactiveFormsModule } from '@angular/forms';
-
+//import { ThousandsSeparatorDirective } from './thousands-separator.directive'; // Importa la directiva aquí
 
 @NgModule({
   declarations: [
     AppComponent,
-
+    //ThousandsSeparatorDirective
   ],
   imports: [
     HttpClientModule,
@@ -58,7 +58,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     DatepickerViewsSelection,
     ReactiveFormsModule
   ],
-  providers: [DecimalPipe, JsonService, ],
+  providers: [DecimalPipe,/* JsonService, */],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

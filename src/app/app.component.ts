@@ -897,7 +897,7 @@ export class AppComponent implements OnInit, OnChanges {
 
 
 
-
+ 
 
 
 
@@ -905,6 +905,7 @@ export class AppComponent implements OnInit, OnChanges {
 /*
 guardar datos en un array, de ahi ir llenando los inputs, desactivar manualmente los que no se usan
 leer array anidado json
+
 
 json para colocar los datos, 
 botones:

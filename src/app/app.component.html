@@ -105,7 +105,7 @@ botones:
         <mat-grid-tile class="tile" colspan="3" rowspan="2">
           <mat-form-field subscriptSizing="dynamic" class="inputText">
             <mat-label class="textLeft">RUC </mat-label>
-            <input matInput placeholder="" type="number">
+            <input matInput placeholder="" type="number" [(ngModel)]="ruc">
           </mat-form-field>
 
         </mat-grid-tile>
@@ -121,14 +121,14 @@ botones:
         <mat-grid-tile class="tile" colspan="4" rowspan="2">
           <mat-form-field subscriptSizing="dynamic" class="inputText">
             <mat-label class="textLeft"> Razón Social/Primer Apellido </mat-label>
-            <input matInput placeholder="" type="text">
+            <input matInput placeholder="" type="text" [(ngModel)]="lastName1">
           </mat-form-field>
 
         </mat-grid-tile>
         <mat-grid-tile class="tile" colspan="4" rowspan="2">
           <mat-form-field subscriptSizing="dynamic" class="inputText">
             <mat-label class="textLeft"> Segundo Apellido </mat-label>
-            <input matInput placeholder="" type="text">
+            <input matInput placeholder="" type="text" [(ngModel)]="lastName2">
           </mat-form-field>
 
         </mat-grid-tile>
@@ -136,7 +136,7 @@ botones:
         <mat-grid-tile class="tile" colspan="8" rowspan="2">
           <mat-form-field subscriptSizing="dynamic" class="inputText">
             <mat-label class="textLeft">Nombres</mat-label>
-            <input matInput placeholder="" type="text">
+            <input matInput placeholder="" type="text" [(ngModel)]="nameT">
           </mat-form-field>
 
         </mat-grid-tile>
@@ -146,18 +146,18 @@ botones:
           <div style="display: flex; flex-direction: column; height: 100%;">
             <label
               style="border-bottom-style: solid; border-color: lightblue; border-bottom-width: 1px; height: 25%; justify-content: center; align-items: center;">
-              <input type="radio" name="DJ" checked>
-              <label> Declaración Jurada Original</label>
+              <input id="DJ" type="radio" name="DJ" checked>
+              <label for="DJ"> Declaración Jurada Original</label>
             </label>
 
             <label style="border-bottom-style: solid; border-color: lightblue; border-bottom-width: 1px; height: 25%;">
-              <input type="radio" name="DJ">
-              <label> Declaración Jurada Rectificativa </label>
+              <input id="DJR" type="radio" name="DJ">
+              <label for="DJR"> Declaración Jurada Rectificativa </label>
             </label>
 
             <label style="height: 50%;">
-              <input type="radio" name="DJ">
-              <label>Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre Definitivo</label>
+              <input id="DJCA" type="radio" name="DJ">
+              <label for="DJCA">Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre Definitivo</label>
               
             </label>
           </div>
@@ -535,15 +535,15 @@ botones:
 
           <div [formGroupName]="11">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_12_1 id="r1_12_1" readonly>
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_12_1 id="r1_12_1" readonly style="font-weight: bold !important;">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2">
-              <input type="number" formControlName="col2" class="inputNEWNumber" #r1_12_2 id="r1_12_2" readonly>
+              <input type="number" formControlName="col2" class="inputNEWNumber" #r1_12_2 id="r1_12_2" readonly style="font-weight: bold !important;">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2">
-              <input type="number" formControlName="col3" class="inputNEWNumber" #r1_12_3 id="r1_12_3" readonly>
+              <input type="number" formControlName="col3" class="inputNEWNumber" #r1_12_3 id="r1_12_3" readonly style="font-weight: bold !important;">
             </mat-grid-tile>
           </div>
 
@@ -842,7 +842,7 @@ botones:
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" formControlName="col3" #r3_6_3 id="r3_6_3" class="inputNEWNumber" readonly>
+              <input type="number" formControlName="col3" #r3_6_3 id="r3_6_3" class="inputNEWNumber" readonly style="font-weight: bold !important;">
             </mat-grid-tile>
           </div>
 
@@ -919,7 +919,7 @@ botones:
 
           <div [formGroupName]="3">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" value="" formControlName="col1" #r4_4_1 id="r4_4_1" class="inputNEWNumber" readonly>
+              <input type="number" value="" formControlName="col1" #r4_4_1 id="r4_4_1" class="inputNEWNumber" readonly style="font-weight: bold !important;">
             </mat-grid-tile>
           </div>
 
@@ -943,7 +943,7 @@ botones:
 
           <div [formGroupName]="5">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" value="" formControlName="col1" #r4_6_1 id="r4_6_1" class="inputNEWNumber" readonly>
+              <input type="number" value="" formControlName="col1" #r4_6_1 id="r4_6_1" class="inputNEWNumber" readonly style="font-weight: bold !important;">
             </mat-grid-tile>
           </div>
 
@@ -996,7 +996,7 @@ botones:
 
           <div [formGroupName]="9">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" formControlName="col1" #r4_10_1 id="r4_10_1" class="inputNEWNumber" readonly>
+              <input type="number" formControlName="col1" #r4_10_1 id="r4_10_1" class="inputNEWNumber" readonly style="font-weight: bold !important;">
             </mat-grid-tile>
           </div>
 
@@ -1130,7 +1130,7 @@ botones:
 
           <div [formGroupName]="6">
             <mat-grid-tile class="tile" colspan="3" rowspan="2">
-              <input type="number" formControlName="col1" #r5_7_1 id="r5_7_1" class="inputNEWNumber" readonly>
+              <input type="number" formControlName="col1" #r5_7_1 id="r5_7_1" class="inputNEWNumber" readonly style="font-weight: bold !important;">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
@@ -1149,7 +1149,7 @@ botones:
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="3" rowspan="2">
-              <input type="number" formControlName="col1" #r5_8_2 id="r5_8_2" class="inputNEWNumber" readonly>
+              <input type="number" formControlName="col1" #r5_8_2 id="r5_8_2" class="inputNEWNumber" readonly style="font-weight: bold !important;">
             </mat-grid-tile>
           </div>
 
@@ -1452,7 +1452,6 @@ botones:
     </div>
   </div>
 </div>
-
 
 <!--mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_footer">
   <div *ngFor="let item of rubro1; let i = index">

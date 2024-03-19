@@ -1,5 +1,6 @@
 
 import { Component, ElementRef, ViewChild, Input, OnInit, OnChanges, HostListener } from '@angular/core';
+// import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable, debounceTime, distinctUntilChanged, lastValueFrom, switchMap, timestamp } from 'rxjs';
 import { DecimalPipe } from '@angular/common';
@@ -27,7 +28,6 @@ export class AppComponent implements OnInit, OnChanges {
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       this.calcularDatos();
-      
     }
   }
 
@@ -41,6 +41,15 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   formArray = new FormArray([]);
+
+  jsonData = '';
+  nameT = '';
+  lastName1 = '';
+  lastName2 = '';
+  ruc = '';
+  response: any;
+
+
 
   jsonDataForm = new FormGroup({ // array local de datos
     r1: new FormArray([
@@ -94,7 +103,7 @@ export class AppComponent implements OnInit, OnChanges {
     //this.addItem('r1', 111, 222, 333) // añadir un item al form
     this.cerarInputs(); // cera todos.
 
-    //this.cargarInputs(); // 4242 , tiene que ser del  json
+    this.cargarInputs(); 
 
     //this.cerarInputs()
 
@@ -105,7 +114,6 @@ export class AppComponent implements OnInit, OnChanges {
   ngOnInit() {
     //this.loadJsonData()
     /*this.jsonDataForm.valueChanges.forEach(value => {
-
       console.log(`(valueChanges ${this.cnt} ) Valores cambiados: `)
       console.log(value)
       this.cnt++;
@@ -136,7 +144,7 @@ export class AppComponent implements OnInit, OnChanges {
 
   ngOnChanges(e: any) {
     console.log(e);
-    this.calcularDatos();
+    //this.calcularDatos();
   }
 
   get r1() {
@@ -158,7 +166,12 @@ export class AppComponent implements OnInit, OnChanges {
    * Crea un log del Form completo con todos sus elementos.
    */
   logForm() {
-    console.log(this.jsonDataForm)
+    console.log(this.jsonDataForm);
+    console.log(this.nameT);
+    console.log(this.lastName1);
+    console.log(this.lastName2);
+    console.log(this.ruc);
+    this.jsonData = JSON.stringify(this.jsonDataForm.value);
   }
 
   testP() {
@@ -187,10 +200,6 @@ export class AppComponent implements OnInit, OnChanges {
 
   cargarDatosJson() {
     this.http.get<any>(this.jsonFile).subscribe(response => {
-      // Asegúrate de que la estructura de tu JSON coincida con la estructura esperada por tus formularios
-      // Supongamos que tienes los mismos nombres de claves en tu JSON como en tus formularios
-
-      // Itera sobre las claves de tu JSON y establece los valores correspondientes en el formulario
       Object.keys(response).forEach(key => {
         const formArray = this.jsonDataForm.get(key) as FormArray;
         formArray.clear(); // Limpia el FormArray antes de agregar los nuevos valores
@@ -219,8 +228,12 @@ export class AppComponent implements OnInit, OnChanges {
     const colJSON = "col" + col;
 
     try {
-      const response: any = await lastValueFrom(this.http.get(this.jsonFile)); //this.http.get(this.jsonFile).toPromise();
-      const value = response[prefix][rowIndex][colJSON];
+      if (this.response == null)
+        this.response = await lastValueFrom(this.http.get(this.jsonFile)); //this.http.get(this.jsonFile).toPromise();
+      if (this.response == null)
+        throw new Error(' Sin datos en archivo o Api');
+
+      const value = this.response[prefix][rowIndex][colJSON];
       //console.log("Valor obtenido:", value);
       //console.log(typeof(value));
       return value;
@@ -228,6 +241,7 @@ export class AppComponent implements OnInit, OnChanges {
       console.error("Error al obtener el valor:", error);
       // Puedes manejar el error como prefieras, por ejemplo, lanzando una excepción
       throw error;
+      // Mostrar en un snackbar msg
     }
 
   }
@@ -264,7 +278,7 @@ export class AppComponent implements OnInit, OnChanges {
     const formArray = this.jsonDataForm.get(rubro) as FormArray;
     //const control = formArray.at(rowIndex).get(`col${colIndex + 1}`) as FormControl;
     const control = formArray.at(rowIndex).get(colJSON) as FormControl;
-    control.setValue(newValue); // or use setValue() if you want to replace the value entirely
+    control.patchValue(newValue); // or use patchValue() if you want to replace the value entirely
   }
 
 
@@ -281,20 +295,15 @@ export class AppComponent implements OnInit, OnChanges {
 
     suma.forEach(id=> {
       const [prefix, row, col] = id.split('_');
-      //const rubro = prefix
       const rowIndex = parseInt(row) - 1;
       const colJSON = "col" + col;
 
       const control = formArray.at(rowIndex).get(colJSON) as FormControl;
       total += control.value;
-      //console.log("valores sumados:")
-      //console.log(control.value)
     });
 
-    //const formArray = this.jsonDataForm.get(rubro) as FormArray;
-    //const control = formArray.at(rowIndex).get(`col${colIndex + 1}`) as FormControl;
     const control = formArray.at(rowIndex).get(colJSON) as FormControl;
-    control.setValue(total); // or use setValue() if you want to replace the value entirely
+    control.patchValue(total); // or use patchValue() if you want to replace the value entirely
   }
 
 
@@ -321,15 +330,10 @@ export class AppComponent implements OnInit, OnChanges {
       } else{
         total -= control.value;
       }
-      
-      //console.log("valores sumados:")
-      //console.log(control.value)
-    });
 
-    //const formArray = this.jsonDataForm.get(rubro) as FormArray;
-    //const control = formArray.at(rowIndex).get(`col${colIndex + 1}`) as FormControl;
+    });
     const control = formArray.at(rowIndex).get(colJSON) as FormControl;
-    control.setValue(total); // or use setValue() if you want to replace the value entirely
+    control.patchValue(total); // or use patchValue() if you want to replace the value entirely
   }
 
 
@@ -756,10 +760,6 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
 
-
-
-
-
   async especiales(){
     let r3_3_3 = await this.getInputValue('r3_2_3') * ((await this.getInputValue('r2_1_1') + await this.getInputValue('r2_2_1')) / await this.getInputValue('r2_4_1'));
     this.updateControlValue('r3_3_3',r3_3_3);
@@ -768,14 +768,6 @@ export class AppComponent implements OnInit, OnChanges {
 
 
   calcularDatos() {
-    //this.calcularSumatoriaR1()
-
-    // casillas especiales
-
-    
-    
-    
-
 
     const r1_total = [
       'r1_12_1', 'r1_12_2', 'r1_12_3'
@@ -800,11 +792,6 @@ export class AppComponent implements OnInit, OnChanges {
 
     this.updateControlValueList_resta('r4_10_1', ['r4_7_1','r4_8_1','r4_9_1']) // tarda en cargarse
 
-
-
-
-
-
     
   }
 
@@ -817,18 +804,13 @@ export class AppComponent implements OnInit, OnChanges {
    * @returns 
    */
   async calcularSumatoriaRubro(rubro: string, col: string, sumDesde: number, sumHasta: number) {
-    //console.log("-------------------- Suma --------------------")
     let sumatoria = 0;
     const rubroFormArray = this.jsonDataForm.get(rubro) as FormArray;
     let cnt = sumDesde - 1;
     rubroFormArray.controls.forEach((control, index) => {
       if (index >= cnt){
-        if (cnt < sumHasta) { // sumar los primeros x (11) elementos de 
-          //console.log("control: ");
-          //console.log(control)
+        if (cnt < sumHasta) { 
           sumatoria += control.get(col)!.value || 0;
-          //console.log(`VALOR A SUMA: ${rubro}, ${col}`)
-          //console.log(control.get(col)!.value)
         }
         cnt++;
       }
@@ -975,7 +957,13 @@ pero no se actualizan los valores en los inputs
 Debounce time para cargar los inputs?
 debounce time para los cambios en input
 
-al dar a calcular varias veces se incrementa el valor en vez de calcularlo desde 0.
+ al dar a calcular varias veces se incrementa el valor en vez de calcularlo desde 0. ---
+
+ localStorage para acceder al json?, mejora el tiempo de inicializacion?
 
 
+setValue reemplazado por patchValue
+
+
+https://stackblitz.com/edit/angular-ren9gd?file=src%2Fapp%2Finput-error-state-matcher-example.html
 */

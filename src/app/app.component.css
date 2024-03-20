@@ -32,9 +32,7 @@
 /*
 mat-mdc-input-element ng-tns-c2608167813-0 mat-mdc-form-field-input-control mdc-text-field__input cdk-text-field-autofill-monitored
 */
-mat-mdc-input-element mat-mdc-form-field-input-control{
-font-size: 3px;
-}
+
 
 
 @media screen and (min-width: 1001px) { /* If the screen size is 901px wide or more, set the font-size to ...px */
@@ -42,20 +40,20 @@ font-size: 3px;
     font-size: 14px;
     line-height: 1.5;
   }
-  
+
 }
 @media screen and (max-width: 1000px) { /* If the screen size is 900px wide or less, set the font-size to ...px */
   .labelRubro{
     font-size: 10px;
-  } 
+  }
   label {
 		font-size: 11px;
     line-height: 1;
     /*text-wrap:pretty;*/
-    
+
 	}
   mat-label{
-    font-size: 8px;
+    font-size: 12px;
     /*text-wrap:pretty;*/
   }
   input{ /* numeros en grid auto*/
@@ -66,12 +64,12 @@ font-size: 3px;
 @media screen and (max-width: 650px) { /* If the screen size is 900px wide or less, set the font-size to ...px */
   .labelRubro{
     font-size: 8px;
-  } 
+  }
   label {
 		font-size: 9px;
     line-height: 1;
     /*text-wrap:pretty;*/
-    
+
 	}
   mat-label{
     font-size: 8px;
@@ -81,7 +79,7 @@ font-size: 3px;
 }
 
 @media print {
-	
+
   .gridHeight_r1{
     height: 400px;
   }
@@ -112,13 +110,13 @@ font-size: 3px;
   label {
     line-height: 1;
 		font-size: 8px;
-    
-    
+
+
     /*line-height: 1px;*/
 	}
   mat-label{
     font-size: 8px;
-    
+
   }
 
   input{ /* numeros en grid auto*/
@@ -133,16 +131,16 @@ font-size: 3px;
     font-size: 10px;
     /*text-wrap:pretty;*/
   }
-  
-  
+
+
 
   .textLeft {
     margin: 0px;
     /*line-height: 1;*/
     /*font-size: 1vw ;*/
   }
-  
-  
+
+
   /*items to hide when printing*/
   #botones {
     display: none;
@@ -152,11 +150,11 @@ font-size: 3px;
     display: none;
   }
 
-  
-  
-  
+
+
+
   /*  background: rgb(231, 231, 231)*/
-  
+
 }
 
 /*
@@ -165,7 +163,7 @@ usar width para acomodar otros.
 */
 
 /*
-@media print{    
+@media print{
   div{
       background-color: #FFFFFF;
   }
@@ -194,7 +192,7 @@ usar width para acomodar otros.
   margin: 5px;
   padding: 0 16px;
   text-align: end;
-  
+
 }
 
 
@@ -219,9 +217,9 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 .card {
-  
+
   background: lightblue;
-  display: flex; 
+  display: flex;
   flex-direction: column;
 }
 
@@ -309,7 +307,7 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 5px;
   line-height: 1.1;
   width: 100%;
-  
+
   /*font-size: 1vw ;*/
 
 }
@@ -326,18 +324,19 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .inputNumber {
-  
+
   padding: 6%;
   height: 80%;
   width: 100%;
   line-height: 1.25;
 }
 
+
 .inputText {
-  text-wrap: pretty;
-  
   padding: 1%;
-  height: 80%;
+  font-size: 14px;
+  line-height: 32px;
+  font-weight: 300;
   width: 100%;
   /*font-size: 1vw;*/
 }

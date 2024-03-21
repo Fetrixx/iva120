@@ -1,3 +1,4 @@
+
 <!--
             mat-grid-list: [formGroup] =  //"jsonDataForm" objeto form
             div: [formgroupName] = "0"  // indice del elemento
@@ -45,20 +46,20 @@ botones:
 
   <!--button mat-raised-button (click)="getInputValue_with_consolelog('r1_1_1')"> getInputValue('r1_1_1')</button-->
   <!--utton mat-raised-button (click)="cargarTodos2()"> cargarTodos2 </button-->
-  <button style="margin-left: 20px" mat-raised-button (click)="cargarInputs()"> cargarInputs() </button>
-  <button style="margin-left: 20px" mat-raised-button (click)="updateFormsToZero()"> updateFormsToZero() </button>
+
+  <button (click)="postData()">Enviar Datos</button>
 
 
+  <button style="margin-left: 20px" mat-raised-button (click)="cargarInputs()"> cargarInputs()</button>
+  <button style="margin-left: 20px" mat-raised-button (click)="_updateFormsToZero()"> updateFormsToZero()</button>
 
 
-
-  <button style="margin-left: 20px" mat-raised-button (click)="logForm()"> log Form </button>
-  <button style="margin-left: 20px" mat-raised-button (click)="logInfoHeader()"> logInfoHeader() </button>
+  <button style="margin-left: 20px" mat-raised-button (click)="logForm()"> log Form</button>
+  <button style="margin-left: 20px" mat-raised-button (click)="logInfoHeader()"> logInfoHeader()</button>
 
   <button style="margin-left: 20px" mat-raised-button (click)="calcularDatos()"> calcularDatos</button>
 
 </div>
-
 
 
 <div style="margin-left: 5%; margin-top: 10px ;margin-bottom: 10px; flex-wrap: wrap;" id="botones">
@@ -68,17 +69,19 @@ botones:
   <button mat-raised-button id="cargarTodos" (click)="cargarDatosJson()">Cargar Datos JSON</button>
   -->
   <button mat-raised-button id="cargarTodos" (click)="cargarInputs()">Cargar Datos JSON</button>
-  <button style="margin-left: 20px" mat-raised-button disabled="true"> Guardar </button>
-  <button style="margin-left: 20px" mat-raised-button (click)="print()"> Imprimir </button>
-  <button style="margin-left: 20px" mat-raised-button (click)="exportJson()" > Exportar </button>
-  <button style="margin-left: 20px" mat-raised-button (click)="calcularDatos()"> Recalcular </button>
+  <button style="margin-left: 20px" mat-raised-button disabled="true"> Guardar</button>
+  <button style="margin-left: 20px" mat-raised-button (click)="print()"> Imprimir</button>
+  <button style="margin-left: 20px" mat-raised-button (click)="exportJson()"> Exportar</button>
+  <button style="margin-left: 20px" mat-raised-button (click)="calcularDatos()"> Recalcular</button>
 </div>
 
-
+<div class="separator" id="separator">
+  <h3 style="text-align: center; margin: 0;" >DECLARACIÓN JURADA NORMALIZADA</h3>
+</div>
 
 <div class="cardsDiv">
   <div style="display: flex; flex-direction: column; background-color: lightblue;"> <!-- CARD WITH INFO  -->
-    <div style="margin: 5px;">
+    <div class="divMargin">
       <mat-grid-list cols="10" rowHeight="1.8rem" gutterSize="0" [formGroup]="infoHeader">
 
         <mat-grid-tile class="tile" colspan="2" [rowspan]="rowspanHSize">
@@ -95,9 +98,12 @@ botones:
             <input matInput placeholder="" type="text">
           </mat-form-field-->
           <mat-form-field id="nroOrden" subscriptSizing="dynamic" class="inputText">
-            <mat-label class="textLeft">Numero de Orden </mat-label>
+            <mat-label class="textLeft">Numero de Orden</mat-label>
             <input matInput placeholder="" type="number" formControlName="nroOrden">
-            <mat-hint>Errors appear instantly!</mat-hint>
+            <!--mat-hint>Errors appear instantly!</mat-hint-->
+            <mat-error *ngIf="infoHeader.get('ruc')?.hasError('minlength')">
+              Please fill out this field.
+            </mat-error>
           </mat-form-field>
 
 
@@ -110,9 +116,9 @@ botones:
 
         </mat-grid-tile>
 
-        <mat-grid-tile class="tile" colspan="3" [rowspan]="rowspanSize" >
-          <mat-form-field subscriptSizing="dynamic" class="inputText"  >
-            <mat-label class="textLeft">RUC </mat-label>
+        <mat-grid-tile class="tile" colspan="3" [rowspan]="rowspanSize">
+          <mat-form-field subscriptSizing="dynamic" class="inputText">
+            <mat-label class="textLeft">RUC</mat-label>
             <input matInput placeholder="" type="number" formControlName="ruc">
           </mat-form-field>
 
@@ -120,7 +126,7 @@ botones:
 
         <mat-grid-tile class="tile" colspan="1" [rowspan]="rowspanSize">
           <mat-form-field subscriptSizing="dynamic" class="inputText">
-            <mat-label class="textLeft">DV </mat-label>
+            <mat-label class="textLeft">DV</mat-label>
             <input matInput placeholder="" type="number" formControlName="dv">
           </mat-form-field>
 
@@ -128,15 +134,15 @@ botones:
 
         <mat-grid-tile class="tile" colspan="4" [rowspan]="rowspanSize">
           <mat-form-field subscriptSizing="dynamic" class="inputText">
-            <mat-label class="textLeft"> Razón Social/Primer Apellido </mat-label>
-            <input matInput placeholder="" type="text"  formControlName="apellido1_razon">
+            <mat-label class="textLeft"> Razón Social/Primer Apellido</mat-label>
+            <input matInput placeholder="" type="text" formControlName="apellido1_razon">
           </mat-form-field>
 
         </mat-grid-tile>
         <mat-grid-tile class="tile" colspan="4" [rowspan]="rowspanSize">
           <mat-form-field subscriptSizing="dynamic" class="inputText">
-            <mat-label class="textLeft"> Segundo Apellido </mat-label>
-            <input matInput placeholder="" type="text"  formControlName="apellido2">
+            <mat-label class="textLeft"> Segundo Apellido</mat-label>
+            <input matInput placeholder="" type="text" formControlName="apellido2">
           </mat-form-field>
 
         </mat-grid-tile>
@@ -154,7 +160,7 @@ botones:
           <div style="display: flex; flex-direction: column; height: 100%;">
             <label
               style="border-bottom-style: solid; border-color: lightblue; border-bottom-width: 1px; height: 25%; justify-content: center; align-items: center;">
-              <input id="DJ" type="radio" name="DJ" checked >
+              <input id="DJ" type="radio" name="DJ" checked>
               <label for="DJ"> Declaración Jurada Original</label>
             </label>
 
@@ -165,7 +171,8 @@ botones:
 
             <label style="height: 50%;">
               <input id="DJCA" type="radio" name="DJ">
-              <label for="DJCA">Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre Definitivo</label>
+              <label for="DJCA">Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre
+                Definitivo</label>
 
             </label>
           </div>
@@ -197,19 +204,14 @@ botones:
         </mat-grid-tile-->
 
         <mat-grid-tile class="tile" colspan="4" rowspan="3">
-          <mat-label style="
-          text-align: left;
-
-          margin-left: 1em;
-          width: 40%;
-          line-height: 1.25;">Periodo / Ejercicio Fiscal</mat-label>
+          <label style="text-align: left; margin-left: 1em; width: 40%; line-height: 1.25;">
+            Periodo / Ejercicio Fiscal
+          </label>
           <!--datepicker-views-selection #picker class="inputDate"></datepicker-views-selection-->
 
 
-
-
           <mat-form-field class="inputText" subscriptSizing="dynamic"
-            style="margin-right: 5px; align-items: center; justify-content: center;">
+                          style="margin-right: 5px; align-items: center; justify-content: center;">
             <mat-label class="textLeft">Mes</mat-label>
             <input matInput placeholder="" type="number" formControlName="month">
           </mat-form-field>
@@ -218,8 +220,6 @@ botones:
             <mat-label class="textLeft">Año</mat-label>
             <input matInput placeholder="" type="number" formControlName="year">
           </mat-form-field>
-
-
 
 
           <!--
@@ -238,11 +238,9 @@ botones:
 </div>
 
 
-
-
 <div class="cardsDiv">
   <div class="card"> <!-- CARD WITH INFO  -->
-    <div style="margin: 5px;">
+    <div class="divMargin">
 
       <!--mat-grid-list cols="14" rowHeight="1.8rem" gutterSize="5"-->
       <mat-grid-list class="gridHeight_r1" cols="14" rowHeight="fit" gutterSize="0" [formGroup]="jsonDataForm">
@@ -279,7 +277,8 @@ botones:
         </mat-grid-tile>
 
         <mat-grid-tile class="tile" colspan="6" rowspan="2">
-          <label class="textLeft"> Enajenación de bienes y/o prestación de servicios gravados con tasa del 10% </label>
+          <label class="textLeft">a) Enajenación de bienes y/o prestación de servicios gravados con tasa del
+            10% </label>
         </mat-grid-tile>
 
         <!--
@@ -289,7 +288,7 @@ botones:
         <div formArrayName="r1">
           <div [formGroupName]="0"> <!--index 0, obj1-->
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_1_1 id="r1_1_1" >
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_1_1 id="r1_1_1">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2" style="background: rgb(231, 231, 231)">
@@ -302,9 +301,8 @@ botones:
           </div>
 
 
-
           <mat-grid-tile class="tile" colspan="6" rowspan="3">
-            <label class="textLeft">Enajenación de productos agrícolas en estado natural
+            <label class="textLeft">b) Enajenación de productos agrícolas en estado natural
               y sus derivados del primer proceso de elaboración o
               industrialización gravados con tasa del 5%
             </label>
@@ -327,7 +325,7 @@ botones:
 
 
           <mat-grid-tile class="tile" colspan="6" rowspan="2">
-            <label class="textLeft">Enajenación de otros bienes y/o prestación de
+            <label class="textLeft">c) Enajenación de otros bienes y/o prestación de
               servicios gravados con tasa del 5%
             </label>
           </mat-grid-tile>
@@ -347,7 +345,7 @@ botones:
           </div>
 
           <mat-grid-tile class="tile" colspan="6" rowspan="2">
-            <label class="textLeft">Enajenación de bienes, prestación de servicios o
+            <label class="textLeft">d) Enajenación de bienes, prestación de servicios o
               ingresos exonerados o no alcanzados por el Impuesto
             </label>
           </mat-grid-tile>
@@ -367,7 +365,7 @@ botones:
           </div>
 
           <mat-grid-tile class="tile" colspan="6" rowspan="2.5">
-            <label class="textLeft">Exportación de productos agrícolas en estado natural y
+            <label class="textLeft">e) Exportación de productos agrícolas en estado natural y
               sus derivados del primer proceso de elaboración o
               industrialización
             </label>
@@ -388,7 +386,7 @@ botones:
           </div>
 
           <mat-grid-tile class="tile" colspan="6" rowspan="2">
-            <label class="textLeft">Prestación de Servicios de Flete Internacional para la
+            <label class="textLeft">f) Prestación de Servicios de Flete Internacional para la
               exportación de bienes
             </label>
           </mat-grid-tile>
@@ -409,7 +407,7 @@ botones:
 
           <mat-grid-tile class="tile" colspan="6" rowspan="2">
             <label class="textLeft">
-              Exportación de otros bienes
+              g) Exportación de otros bienes
             </label>
           </mat-grid-tile>
 
@@ -427,8 +425,8 @@ botones:
             </mat-grid-tile>
           </div>
 
-          <mat-grid-tile class="tile" colspan="6" rowspan="2.5">
-            <label class="textLeft"> Ajustes de precios, devoluciones realizadas,
+          <mat-grid-tile class="tile" colspan="6" rowspan="3">
+            <label class="textLeft">h) Ajustes de precios, devoluciones realizadas,
               descuentos obtenidos y recupero de Impuestos por
               operaciones incobrables, declaradas a la tasa del 10%
             </label>
@@ -448,8 +446,8 @@ botones:
             </mat-grid-tile>
           </div>
 
-          <mat-grid-tile class="tile" colspan="6" rowspan="4">
-            <label class="textLeft"> Ajustes de precios, devoluciones realizadas,
+          <mat-grid-tile class="tile" colspan="6" rowspan="5">
+            <label class="textLeft">i) Ajustes de precios, devoluciones realizadas,
               descuentos obtenidos y recupero de Impuestos por
               operaciones incobrables, declaradas a la tasa del 5%,
               correspondientes a la adquisición de productos
@@ -459,22 +457,22 @@ botones:
           </mat-grid-tile>
 
           <div [formGroupName]="8">
-            <mat-grid-tile class="tile" colspan="4" rowspan="4">
+            <mat-grid-tile class="tile" colspan="4" rowspan="5">
               <input type="number" formControlName="col1" class="inputNEWNumber" #r1_9_1 id="r1_9_1">
             </mat-grid-tile>
 
-            <mat-grid-tile class="tile" colspan="2" rowspan="4">
+            <mat-grid-tile class="tile" colspan="2" rowspan="5">
               <input type="number" formControlName="col2" class="inputNEWNumber" #r1_9_2 id="r1_9_2">
             </mat-grid-tile>
 
-            <mat-grid-tile class="tile" colspan="2" rowspan="4" style="background: rgb(231, 231, 231)">
+            <mat-grid-tile class="tile" colspan="2" rowspan="5" style="background: rgb(231, 231, 231)">
               <input type="number" class="inputNEWNumber" disabled="true" #r1_9_3 id="r1_9_3">
             </mat-grid-tile>
           </div>
 
 
-          <mat-grid-tile class="tile" colspan="6" rowspan="3">
-            <label class="textLeft"> Ajustes de precios, devoluciones realizadas,
+          <mat-grid-tile class="tile" colspan="6" rowspan="4">
+            <label class="textLeft">j) Ajustes de precios, devoluciones realizadas,
               descuentos obtenidos y recupero de Impuestos por
               operaciones incobrables, declaradas a la tasa del 5%,
               correspondientes a la adquisición de otros bienes y
@@ -484,21 +482,21 @@ botones:
 
 
           <div [formGroupName]="9">
-            <mat-grid-tile class="tile" colspan="4" rowspan="3">
+            <mat-grid-tile class="tile" colspan="4" rowspan="4">
               <input type="number" formControlName="col1" class="inputNEWNumber" #r1_10_1 id="r1_10_1">
             </mat-grid-tile>
 
-            <mat-grid-tile class="tile" colspan="2" rowspan="3">
+            <mat-grid-tile class="tile" colspan="2" rowspan="4">
               <input type="number" formControlName="col2" class="inputNEWNumber" #r1_10_2 id="r1_10_2">
             </mat-grid-tile>
 
-            <mat-grid-tile class="tile" colspan="2" rowspan="3" style="background: rgb(231, 231, 231)">
+            <mat-grid-tile class="tile" colspan="2" rowspan="4" style="background: rgb(231, 231, 231)">
               <input type="number" class="inputNEWNumber" disabled="true" #r1_10_3 id="r1_10_3">
             </mat-grid-tile>
           </div>
 
           <mat-grid-tile class="tile" colspan="6" rowspan="3">
-            <label class="textLeft"> Ajustes de precios, devoluciones realizadas,
+            <label class="textLeft">k) Ajustes de precios, devoluciones realizadas,
               descuentos obtenidos y recupero por operaciones
               incobrables, exonerados o no alcanzados por el
               Impuesto
@@ -522,22 +520,25 @@ botones:
           <mat-grid-tile class="tile" colspan="6" rowspan="2">
             <label>
               <b>
-                TOTAL
+                l) TOTAL
               </b>
             </label>
           </mat-grid-tile>
 
           <div [formGroupName]="11">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_12_1 id="r1_12_1" readonly style="font-weight: bold !important;">
+              <input type="number" formControlName="col1" class="inputNEWNumber" #r1_12_1 id="r1_12_1" readonly
+                     style="font-weight: bold !important;">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2">
-              <input type="number" formControlName="col2" class="inputNEWNumber" #r1_12_2 id="r1_12_2" readonly style="font-weight: bold !important;">
+              <input type="number" formControlName="col2" class="inputNEWNumber" #r1_12_2 id="r1_12_2" readonly
+                     style="font-weight: bold !important;">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="2" rowspan="2">
-              <input type="number" formControlName="col3" class="inputNEWNumber" #r1_12_3 id="r1_12_3" readonly style="font-weight: bold !important;">
+              <input type="number" formControlName="col3" class="inputNEWNumber" #r1_12_3 id="r1_12_3" readonly
+                     style="font-weight: bold !important;">
             </mat-grid-tile>
           </div>
 
@@ -550,8 +551,7 @@ botones:
 
 <div class="cardsDiv">
   <div class="card"> <!-- CARD WITH INFO  -->
-    <div style="margin: 5px;">
-
+    <div class="divMargin">
 
 
       <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r2" [formGroup]="jsonDataForm">
@@ -559,20 +559,20 @@ botones:
         <div formArrayName="r2">
 
           <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="10"
-            rowspan="2">
+                         rowspan="2">
             <label class="labelRubro"> RUBRO 2 - ENAJENACIÓN DE BIENES Y/O PRESTACIÓN DE SERVICIOS DE LOS ÚLTIMOS SEIS
               (6) MESES (INCLUIDO EL PERIODO QUE SE DECLARA) </label>
           </mat-grid-tile>
 
           <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4"
-            rowspan="2">
+                         rowspan="2">
             <label>
               MONTO ACUMULADO
             </label>
           </mat-grid-tile>
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
-            <label class="textLeft"> Enajenación de bienes y/o prestación de servicios gravados en el mercado interno,
+            <label class="textLeft">a) Enajenación de bienes y/o prestación de servicios gravados en el mercado interno,
               con
               excepción de los
               productos agrícolas en estado natural </label>
@@ -585,7 +585,7 @@ botones:
           </div>
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
-            <label class="textLeft"> Enajenación de productos agrícolas en estado natural y sus derivados del primer
+            <label class="textLeft">b) Enajenación de productos agrícolas en estado natural y sus derivados del primer
               proceso de elaboración
               o industrialización en el mercado interno </label>
           </mat-grid-tile>
@@ -598,7 +598,7 @@ botones:
           </div>
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
-            <label class="textLeft"> Enajenación de bienes y/o prestación de servicios exonerados o no alcanzados
+            <label class="textLeft">c) Enajenación de bienes y/o prestación de servicios exonerados o no alcanzados
             </label>
           </mat-grid-tile>
 
@@ -609,18 +609,18 @@ botones:
           </div>
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
-            <label class="textLeftBold"> TOTAL DE OPERACIONES EN EL MERCADO INTERNO </label>
+            <label class="textLeftBold">d) TOTAL DE OPERACIONES EN EL MERCADO INTERNO (a+b+c) </label>
           </mat-grid-tile>
 
           <div [formGroupName]="3">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
               <input type="number" formControlName="col1" #r2_4_1 id="r2_4_1" class="inputNEWNumber"
-                style="font-weight: bold !important;" readonly>
+                     style="font-weight: bold !important;" readonly>
             </mat-grid-tile>
           </div>
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
-            <label class="textLeft"> Exportación de productos agrícolas en estado natural y sus derivados del primer
+            <label class="textLeft">e) Exportación de productos agrícolas en estado natural y sus derivados del primer
               proceso de elaboración o industrialización </label>
           </mat-grid-tile>
 
@@ -631,7 +631,7 @@ botones:
           </div>
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
-            <label class="textLeft"> Servicios de flete internacional prestados por empresas transportadoras para la
+            <label class="textLeft">f) Servicios de flete internacional prestados por empresas transportadoras para la
               exportación de bienes </label>
           </mat-grid-tile>
 
@@ -642,7 +642,7 @@ botones:
           </div>
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
-            <label class="textLeft"> Exportación de otros bienes </label>
+            <label class="textLeft">g) Exportación de otros bienes </label>
           </mat-grid-tile>
 
           <div [formGroupName]="6">
@@ -652,26 +652,26 @@ botones:
           </div>
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
-            <label class="textLeftBold"> TOTAL DE OPERACIONES DE EXPORTACIÓN </label>
+            <label class="textLeftBold">h) TOTAL DE OPERACIONES DE EXPORTACIÓN (e+f+g)</label>
           </mat-grid-tile>
 
 
           <div [formGroupName]="7">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
               <input type="number" formControlName="col1" #r2_8_1 id="r2_8_1" class="inputNEWNumber"
-                style="font-weight: bold !important;" readonly>
+                     style="font-weight: bold !important;" readonly>
             </mat-grid-tile>
           </div>
 
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
-            <label class="textLeftBold"> TOTAL DE OPERACIONES ACUMULADAS </label>
+            <label class="textLeftBold">i) TOTAL DE OPERACIONES ACUMULADAS (d+h) </label>
           </mat-grid-tile>
 
           <div [formGroupName]="8">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
               <input type="number" formControlName="col1" #r2_9_1 id="r2_9_1" class="inputNEWNumber"
-                style="font-weight: bold !important;" readonly>
+                     style="font-weight: bold !important;" readonly>
             </mat-grid-tile>
           </div>
 
@@ -684,29 +684,24 @@ botones:
 </div>
 
 
-
-
-
 <div class="cardsDiv">
   <div class="card"> <!-- CARD WITH INFO  -->
-    <div style="margin: 5px;">
+    <div class="divMargin">
 
       <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r3" [formGroup]="jsonDataForm">
 
 
-
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="6"
-          rowspan="2">
+                       rowspan="2">
           <label class="labelRubro"> RUBRO 3 - COMPRAS LOCALES E IMPORTACIONES DEL PERIODO </label>
         </mat-grid-tile>
-
 
 
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4">
           <label> MONTO IMPONIBLE</label>
         </mat-grid-tile>
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4"
-          rowspan="2">
+                       rowspan="2">
           <label> IVA CRÉDITO -III-</label>
         </mat-grid-tile>
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="2">
@@ -717,7 +712,7 @@ botones:
         </mat-grid-tile>
 
         <mat-grid-tile class="tile" colspan="6" rowspan="2">
-          <label class="textLeft"> IVA Crédito atribuido directamente a operaciones gravadas en el mercado interno
+          <label class="textLeft">a) IVA Crédito atribuido directamente a operaciones gravadas en el mercado interno
           </label>
 
         </mat-grid-tile>
@@ -739,7 +734,7 @@ botones:
 
           <mat-grid-tile class="tile" colspan="6" rowspan="2">
             <label class="textLeft">
-              IVA Crédito atribuido indistintamente a operaciones gravadas, exoneradas o no alcanzadas
+              b) IVA Crédito atribuido indistintamente a operaciones gravadas, exoneradas o no alcanzadas
             </label>
           </mat-grid-tile>
 
@@ -760,7 +755,8 @@ botones:
 
           <mat-grid-tile class="tile" colspan="6" rowspan="2">
             <label class="textLeft">
-              IVA Crédito atribuido proporcionalmente a operaciones gravadas en el mercado interno
+              c) IVA Crédito atribuido proporcionalmente a operaciones gravadas en el mercado interno (b * (R2: a+b /
+              c))
             </label>
           </mat-grid-tile>
 
@@ -781,7 +777,7 @@ botones:
 
           <mat-grid-tile class="tile" colspan="6" rowspan="2">
             <label class="textLeft">
-              IVA Crédito atribuido proporcionalmente a operaciones gravadas en el mercado interno y a exportación
+              d) IVA Crédito atribuido proporcionalmente a operaciones gravadas en el mercado interno y a exportación
             </label>
           </mat-grid-tile>
 
@@ -801,7 +797,7 @@ botones:
 
           <mat-grid-tile class="tile" colspan="6" rowspan="2.5">
             <label class="textLeft">
-              IVA Crédito por ajustes de precios, devoluciones y descuentos otorgados, por ventas ya declaradas y
+              e) IVA Crédito por ajustes de precios, devoluciones y descuentos otorgados, por ventas ya declaradas y
               operaciones declaradas incobrables
             </label>
           </mat-grid-tile>
@@ -822,7 +818,7 @@ botones:
 
           <mat-grid-tile class="tile" colspan="6" rowspan="2">
             <label class="textLeftBold">
-              TOTAL DE IVA CRÉDITO PARA OPERACIONES EN EL MERCADO INTERNO
+              f) TOTAL DE IVA CRÉDITO PARA OPERACIONES EN EL MERCADO INTERNO (a+c+d+e)
             </label>
           </mat-grid-tile>
 
@@ -836,7 +832,8 @@ botones:
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" formControlName="col3" #r3_6_3 id="r3_6_3" class="inputNEWNumber" readonly style="font-weight: bold !important;">
+              <input type="number" formControlName="col3" #r3_6_3 id="r3_6_3" class="inputNEWNumber" readonly
+                     style="font-weight: bold !important;">
             </mat-grid-tile>
           </div>
 
@@ -850,11 +847,11 @@ botones:
 
 <div class="cardsDiv">
   <div class="card"> <!-- CARD WITH INFO  -->
-    <div style="margin: 5px;">
+    <div class="divMargin">
       <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r4" [formGroup]="jsonDataForm">
         <div formArrayName="r4">
           <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="10"
-            rowspan="2">
+                         rowspan="2">
             <label class="labelRubro">
               RUBRO 4 - DETERMINACIÓN DEL IMPUESTO O DEL SALDO TÉCNICO
             </label>
@@ -862,7 +859,7 @@ botones:
 
 
           <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="4"
-            rowspan="2">
+                         rowspan="2">
             <label>
               MONTO
             </label>
@@ -871,7 +868,7 @@ botones:
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
 
             <label class="textLeft">
-              IVA Débito
+              a) IVA Débito (R1: col2 y 3: inc. l)
             </label>
 
           </mat-grid-tile>
@@ -885,7 +882,7 @@ botones:
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
             <label class="textLeft">
-              IVA Crédito
+              b) IVA Crédito (R3: inc. f)
             </label>
           </mat-grid-tile>
 
@@ -897,7 +894,7 @@ botones:
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
             <label class="textLeft">
-              Saldo a favor del contribuyente del período anterior por operaciones en el mercado interno
+              c) Saldo a favor del contribuyente del período anterior por operaciones en el mercado interno
             </label>
           </mat-grid-tile>
 
@@ -908,18 +905,21 @@ botones:
           </div>
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
-            <label class="textLeftBold"> SALDO A FAVOR DEL CONTRIBUYENTE </label>
+            <label class="textLeftBold">
+              d) SALDO A FAVOR DEL CONTRIBUYENTE (cuando el inc. a  sea menor que inc. b+c)
+            </label>
           </mat-grid-tile>
 
           <div [formGroupName]="3">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" value="" formControlName="col1" #r4_4_1 id="r4_4_1" class="inputNEWNumber" readonly style="font-weight: bold !important;">
+              <input type="number" value="" formControlName="col1" #r4_4_1 id="r4_4_1" class="inputNEWNumber" readonly
+                     style="font-weight: bold !important;">
             </mat-grid-tile>
           </div>
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
             <label class="textLeft">
-              Saldo a favor del contribuyente a remitir en beneficio del Fisco
+              e) Saldo a favor del contribuyente a remitir en beneficio del Fisco
             </label>
           </mat-grid-tile>
 
@@ -931,33 +931,36 @@ botones:
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
             <label class="textLeftBold">
-              SALDO A FAVOR DEL CONTRIBUYENTE
+              f) SALDO A FAVOR DEL CONTRIBUYENTE
             </label>
           </mat-grid-tile>
 
           <div [formGroupName]="5">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" value="" formControlName="col1" #r4_6_1 id="r4_6_1" class="inputNEWNumber" readonly style="font-weight: bold !important;">
+              <input type="number" value="" formControlName="col1" #r4_6_1 id="r4_6_1" class="inputNEWNumber" readonly
+                     style="font-weight: bold !important;">
             </mat-grid-tile>
           </div>
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
             <label class="textLeft">
-              Saldo a favor del fisco
+              g) Saldo a favor del fisco (cuando inc. a sea mayor que b+c)
             </label>
           </mat-grid-tile>
 
           <div [formGroupName]="6">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
+              <!--span style="margin-left: 5px; font-size: 8px" >
+                48
+              </span-->
               <input type="number" value="" formControlName="col1" #r4_7_1 id="r4_7_1" class="inputNEWNumber">
             </mat-grid-tile>
           </div>
 
 
-
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
             <label class="textLeft">
-              Monto del IVA Crédito utilizado en el periodo que se liquida para operaciones gravadas
+              h) Monto del IVA Crédito utilizado en el periodo que se liquida para operaciones gravadas
             </label>
           </mat-grid-tile>
 
@@ -970,7 +973,7 @@ botones:
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2.5">
             <label class="textLeft">
-              Deducción conforme al Art. 7° y 8° de la Ley N° 4.96_2/201_3 por incorporación de personas con
+              i) Deducción conforme al Art. 7° y 8° de la Ley N° 4.962/2013 por incorporación de personas con
               discapacidad y en concepto de gastos y costos por adecuación del entorno físico, tecnológica, etc. y
               contratación de facilitadores laborales (No trasladable)
             </label>
@@ -984,13 +987,14 @@ botones:
 
           <mat-grid-tile class="tile" colspan="10" rowspan="2">
             <label class="textLeftBold">
-              IMPUESTO DETERMINADO
+              j) IMPUESTO DETERMINADO (g-h-i)
             </label>
           </mat-grid-tile>
 
           <div [formGroupName]="9">
             <mat-grid-tile class="tile" colspan="4" rowspan="2">
-              <input type="number" formControlName="col1" #r4_10_1 id="r4_10_1" class="inputNEWNumber" readonly style="font-weight: bold !important;">
+              <input type="number" formControlName="col1" #r4_10_1 id="r4_10_1" class="inputNEWNumber" readonly
+                     style="font-weight: bold !important;">
             </mat-grid-tile>
           </div>
 
@@ -1003,12 +1007,12 @@ botones:
 
 <div class="cardsDiv">
   <div class="card"> <!-- CARD WITH INFO  -->
-    <div style="margin: 5px;">
+    <div class="divMargin">
       <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r5" [formGroup]="jsonDataForm">
 
 
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="8"
-          rowspan="2">
+                       rowspan="2">
           <label class="labelRubro"> RUBRO 5 - IMPUESTO DETERMINADO Y/O SALDO FINANCIERO A FAVOR DEL CONTRIBUYENTE
           </label>
         </mat-grid-tile>
@@ -1098,7 +1102,7 @@ botones:
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="3" rowspan="2">
-              <input type="number" formControlName="col1" #r5_5_2 id="r5_5_2" class="inputNEWNumber">
+              <input type="number" formControlName="col2" #r5_5_2 id="r5_5_2" class="inputNEWNumber">
             </mat-grid-tile>
           </div>
 
@@ -1109,12 +1113,12 @@ botones:
           <div [formGroupName]="5">
             <mat-grid-tile class="tile" colspan="3" rowspan="2">
               <input type="number" formControlName="col1" #r5_6_1 id="r5_6_1" class="inputNEWNumber"
-                style="font-weight: bold !important;" readonly>
+                     style="font-weight: bold !important;" readonly>
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="3" rowspan="2">
               <input type="number" formControlName="col2" #r5_6_2 id="r5_6_2" class="inputNEWNumber"
-                style="font-weight: bold !important;" readonly>
+                     style="font-weight: bold !important;" readonly>
             </mat-grid-tile>
           </div>
 
@@ -1124,7 +1128,8 @@ botones:
 
           <div [formGroupName]="6">
             <mat-grid-tile class="tile" colspan="3" rowspan="2">
-              <input type="number" formControlName="col1" #r5_7_1 id="r5_7_1" class="inputNEWNumber" readonly style="font-weight: bold !important;">
+              <input type="number" formControlName="col1" #r5_7_1 id="r5_7_1" class="inputNEWNumber" readonly
+                     style="font-weight: bold !important;">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
@@ -1143,7 +1148,8 @@ botones:
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="3" rowspan="2">
-              <input type="number" formControlName="col1" #r5_8_2 id="r5_8_2" class="inputNEWNumber" readonly style="font-weight: bold !important;">
+              <input type="number" formControlName="col2" #r5_8_2 id="r5_8_2" class="inputNEWNumber" readonly
+                     style="font-weight: bold !important;">
             </mat-grid-tile>
           </div>
 
@@ -1154,7 +1160,6 @@ botones:
     </div>
   </div>
 </div>
-
 
 
 <!--
@@ -1178,23 +1183,23 @@ botones:
 
 <div class="cardsDiv">
   <div class="card"> <!-- CARD WITH INFO  -->
-    <div style="margin: 5px;">
+    <div class="divMargin">
       <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_r6" [formGroup]="jsonDataForm">
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="8"
-          rowspan="2">
+                       rowspan="2">
           <label class="labelRubro">
             RUBRO 6 - INFORMACIÓN DE LAS COMPRAS DEL PERIODO,
             VINCULADAS A OPERACIONES EXONERADAS O NO ALCANZADAS POR EL IMPUESTO
           </label>
         </mat-grid-tile>
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="3"
-          rowspan="2">
+                       rowspan="2">
           <label>
             MONTO -I-
           </label>
         </mat-grid-tile>
         <mat-grid-tile class="tile" style="background: #e4f4f4;  width: 100%; font-weight: bold;" colspan="3"
-          rowspan="2">
+                       rowspan="2">
           <label>
             IVA -II-
           </label>
@@ -1310,7 +1315,7 @@ botones:
 
           <div [formGroupName]="5">
             <mat-grid-tile class="tile" colspan="3" rowspan="2">
-              <input type="number" formControlName="col1"  #r6_7_1 id="r6_7_1" class="inputNEWNumber">
+              <input type="number" formControlName="col1" #r6_7_1 id="r6_7_1" class="inputNEWNumber">
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
@@ -1325,11 +1330,13 @@ botones:
   </div>
 </div>
 
+<div id="separator2">
 
+</div>
 
 <div class="cardsDiv">
   <div class="card"> <!-- CARD WITH INFO  -->
-    <div style="margin: 5px;">
+    <div class="divMargin">
       <mat-grid-list cols="14" rowHeight="fit" gutterSize="0" class="gridHeight_footer">
 
         <mat-grid-tile class="tile" colspan="14" rowspan="2">
@@ -1385,13 +1392,13 @@ botones:
           </label>
 
           <mat-form-field subscriptSizing="dynamic"
-            style="margin-right: 5px; align-items: center; justify-content: center;">
+                          style="margin-right: 5px; align-items: center; justify-content: center;">
             <mat-label class="textLeft">Dia</mat-label>
             <input matInput placeholder="" type="number">
           </mat-form-field>
           /
           <mat-form-field subscriptSizing="dynamic"
-            style="margin-right: 5px; align-items: center; justify-content: center;">
+                          style="margin-right: 5px; align-items: center; justify-content: center;">
             <mat-label class="textLeft">Mes</mat-label>
             <input matInput placeholder="" type="number">
           </mat-form-field>
@@ -1426,8 +1433,6 @@ botones:
         </mat-grid-tile>
 
 
-
-
         <mat-grid-tile class="tile" colspan="14" rowspan="2">
           <label class="textLeft">
             Estimado Contribuyente: Le recordamos que los pagos que efectúe emergentes de esta declaración, serán
@@ -1438,9 +1443,6 @@ botones:
 
 
       </mat-grid-list>
-
-
-
 
 
     </div>

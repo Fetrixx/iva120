@@ -1,8 +1,9 @@
 import {Component, HostListener, Input, OnChanges, OnInit} from '@angular/core';
 // import { FormsModule } from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {debounceTime, distinctUntilChanged, lastValueFrom} from 'rxjs';
-import {FormArray, FormControl, FormGroup} from '@angular/forms'
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms'
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 //import { JsonService } from './jsonService.service';
 
@@ -14,12 +15,11 @@ import {FormArray, FormControl, FormGroup} from '@angular/forms'
 })
 export class AppComponent implements OnInit, OnChanges {
 
-
   title = 'iva120';
   /**
    * link to the json
    */
-  @Input() jsonFile: any = '../assets/datos.json'; // CARGA DEL JSON (temporal)
+  @Input() jsonFile: any = '../assets/datos2.json'; // CARGA DEL JSON (temporal)
 
   // jsonDataForm: FormGroup;
 
@@ -41,6 +41,10 @@ export class AppComponent implements OnInit, OnChanges {
   seleccion:any
 
 */
+
+  /**
+   * Copia local de los datos del json
+   */
   jsonResponse: any = null;
 
   logInfoHeader(){
@@ -50,18 +54,42 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   infoHeader = new FormGroup({
-    nroOrden: new FormControl('59385673846'),
-    ruc: new FormControl('22222'),
-    dv: new FormControl('213'),
+    nroOrden: new FormControl('123456789', Validators.minLength(5)),
+    ruc: new FormControl('192837465',Validators.minLength(1) ),
+    dv: new FormControl('0'),
     apellido1_razon: new FormControl('Apellido1_filler'),
     apellido2: new FormControl('Apellido2_filler'),
     nombres: new FormControl('Nombre_filler'),
-    nroOrdenDeclaracion: new FormControl('57283755992'),
+    nroOrdenDeclaracion: new FormControl('987654321'),
     periodoEjercicioFiscal: new FormControl('0'),
-    month: new FormControl('01'),
+    month: new FormControl('1'),
     year: new FormControl('2024')
   })
 
+  firstError :any;
+  onSubmit(){
+    const props = Object.keys(this.infoHeader.value)
+    this.firstError = null
+    props.forEach((prop) => {
+      if (!this.firstError && this.infoHeader.get(prop)?.errors) {
+        console.log('setting firstError', prop, this.infoHeader.get(prop)?.errors)
+        this.firstError = prop
+      }
+    })
+    if(this.firstError == 'nroOrden'){
+      this.infoHeader.get('ruc')?.clearValidators();
+      this.infoHeader.get('ruc')?.updateValueAndValidity();
+      this.infoHeader.get('dv')?.clearValidators();
+      this.infoHeader.get('dv')?.updateValueAndValidity();
+      this.infoHeader.get('apellido1_razon')?.clearValidators();
+      this.infoHeader.get('apellido1_razon')?.updateValueAndValidity();
+      this.infoHeader.get('apellido2')?.clearValidators();
+      this.infoHeader.get('apellido2')?.updateValueAndValidity();
+      this.infoHeader.get('nombres')?.clearValidators();
+      this.infoHeader.get('nombres')?.updateValueAndValidity();
+
+    }
+  }
 
   jsonDataForm = new FormGroup({ // array local de datos
     r1: new FormArray([
@@ -111,7 +139,32 @@ export class AppComponent implements OnInit, OnChanges {
 
   }
 
-  constructor(private http: HttpClient,/*private jsonService: JsonService*/) {
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
+
+  postData(){
+    const formData = this.jsonDataForm.value;
+    const url = 'https://reqbin.com/';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    // Realiza la solicitud HTTP POST
+    this.http.post(url, formData, { headers }).subscribe(
+      response => {
+        console.log('Respuesta del servidor:', response);
+        // Puedes realizar cualquier acción adicional con la respuesta del servidor aquí
+      },
+      error => {
+        console.error('Error al enviar los datos:', error);
+        // Maneja el error de acuerdo a tus necesidades
+      }
+    );
+  }
+
+
+  constructor(private http: HttpClient,/*private jsonService: JsonService*/ private _snackBar: MatSnackBar, private fb: FormBuilder) {
     //this.addItem('r1', 111, 222, 333) // añadir un item al form
     this.cerarInputs(); // cera todos.
 
@@ -123,9 +176,12 @@ export class AppComponent implements OnInit, OnChanges {
     this.cargarInputs();
 
 
+
     //this.cerarInputs()
 
   }
+
+
 
 
   cnt: number = 0;
@@ -143,13 +199,14 @@ export class AppComponent implements OnInit, OnChanges {
       debounceTime(1000),
       distinctUntilChanged(),
 
-
     ).subscribe(value => {
       console.log(`(valueChanges nro. ${this.cnt} ) Valores cambiados: `)
       console.log(value)
       this.cnt++;
+
       //this.calcularDatos()
     })
+
 
     /*this.jsonDataForm.valueChanges.pipe(debounceTime(1000)).subscribe(value => {
       console.log(`(valueChanges ${this.cnt} ) Valores cambiados: `)
@@ -176,14 +233,20 @@ export class AppComponent implements OnInit, OnChanges {
   /**
    * Crea un log del Form completo con todos sus elementos.
    */
-  logForm() {/*
-    console.log(this.jsonDataForm);
+  logForm() {
+
+    console.log(" >>>>> JSON: ");
+    console.log(this.jsonDataForm)
+
+
+    console.log(" >>>>> INFORMATION HEADER: ");
+    console.log(this.infoHeader);
+    /*
+
     console.log(this.nameT);
     console.log(this.lastName1);
     console.log(this.lastName2);
     console.log(this.ruc);
-
-
     jsonData = '';
     nroOrden = ''
     nameT = '';
@@ -215,6 +278,7 @@ export class AppComponent implements OnInit, OnChanges {
   rowspanSize = 3;
   rowspanHSize = 12
   print(){
+    this.calcularDatos();
     this.rowspanSize = 2;
     this.rowspanHSize = 9
 
@@ -230,6 +294,31 @@ export class AppComponent implements OnInit, OnChanges {
 
   }
 
+  getLocalInputValue(id: string):number{
+    const [prefix, row, col] = id.split('_');
+    const rowIndex = parseInt(row) - 1;
+    const colJSON = "col" + col;
+
+    try {
+      //console.log("json Data Form")
+
+      //console.log(this.jsonResponse)
+      //console.log(this.jsonResponse[prefix][rowIndex])
+
+      const val = this.jsonDataForm.get(prefix)?.get(rowIndex.toString())?.get(colJSON)?.value
+      //console.log(`FUNCA... ${id}: ${val}, type: ${typeof (val)}`)
+
+      return val;
+    } catch (error) {
+      console.error("Error al obtener el valor:", error);
+      // Puedes manejar el error como prefieras, por ejemplo, lanzando una excepción
+      this.openSnackBar(`${error}`, "ok.") // Mostrar en un snackbar msg
+      throw error;
+
+
+    }
+
+  }
 
   async getInputValue(id: string): Promise<number> {
     const [prefix, row, col] = id.split('_');
@@ -241,16 +330,17 @@ export class AppComponent implements OnInit, OnChanges {
         this.jsonResponse = await lastValueFrom(this.http.get(this.jsonFile)); //this.http.get(this.jsonFile).toPromise(); // CARGAR JSON
       }
       if (this.jsonResponse == null){
-        throw new Error(' Sin datos en archivo o Api (getInputValue)');
+        throw new Error(' Sin datos en archivo o Api (getInputValue)'); // si el json esta vacio
       }
 
-
+      //console.log(this.jsonResponse[prefix][rowIndex][colJSON])
       return this.jsonResponse[prefix][rowIndex][colJSON];
     } catch (error) {
       console.error("Error al obtener el valor:", error);
       // Puedes manejar el error como prefieras, por ejemplo, lanzando una excepción
+      this.openSnackBar(`${error}`, "ok.") // Mostrar en un snackbar msg
       throw error;
-      // Mostrar en un snackbar msg
+
     }
 
   }
@@ -287,11 +377,13 @@ export class AppComponent implements OnInit, OnChanges {
 
 
     suma.forEach(id => {
+      //console.log(id)
       const [prefix, row, col] = id.split('_');
       const rowIndex = parseInt(row) - 1;
       const colJSON = "col" + col;
 
       const control = formArray.at(rowIndex).get(colJSON) as FormControl;
+      //console.log(`VALOR DL ITEM A SUMAR: ${control.value}`)
       total += control.value;
     });
 
@@ -354,26 +446,83 @@ export class AppComponent implements OnInit, OnChanges {
 
 
 
+
+
+  inputsArray = {
+    r1_inputs : [
+      ['r1_1_1', 'r1_1_2', 'r1_1_3'],
+      ['r1_2_1', 'r1_2_2', 'r1_2_3'],
+      ['r1_3_1', 'r1_3_2', 'r1_3_3'],
+      ['r1_4_1', 'r1_4_2', 'r1_4_3'],
+      ['r1_5_1', 'r1_5_2', 'r1_5_3'],
+      ['r1_6_1', 'r1_6_2', 'r1_6_3'],
+      ['r1_7_1', 'r1_7_2', 'r1_7_3'],
+      ['r1_8_1', 'r1_8_2', 'r1_8_3'],
+      ['r1_9_1', 'r1_9_2', 'r1_9_3'],
+      ['r1_10_1', 'r1_10_2', 'r1_10_3'],
+      ['r1_11_1', 'r1_11_2', 'r1_11_3'],
+    ],
+    r2_inputs : [
+      ['r2_1_1'],
+      ['r2_2_1'],
+      ['r2_3_1'],
+      ['r2_4_1'],
+      ['r2_5_1'],
+      ['r2_6_1'],
+      ['r2_7_1'],
+      ['r2_8_1']
+    ],
+     r3_inputs : [
+      ['r3_1_1', 'r3_1_2', 'r3_1_3'],
+      ['r3_2_1', 'r3_2_2', 'r3_2_3'],
+      ['r3_3_1', 'r3_3_2', 'r3_3_3'],
+      ['r3_4_1', 'r3_4_2', 'r3_4_3'],
+      ['r3_5_1', 'r3_5_2', 'r3_5_3'],
+      ['r3_6_1', 'r3_6_2', 'r3_6_3'],
+    ],
+    r4_inputs : [
+      ['r4_1_1'],
+      ['r4_2_1'],
+      ['r4_3_1'],
+      ['r4_4_1'],
+      ['r4_5_1'],
+      ['r4_6_1'],
+      ['r4_7_1'],
+      ['r4_8_1'],
+      ['r4_9_1'],
+      ['r4_10_1']
+    ],
+
+    r5_inputs : [
+      ['r5_1_1', 'r5_1_2'],
+      ['r5_2_1', 'r5_2_2'],
+      ['r5_3_1', 'r5_3_2'],
+      ['r5_4_1', 'r5_4_2'],
+      ['r5_5_1', 'r5_5_2'],
+      ['r5_6_1', 'r5_6_2'],
+      ['r5_7_1', 'r5_7_2'],
+      ['r5_8_1', 'r5_8_2'],
+    ],
+    r6_inputs : [
+      ['r6_1_1', 'r6_1_2'],
+      ['r6_2_1', 'r6_2_2'],
+      ['r6_3_1', 'r6_3_2'],
+      ['r6_4_1', 'r6_4_2'],
+      ['r6_5_1', 'r6_5_2'],
+      ['r6_6_1', 'r6_6_2'],
+      ['r6_7_1', 'r6_7_2'],
+    ]
+  }
+
+
+  /**
+   * carga los valores del json en las casillas (posteriormente usar solamente la variable local)
+   */
   async cargarInputs() {
 
     try {
 
-      const r1_inputs = [
-        ['r1_1_1', 'r1_1_2', 'r1_1_3'],
-        ['r1_2_1', 'r1_2_2', 'r1_2_3'],
-        ['r1_3_1', 'r1_3_2', 'r1_3_3'],
-        ['r1_4_1', 'r1_4_2', 'r1_4_3'],
-        ['r1_5_1', 'r1_5_2', 'r1_5_3'],
-        ['r1_6_1', 'r1_6_2', 'r1_6_3'],
-        ['r1_7_1', 'r1_7_2', 'r1_7_3'],
-        ['r1_8_1', 'r1_8_2', 'r1_8_3'],
-        ['r1_9_1', 'r1_9_2', 'r1_9_3'],
-        ['r1_10_1', 'r1_10_2', 'r1_10_3'],
-        ['r1_11_1', 'r1_11_2', 'r1_11_3'],
-        /*'r12_1', 'r12_2', 'r12_3',*/ // totales
-      ];
-
-      for (const fila of r1_inputs) {
+      for (const fila of this.inputsArray.r1_inputs) {
 
         for (let columna = 0; columna < fila.length; columna++) {
           let valor = await this.getInputValue(fila[columna]);
@@ -387,19 +536,8 @@ export class AppComponent implements OnInit, OnChanges {
       console.log(error)
     }
 
-
     try {
-      const r2_inputs = [
-        ['r2_1_1'],
-        ['r2_2_1'],
-        ['r2_3_1'],
-        ['r2_4_1'],
-        ['r2_5_1'],
-        ['r2_6_1'],
-        ['r2_7_1'],
-        ['r2_8_1']
-      ];
-      for (const fila of r2_inputs) {
+      for (const fila of this.inputsArray.r2_inputs) {
 
         for (let columna = 0; columna < fila.length; columna++) {
           let valor = await this.getInputValue(fila[columna]);
@@ -412,16 +550,9 @@ export class AppComponent implements OnInit, OnChanges {
     }
 
     try {
-      const r3_inputs = [
-        ['r3_1_1', 'r3_1_2', 'r3_1_3'],
-        ['r3_2_1', 'r3_2_2', 'r3_2_3'],
-        ['r3_3_1', 'r3_3_2', 'r3_3_3'],
-        ['r3_4_1', 'r3_4_2', 'r3_4_3'],
-        ['r3_5_1', 'r3_5_2', 'r3_5_3'],
-        ['r3_6_1', 'r3_6_2', 'r3_6_3'],
-      ];
 
-      for (const fila of r3_inputs) {
+
+      for (const fila of this.inputsArray.r3_inputs) {
 
         for (let columna = 0; columna < fila.length; columna++) {
           let valor = await this.getInputValue(fila[columna]);
@@ -434,19 +565,7 @@ export class AppComponent implements OnInit, OnChanges {
     }
 
     try {
-      const r4_inputs = [
-        ['r4_1_1'],
-        ['r4_2_1'],
-        ['r4_3_1'],
-        ['r4_4_1'],
-        ['r4_5_1'],
-        ['r4_6_1'],
-        ['r4_7_1'],
-        ['r4_8_1'],
-        ['r4_9_1'],
-        ['r4_10_1']
-      ];
-      for (const fila of r4_inputs) {
+      for (const fila of this.inputsArray.r4_inputs) {
 
         for (let columna = 0; columna < fila.length; columna++) {
           let valor = await this.getInputValue(fila[columna]);
@@ -461,17 +580,8 @@ export class AppComponent implements OnInit, OnChanges {
 
 
     try {
-      const r5_inputs = [
-        ['r5_1_1', 'r5_1_2'],
-        ['r5_2_1', 'r5_2_2'],
-        ['r5_3_1', 'r5_3_2'],
-        ['r5_4_1', 'r5_4_2'],
-        ['r5_5_1', 'r5_5_2'],
-        ['r5_6_1', 'r5_6_2'],
-        ['r5_7_1', 'r5_7_2'],
-        ['r5_8_1', 'r5_8_2'],
-      ];
-      for (const fila of r5_inputs) {
+
+      for (const fila of this.inputsArray.r5_inputs) {
 
         for (let columna = 0; columna < fila.length; columna++) {
           let valor = await this.getInputValue(fila[columna]);
@@ -486,16 +596,8 @@ export class AppComponent implements OnInit, OnChanges {
 
 
     try {
-      const r6_inputs = [
-        ['r6_1_1', 'r6_1_2'],
-        ['r6_2_1', 'r6_2_2'],
-        ['r6_3_1', 'r6_3_2'],
-        ['r6_4_1', 'r6_4_2'],
-        ['r6_5_1', 'r6_5_2'],
-        ['r6_6_1', 'r6_6_2'],
-        ['r6_7_1', 'r6_7_2'],
-      ];
-      for (const fila of r6_inputs) {
+
+      for (const fila of this.inputsArray.r6_inputs) {
 
         for (let columna = 0; columna < fila.length; columna++) {
           let valor = await this.getInputValue(fila[columna]);
@@ -516,120 +618,45 @@ export class AppComponent implements OnInit, OnChanges {
    * Crea nuevos objetos en el Form, les asigna un valor 0, a ser cambiados en un update
    */
   cerarInputs() {
-    const r1_inputs = [
-      ['r1_1_1', 'r1_1_2', 'r1_1_3'],
-      ['r1_2_1', 'r1_2_2', 'r1_2_3'],
-      ['r1_3_1', 'r1_3_2', 'r1_3_3'],
-      ['r1_4_1', 'r1_4_2', 'r1_4_3'],
-      ['r1_5_1', 'r1_5_2', 'r1_5_3'],
-      ['r1_6_1', 'r1_6_2', 'r1_6_3'],
-      ['r1_7_1', 'r1_7_2', 'r1_7_3'],
-      ['r1_8_1', 'r1_8_2', 'r1_8_3'],
-      ['r1_9_1', 'r1_9_2', 'r1_9_3'],
-      ['r1_10_1', 'r1_10_2', 'r1_10_3'],
-      ['r1_11_1', 'r1_11_2', 'r1_11_3'],
-      ['r1_12_1', 'r1_12_2', 'r1_12_3'], // total
-      /*'r12_1', 'r12_2', 'r12_3',*/ // totales
-    ];
 
-    const r2_inputs = [
-      ['r2_1_1'],
-      ['r2_2_1'],
-      ['r2_3_1'],
-      ['r2_4_1'],
-      ['r2_5_1'],
-      ['r2_6_1'],
-      ['r2_7_1'],
-      ['r2_8_1'],
-      ['r2_8_1']
-    ];
-    const r3_inputs = [
-      ['r3_1_1', 'r3_1_2', 'r3_1_3'],
-      ['r3_2_1', 'r3_2_2', 'r3_2_3'],
-      ['r3_3_1', 'r3_3_2', 'r3_3_3'],
-      ['r3_4_1', 'r3_4_2', 'r3_4_3'],
-      ['r3_5_1', 'r3_5_2', 'r3_5_3'],
-      ['r3_6_1', 'r3_6_2', 'r3_6_3'],
-    ];
+    /**
+     * cantidad de casillas a rellenar en cada rubro
+     */
+    const items = {
+      r1: 12,
+      r2: 9,
+      r3: 6,
+      r4: 10,
+      r5: 8,
+      r6: 7
+    }
 
-    const r4_inputs = [
-      ['r4_1_1'],
-      ['r4_2_1'],
-      ['r4_3_1'],
-      ['r4_4_1'],
-      ['r4_5_1'],
-      ['r4_6_1'],
-      ['r4_7_1'],
-      ['r4_8_1'],
-      ['r4_9_1'],
-      ['r4_10_1']
-    ];
-
-    const r5_inputs = [
-      ['r5_1_1', 'r5_1_2'],
-      ['r5_2_1', 'r5_2_2'],
-      ['r5_3_1', 'r5_3_2'],
-      ['r5_4_1', 'r5_4_2'],
-      ['r5_5_1', 'r5_5_2'],
-      ['r5_6_1', 'r5_6_2'],
-      ['r5_7_1', 'r5_7_2'],
-      ['r5_8_1', 'r5_8_2'],
-    ];
-    const r6_inputs = [
-      ['r6_1_1', 'r6_1_2'],
-      ['r6_2_1', 'r6_2_2'],
-      ['r6_3_1', 'r6_3_2'],
-      ['r6_4_1', 'r6_4_2'],
-      ['r6_5_1', 'r6_5_2'],
-      ['r6_6_1', 'r6_6_2'],
-      'r6_7_1', 'r6_7_2',
-    ];
-
-    r1_inputs.forEach(()=> {
+    for (let i = 0; i < items.r1; i++) {
       this.addItem('r1', 0, 0, 0)
-    });
-    r2_inputs.forEach(() => {
+    }
+    for (let i = 0; i < items.r2; i++) {
       this.addItem('r2', 0)
-    });
-    r3_inputs.forEach(() => {
+    }
+    for (let i = 0; i < items.r3; i++) {
       this.addItem('r3', 0, 0, 0)
-    });
-    r4_inputs.forEach(() => {
+    }
+    for (let i = 0; i < items.r4; i++) {
       this.addItem('r4', 0)
-    });
-    r5_inputs.forEach(() => {
+    }
+    for (let i = 0; i < items.r5; i++) {
       this.addItem('r5', 0, 0)
-    });
-    r6_inputs.forEach(() => {
+    }
+    for (let i = 0; i < items.r6; i++) {
       this.addItem('r6', 0, 0)
-    });
-
+    }
   }
 
-  updateFormsToZero() {
+  _updateFormsToZero() {
 
     try {
 
-      const r1_inputs = [
-        ['r1_1_1', 'r1_1_2', 'r1_1_3'],
-        ['r1_2_1', 'r1_2_2', 'r1_2_3'],
-        ['r1_3_1', 'r1_3_2', 'r1_3_3'],
-        ['r1_4_1', 'r1_4_2', 'r1_4_3'],
-        ['r1_5_1', 'r1_5_2', 'r1_5_3'],
-        ['r1_6_1', 'r1_6_2', 'r1_6_3'],
-        ['r1_7_1', 'r1_7_2', 'r1_7_3'],
-        ['r1_8_1', 'r1_8_2', 'r1_8_3'],
-        ['r1_9_1', 'r1_9_2', 'r1_9_3'],
-        ['r1_10_1', 'r1_10_2', 'r1_10_3'],
-        ['r1_11_1', 'r1_11_2', 'r1_11_3'],
-        /*'r12_1', 'r12_2', 'r12_3',*/ // totales
-      ];
-
-
-
-
-      for (const fila of r1_inputs) {
-        console.log(`elementos de la fila: ${fila[0]},   ${fila[1]},   ${fila[2]}`)
+      for (const fila of this.inputsArray.r1_inputs) {
+        //console.log(`elementos de la fila: ${fila[0]},   ${fila[1]},   ${fila[2]}`)
         for (let columna = 0; columna < fila.length; columna++) {
           this.updateControlValue(fila[columna], 0);
         }
@@ -641,17 +668,8 @@ export class AppComponent implements OnInit, OnChanges {
     }
 
     try {
-      const r2_inputs = [
-        ['r2_1_1'],
-        ['r2_2_1'],
-        ['r2_3_1'],
-        ['r2_4_1'],
-        ['r2_5_1'],
-        ['r2_6_1'],
-        ['r2_7_1'],
-        ['r2_8_1']
-      ];
-      for (const fila of r2_inputs) {
+
+      for (const fila of this.inputsArray.r2_inputs) {
 
         for (let columna = 0; columna < fila.length; columna++) {
           this.updateControlValue(fila[columna], 0);
@@ -663,16 +681,8 @@ export class AppComponent implements OnInit, OnChanges {
     }
 
     try {
-      const r3_inputs = [
-        ['r3_1_1', 'r3_1_2', 'r3_1_3'],
-        ['r3_2_1', 'r3_2_2', 'r3_2_3'],
-        ['r3_3_1', 'r3_3_2', 'r3_3_3'],
-        ['r3_4_1', 'r3_4_2', 'r3_4_3'],
-        ['r3_5_1', 'r3_5_2', 'r3_5_3'],
-        ['r3_6_1', 'r3_6_2', 'r3_6_3'],
-      ];
 
-      for (const fila of r3_inputs) {
+      for (const fila of this.inputsArray.r3_inputs) {
 
         for (let columna = 0; columna < fila.length; columna++) {
           this.updateControlValue(fila[columna], 0);
@@ -684,19 +694,8 @@ export class AppComponent implements OnInit, OnChanges {
     }
 
     try {
-      const r4_inputs = [
-        ['r4_1_1'],
-        ['r4_2_1'],
-        ['r4_3_1'],
-        ['r4_4_1'],
-        ['r4_5_1'],
-        ['r4_6_1'],
-        ['r4_7_1'],
-        ['r4_8_1'],
-        ['r4_9_1'],
-        ['r4_10_1']
-      ];
-      for (const fila of r4_inputs) {
+
+      for (const fila of this.inputsArray.r4_inputs) {
 
         for (let columna = 0; columna < fila.length; columna++) {
           this.updateControlValue(fila[columna], 0);
@@ -708,17 +707,8 @@ export class AppComponent implements OnInit, OnChanges {
     }
 
     try {
-      const r5_inputs = [
-        ['r5_1_1', 'r5_1_2'],
-        ['r5_2_1', 'r5_2_2'],
-        ['r5_3_1', 'r5_3_2'],
-        ['r5_4_1', 'r5_4_2'],
-        ['r5_5_1', 'r5_5_2'],
-        ['r5_6_1', 'r5_6_2'],
-        ['r5_7_1', 'r5_7_2'],
-        ['r5_8_1', 'r5_8_2'],
-      ];
-      for (const fila of r5_inputs) {
+
+      for (const fila of this.inputsArray.r5_inputs) {
         for (let columna = 0; columna < fila.length; columna++) {
           this.updateControlValue(fila[columna], 0);
         }
@@ -729,16 +719,8 @@ export class AppComponent implements OnInit, OnChanges {
     }
 
     try {
-      const r6_inputs = [
-        ['r6_1_1', 'r6_1_2'],
-        ['r6_2_1', 'r6_2_2'],
-        ['r6_3_1', 'r6_3_2'],
-        ['r6_4_1', 'r6_4_2'],
-        ['r6_5_1', 'r6_5_2'],
-        ['r6_6_1', 'r6_6_2'],
-        ['r6_7_1', 'r6_7_2'],
-      ];
-      for (const fila of r6_inputs) {
+
+      for (const fila of this.inputsArray.r6_inputs) {
         for (let columna = 0; columna < fila.length; columna++) {
           this.updateControlValue(fila[columna], 0);
         }
@@ -752,11 +734,6 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
 
-  async especiales() {
-    let r3_3_3 = await this.getInputValue('r3_2_3') * ((await this.getInputValue('r2_1_1') + await this.getInputValue('r2_2_1')) / await this.getInputValue('r2_4_1'));
-    this.updateControlValue('r3_3_3', r3_3_3);
-
-  }
 
 
   calcularDatos() {
@@ -767,22 +744,70 @@ export class AppComponent implements OnInit, OnChanges {
     r1_total.forEach(id => {
       this.actualizarSumatoriaIndividual(id, 1, 11)
     })
+
     //this.actualizarSumatoria(r1_total)
     this.actualizarSumatoriaIndividual('r2_4_1', 1, 3) // primer total R2
     this.actualizarSumatoriaIndividual('r2_8_1', 5, 7) // 2do total R2
-
     //this.updateControlValue('r2_9_1',(await r2_t + await r2_t2)) // 3er total R2
     this.updateControlValueList('r2_9_1', ['r2_4_1', 'r2_8_1']) // tarda en cargarse
 
-    const r3_total = [
-      'r3_6_1', 'r3_6_2', 'r3_6_3',
-    ]
-    r3_total.forEach(id => {
-      this.actualizarSumatoriaIndividual(id, 1, 5)
-    })
+
+    this.updateControlValueList('r3_6_3', ['r3_1_3','r3_3_3','r3_4_3','r3_5_3'])
+
+    let r3_3_3 = this.getLocalInputValue('r3_2_3') * (  (this.getLocalInputValue('r2_1_1') + this.getLocalInputValue('r2_2_1')) / this.getLocalInputValue('r2_4_1')  ) ;
+    //((this.getLocalInputValue(('r2_1_1') + this.getLocalInputValue('r2_2_1')) /  this.getLocalInputValue('r2_4_1')))
+    //console.log(`  valor r3-3-3: ${r3_3_3}`);
+    this.updateControlValue('r3_3_3', r3_3_3);
 
 
+
+    //this.updateControlValueList('r4_1_1', ['r1_12_2','r1_12_3'])
+
+    //this.updateControlValueList('r4_1_1', ['r1_1_1'])
+
+    this.updateControlValue('r4_1_1', ( this.getLocalInputValue('r1_12_2') + this.getLocalInputValue('r1_12_3') ))
+    this.updateControlValue('r4_2_1', this.getLocalInputValue('r3_6_3'))
+    let r4d = 0;
+    let r4g= 0;
+    if ((this.getLocalInputValue('r4_2_1') + this.getLocalInputValue('r4_3_1')) > this.getLocalInputValue('r4_1_1')){
+      r4d = (this.getLocalInputValue('r4_2_1') + this.getLocalInputValue('r4_3_1')) - this.getLocalInputValue('r4_1_1');
+    } // else... 0;
+    else{
+      r4g = this.getLocalInputValue('r4_1_1') - (this.getLocalInputValue('r4_2_1') + this.getLocalInputValue('r4_3_1'));
+    }
+    this.updateControlValue('r4_4_1', r4d)
+    if ((this.getLocalInputValue('r4_4_1') > this.getLocalInputValue('r4_5_1'))){ // inc. f, inc d - e (r4_4_1 - r4_5_1)
+      this.updateControlValue('r4_6_1', (this.getLocalInputValue('r4_4_1')- this.getLocalInputValue('r4_5_1')))
+    }
+    this.updateControlValue('r4_7_1', r4g)
     this.updateControlValueList_resta('r4_10_1', ['r4_7_1', 'r4_8_1', 'r4_9_1']) // tarda en cargarse
+
+
+    this.updateControlValue('r5_1_2', this.getLocalInputValue('r4_10_1'))
+    //this.updateControlValue('r5_2_1', this.getLocalInputValue('r5_7_1'))
+    this.updateControlValue('r5_6_1', (
+      this.getLocalInputValue('r5_2_1') + this.getLocalInputValue('r5_3_1') + this.getLocalInputValue('r5_4_1')
+    ))
+    this.updateControlValue('r5_6_2', (
+      this.getLocalInputValue('r5_1_2') + this.getLocalInputValue('r5_5_2')
+    ))
+
+    this.updateControlValue('r5_7_1',0)
+    this.updateControlValue('r5_8_2',0)
+    if ( this.getLocalInputValue('r5_6_1') > this.getLocalInputValue('r5_6_2')  ){ // a favor del contribuyente
+      this.updateControlValue('r5_7_1', (this.getLocalInputValue('r5_6_1') - this.getLocalInputValue('r5_6_2')));
+      this.updateControlValue('r5_8_2',0)
+    } else{
+      this.updateControlValue('r5_7_1',0)
+      this.updateControlValue('r5_8_2', (this.getLocalInputValue('r5_6_2') - this.getLocalInputValue('r5_6_1')));
+    }
+
+
+
+
+    //console.log(this.getLocalInputValue('r3_6_3'));
+    //console.log(this.getLocalInputValue('r3_6_3'))
+
 
 
   }
@@ -795,7 +820,7 @@ export class AppComponent implements OnInit, OnChanges {
    * @param sumHasta se calcula una suma hasta (incluye)
    * @returns
    */
-  async calcularSumatoriaRubro(rubro: string, col: string, sumDesde: number, sumHasta: number) {
+  calcularSumatoriaRubro(rubro: string, col: string, sumDesde: number, sumHasta: number) {
     let sumatoria = 0;
     const rubroFormArray = this.jsonDataForm.get(rubro) as FormArray;
     let cnt = sumDesde - 1;
@@ -849,12 +874,12 @@ export class AppComponent implements OnInit, OnChanges {
    * @param sumDesde se calcula una suma desde (incluye)
    * @param sumHasta se calcula una suma hasta (incluye)
    */
-  async actualizarSumatoriaIndividual(id: string, sumDesde: number, sumHasta: number) {
+  actualizarSumatoriaIndividual(id: string, sumDesde: number, sumHasta: number) {
     try {
       let cols: string[] = [];
       const [rubro, row, col] = id.split('_');
       const colJson = "col" + col.toString();
-      const total = await this.calcularSumatoriaRubro(rubro, colJson, sumDesde, sumHasta);
+      const total =  this.calcularSumatoriaRubro(rubro, colJson, sumDesde, sumHasta);
       this.updateControlValue(id, total);
       return total;
     } catch (error) {
@@ -961,6 +986,8 @@ setValue reemplazado por patchValue
 
 https://stackblitz.com/edit/angular-ren9gd?file=src%2Fapp%2Finput-error-state-matcher-example.html
 
-buscar snackbar
+buscar snackbar: snackbar para errores - YA
+
+al intentar "calcular valores"en valueChanges, al calcular se crea un evento que reacciona al valueChange, y esto crea un loop infinito. (en ngOnInit)
 
 */

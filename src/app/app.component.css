@@ -1,31 +1,34 @@
 
-.labelRubro{
+.labelRubro {
   font-size: 13px;
   font-weight: bold;
 }
 
-.gridHeight_r1{
+.gridHeight_r1 {
   height: 800px;
 }
 
-.gridHeight_r2{
+.gridHeight_r2 {
   height: 420px;
 }
 
-.gridHeight_r3{
+.gridHeight_r3 {
   height: 450px;
 }
 
-.gridHeight_r4{
+.gridHeight_r4 {
   height: 550px;
 }
-.gridHeight_r5{
+
+.gridHeight_r5 {
   height: 500px;
 }
-.gridHeight_r6{
+
+.gridHeight_r6 {
   height: 500px;
 }
-.gridHeight_footer{
+
+.gridHeight_footer {
   height: 600px;
 }
 
@@ -34,104 +37,153 @@ mat-mdc-input-element ng-tns-c2608167813-0 mat-mdc-form-field-input-control mdc-
 */
 
 
-
-@media screen and (min-width: 1001px) { /* If the screen size is 901px wide or more, set the font-size to ...px */
-  .labelRubro{
+@media screen and (min-width: 1001px) {
+  /* If the screen size is 901px wide or more, set the font-size to ...px */
+  .labelRubro {
     font-size: 14px;
     line-height: 1.5;
   }
 
 }
-@media screen and (max-width: 1000px) { /* If the screen size is 900px wide or less, set the font-size to ...px */
-  .labelRubro{
+
+@media screen and (max-width: 1000px) {
+  /* If the screen size is 900px wide or less, set the font-size to ...px */
+  .labelRubro {
     font-size: 10px;
   }
+
   label {
-		font-size: 11px;
+    font-size: 11px;
     line-height: 1;
     /*text-wrap:pretty;*/
 
-	}
-  mat-label{
+  }
+
+  mat-label {
     font-size: 12px;
     /*text-wrap:pretty;*/
   }
-  input{ /* numeros en grid auto*/
+
+  input { /* numeros en grid auto*/
     font-size: 8px;
   }
 
 }
-@media screen and (max-width: 650px) { /* If the screen size is 900px wide or less, set the font-size to ...px */
-  .labelRubro{
+
+
+@media screen and (max-width: 650px) {
+  /* If the screen size is 900px wide or less, set the font-size to ...px */
+  .labelRubro {
     font-size: 8px;
   }
+
   label {
-		font-size: 9px;
+    font-size: 9px;
     line-height: 1;
     /*text-wrap:pretty;*/
 
-	}
-  mat-label{
+  }
+
+  mat-label {
     font-size: 8px;
     /*text-wrap:pretty;*/
   }
 
+}
+
+.divMargin {
+  margin: 5px;
 }
 
 @media print {
 
-  .gridHeight_r1{
+  #separator{
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5px;
+    width: 100%;
+    height: 85px;
+  }
+
+  #separator2{
+    display: flex !important;
+    height: 35px;
+
+  }
+
+  .divMargin {
+    margin: 0;
+  }
+
+  .cardsDiv {
+    border-style: none;
+    border-width: 0;
+    border-color: white;
+  }
+
+  .gridHeight_r1 {
     height: 400px;
   }
-  .gridHeight_r2{
+
+  .gridHeight_r2 {
     height: 250px;
   }
-  .gridHeight_r3{
+
+  .gridHeight_r3 {
     height: 200px;
   }
-  .gridHeight_r4{
+
+  .gridHeight_r4 {
     height: 250px;
   }
-  .gridHeight_r5{
+
+  .gridHeight_r5 {
     height: 210px;
   }
-  .gridHeight_r6{
+
+  .gridHeight_r6 {
     height: 300px;
   }
 
-  .gridHeight_footer{
+  .footerDiv {
+    height: 200px;
+  }
+
+  .gridHeight_footer {
     height: 250px;
   }
 
-  .labelRubro{
+  .labelRubro { /* h  del rubro*/
     font-size: 8px;
     line-height: 1.3;
   }
-  label {
+
+  label { /* texto rubros*/
     line-height: 1;
-		font-size: 8px;
+    font-size: 8px;
 
 
     /*line-height: 1px;*/
-	}
-  mat-label{
-    font-size: 8px;
+  }
+
+  mat-label {
+    font-size: 12px;
 
   }
 
-  input{ /* numeros en grid auto*/
+  input { /* numeros en grid auto*/
     font-size: 8px;
   }
 
-  mat-input{ /* texto */
+  mat-input { /* texto */
     font-size: 6px;
   }
 
-  span{
+  span {
     font-size: 10px;
     /*text-wrap:pretty;*/
   }
-
 
 
   .textLeft {
@@ -149,8 +201,6 @@ mat-mdc-input-element ng-tns-c2608167813-0 mat-mdc-form-field-input-control mdc-
   #botones_test {
     display: none;
   }
-
-
 
 
   /*  background: rgb(231, 231, 231)*/
@@ -183,18 +233,18 @@ usar width para acomodar otros.
   margin: 5px;
   padding: 0 16px;
 }
+
 .inputNEWNumber {
   background-color: rgba(240, 248, 255, 0);
-  border-color: lightgray;
-  border-width: 1px;
-  width: 90%;
-  height: 70%;
-  margin: 5px;
-  padding: 0 16px;
+  border-color: white;
+  border-width: 0;
+  width: 100%;
+  height: 100%;
+  /*margin: 5px;*/
+  padding: 0 2%;
   text-align: end;
 
 }
-
 
 
 .mat-mdc-card-content {
@@ -223,24 +273,23 @@ input[type=number]::-webkit-outer-spin-button {
   flex-direction: column;
 }
 
-.tile{
+.tile {
   border-style: solid;
   border-width: 1px;
-  border-color:lightblue;
+  border-color: lightblue;
   background: white;
 
-  text-wrap: pretty;
+
   text-align: left;
   /*align-items: center; justify-content: flex-start;*/
 }
-
 
 
 .textTitle {
   background: #e4f4f4;
   width: 100%;
   font-weight: bold;
-  /*text-wrap: pretty;
+  /*
   /*font-size: 1vw;*/
 }
 
@@ -248,8 +297,8 @@ input[type=number]::-webkit-outer-spin-button {
 
   margin-left: 5%;
   margin-right: 5%;
-  margin-bottom: 10px
-  ;
+  margin-bottom: 15px;
+
   /*margin-top: 10px*/
   /*margin-top: 1rem;*/
   border-style: solid;
@@ -267,7 +316,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .textHeadBold {
-  text-wrap: pretty;
+
   text-align: center;
   margin: 5px;
   font-weight: bold;
@@ -276,7 +325,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .textHead {
-  text-wrap: pretty;
+
   text-align: left;
   margin-left: 4%;
   margin-right: 2%;
@@ -287,7 +336,7 @@ input[type=number]::-webkit-outer-spin-button {
 .button {
   margin-left: 3%;
   margin-right: 3%;
-  text-wrap: pretty;
+
   text-align: left;
   margin: 1rem;
   /*font-size: 1vw ;*/
@@ -302,7 +351,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .textLeft {
-  text-wrap: pretty;
+
   text-align: left;
   margin: 5px;
   line-height: 1.1;
@@ -331,6 +380,20 @@ input[type=number]::-webkit-outer-spin-button {
   line-height: 1.25;
 }
 
+.separator {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px;
+  width: 100%;
+  height: 75px;
+
+}
+
+.footerDiv {
+  height: 1px;
+
+}
 
 .inputText {
   padding: 1%;
@@ -353,7 +416,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 .inputDate {
-  text-wrap: pretty;
+
   width: 80%;
   margin-bottom: -3vh;
   padding: 1%;

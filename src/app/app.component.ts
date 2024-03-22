@@ -2,10 +2,12 @@ import {Component, HostListener, Input, OnChanges, OnInit} from '@angular/core';
 // import { FormsModule } from '@angular/forms';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {debounceTime, distinctUntilChanged, lastValueFrom} from 'rxjs';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms'
+import {FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms'
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ErrorStateMatcher} from "@angular/material/core";
 
 //import { JsonService } from './jsonService.service';
+
 
 
 @Component({
@@ -53,43 +55,99 @@ export class AppComponent implements OnInit, OnChanges {
     console.log(this.infoHeader.value);
   }
 
+  /*infoHeader = new FormGroup({
+    nroOrden: new FormControl('123456789', Validators.required),
+    ruc: new FormControl('192837465',Validators.minLength(5) ),
+    dv: new FormControl('0',Validators.minLength(5)),
+    apellido1_razon: new FormControl('Apellido1_filler',Validators.minLength(5)),
+    apellido2: new FormControl('Apellido2_filler',Validators.minLength(5)),
+    nombres: new FormControl('Nombre_filler',Validators.minLength(5)),
+    nroOrdenDeclaracion: new FormControl('987654321',Validators.minLength(5)),
+    periodoEjercicioFiscal: new FormControl('0',Validators.minLength(5)),
+    month: new FormControl('1',Validators.minLength(5)),
+    year: new FormControl('2024',Validators.minLength(5))
+
+  })*/
+
+  msg = ''
+
   infoHeader = new FormGroup({
-    nroOrden: new FormControl('123456789', Validators.minLength(5)),
-    ruc: new FormControl('192837465',Validators.minLength(1) ),
-    dv: new FormControl('0'),
-    apellido1_razon: new FormControl('Apellido1_filler'),
-    apellido2: new FormControl('Apellido2_filler'),
-    nombres: new FormControl('Nombre_filler'),
-    nroOrdenDeclaracion: new FormControl('987654321'),
-    periodoEjercicioFiscal: new FormControl('0'),
-    month: new FormControl('1'),
-    year: new FormControl('2024')
+    nroOrden: new FormControl('', [Validators.required, Validators.minLength(4), Validators.pattern("^[0-9]*$") ]),
+    ruc: new FormControl('',[Validators.required, Validators.minLength(4), Validators.pattern("^[0-9]*$")] ),
+    dv: new FormControl('', Validators.pattern("^[0-9]*$")),
+    apellido1_razon: new FormControl('',Validators.required),
+    apellido2: new FormControl(''),
+    nombres: new FormControl(''),
+    nroOrdenDeclaracion: new FormControl('',Validators.pattern("^[0-9]*$")),
+    periodoEjercicioFiscal: new FormControl(''),
+    month: new FormControl('',[Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(2), Validators.maxLength(2)]),
+    year: new FormControl('',[Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("^[0-9]*$")])
   })
 
-  firstError :any;
-  onSubmit(){
+  firstError:boolean = false;
+  onSubmit():any{
+    this.firstError = false; // si no se cambia a true (con error), esta lista para enviar
     const props = Object.keys(this.infoHeader.value)
-    this.firstError = null
     props.forEach((prop) => {
-      if (!this.firstError && this.infoHeader.get(prop)?.errors) {
-        console.log('setting firstError', prop, this.infoHeader.get(prop)?.errors)
-        this.firstError = prop
+      console.log(this.infoHeader.get(prop)?.errors) // si los valores no son cargados, llega como true
+      if (this.infoHeader.get(prop)?.errors) { // si hay algun error
+        if (!this.firstError){
+          this.firstError = true;
+        }
+        //console.log('setting firstError', prop, this.infoHeader.get(prop)?.errors)
       }
-    })
-    if(this.firstError == 'nroOrden'){
-      this.infoHeader.get('ruc')?.clearValidators();
-      this.infoHeader.get('ruc')?.updateValueAndValidity();
-      this.infoHeader.get('dv')?.clearValidators();
-      this.infoHeader.get('dv')?.updateValueAndValidity();
-      this.infoHeader.get('apellido1_razon')?.clearValidators();
-      this.infoHeader.get('apellido1_razon')?.updateValueAndValidity();
-      this.infoHeader.get('apellido2')?.clearValidators();
-      this.infoHeader.get('apellido2')?.updateValueAndValidity();
-      this.infoHeader.get('nombres')?.clearValidators();
-      this.infoHeader.get('nombres')?.updateValueAndValidity();
 
+    })
+    if(this.firstError){ // hay error
+      this.msg = "Rellene los campos correctamente";
+      console.log(this.msg)
+
+      this.openSnackBar(this.msg, 'ok.')
+      //return true
+    }
+    else{// no hay errores
+      this.msg = "Enviado";
+      console.log(this.msg)
+
+      this.openSnackBar(this.msg, 'ok.')
     }
   }
+
+
+  postData(){
+    this.onSubmit();
+    if (!this.firstError){ // si hay errores
+      this.msg = 'Enviado'
+      console.log(this.msg)
+      console.log(`1st err: ${this.firstError}`)
+      this.openSnackBar(this.msg, 'ok.')
+
+      const formData = this.jsonDataForm.value;
+      //const url = 'https://reqbin.com/';
+      const url = ''
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+      });
+
+      // Realiza la solicitud HTTP POST
+      this.http.post(url, formData, { headers }).subscribe(
+        response => {
+          console.log('Respuesta del servidor:', response);
+          // Puedes realizar cualquier acción adicional con la respuesta del servidor aquí
+        },
+        error => {
+          console.error('Error al enviar los datos:', error);
+          this.openSnackBar(`PostError: ${error}`, 'ok.')
+          // Maneja el error de acuerdo a tus necesidades
+        }
+      );
+    }
+    else {
+      this.openSnackBar('Rellene los campos correctamente', 'ok.')
+    }
+  }
+
+
 
   jsonDataForm = new FormGroup({ // array local de datos
     r1: new FormArray([
@@ -140,28 +198,12 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
+    this._snackBar.open(message, action, {
+      verticalPosition: 'top'
+    } );
   }
 
-  postData(){
-    const formData = this.jsonDataForm.value;
-    const url = 'https://reqbin.com/';
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
 
-    // Realiza la solicitud HTTP POST
-    this.http.post(url, formData, { headers }).subscribe(
-      response => {
-        console.log('Respuesta del servidor:', response);
-        // Puedes realizar cualquier acción adicional con la respuesta del servidor aquí
-      },
-      error => {
-        console.error('Error al enviar los datos:', error);
-        // Maneja el error de acuerdo a tus necesidades
-      }
-    );
-  }
 
 
   constructor(private http: HttpClient,/*private jsonService: JsonService*/ private _snackBar: MatSnackBar, private fb: FormBuilder) {

@@ -190,6 +190,13 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   /**
+   * get data (json obj) to load the  form.
+   */
+  getData() {
+    //this.openSnackBar('Datos obtenidos correctamente.', 'OK')
+  }
+
+  /**
    * Crea un log del Form completo con todos sus elementos.
    */
   logForm() {

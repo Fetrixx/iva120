@@ -33,7 +33,7 @@ import { DecimalPipe } from '@angular/common';
 //import { JsonService } from './jsonService.service';
 import { ReactiveFormsModule } from '@angular/forms';
 //import { ThousandsSeparatorDirective } from './thousands-separator.directive'; // Importa la directiva aquí
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [

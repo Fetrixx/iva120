@@ -95,6 +95,13 @@ mat-mdc-input-element ng-tns-c2608167813-0 mat-mdc-form-field-input-control mdc-
   margin: 5px;
 }
 
+.base{
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  /*align-items: center;*/
+}
+
 @media print {
 
   #separator{
@@ -298,7 +305,8 @@ input[type=number]::-webkit-outer-spin-button {
   margin-left: 5%;
   margin-right: 5%;
   margin-bottom: 15px;
-
+  /*max-width: 1920px;*/
+  min-width: 400px;
   /*margin-top: 10px*/
   /*margin-top: 1rem;*/
   border-style: solid;

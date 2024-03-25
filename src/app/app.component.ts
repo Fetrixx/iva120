@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {debounceTime, distinctUntilChanged, lastValueFrom} from 'rxjs';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms'
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {UserDataService} from "./services/user-data.service";
 
 @Component({
   selector: 'app-root',
@@ -24,11 +25,18 @@ export class AppComponent implements OnInit, OnChanges {
     apellido1_razon: new FormControl('', Validators.required),
     apellido2: new FormControl(''),
     nombres: new FormControl(''),
+    tipoDeclaracion: new FormControl('Declaración Jurada Original'),
     nroOrdenDeclaracion: new FormControl('', Validators.pattern("^[0-9]*$")),
-    periodoEjercicioFiscal: new FormControl(''),
-    month: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(2), Validators.maxLength(2)]),
-    year: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("^[0-9]*$")])
+    //periodoEjercicioFiscal: new FormControl(''),
+    periodoEjercicioFiscal: new FormGroup({
+      month: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(2), Validators.maxLength(2)]),
+      year: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(4), Validators.pattern("^[0-9]*$")])
+    }),
+
   })
+  seleccionarTipoDeclaracion(valor: string) {
+    this.infoHeader.controls['tipoDeclaracion'].setValue(valor);
+  }
 
   jsonDataForm = new FormGroup({ // array local de datos
     r1: new FormArray([]),
@@ -86,13 +94,14 @@ export class AppComponent implements OnInit, OnChanges {
     }
   }
 
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string, durationTime: number = 5000) {
     this._snackBar.open(message, action, {
+      duration: durationTime,
       verticalPosition: 'top'
     });
   }
 
-  constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
+  constructor(private http: HttpClient, private _snackBar: MatSnackBar, private userData: UserDataService) {
     this.cerarInputs(); // cera todos.
     console.log("infoHeader")
     console.log(this.infoHeader)
@@ -120,9 +129,15 @@ export class AppComponent implements OnInit, OnChanges {
     //this.calcularDatos();
   }
 
-
   msg = ''
   firstError: boolean = false;
+
+  getUserData(data:any){
+    console.warn(data)
+    this.userData.saveUser(data).subscribe((result) =>{
+      console.warn(result);
+    })
+  }
 
   onSubmit(): any {
     this.firstError = false; // si no se cambia a true (con error), esta lista para enviar
@@ -151,14 +166,16 @@ export class AppComponent implements OnInit, OnChanges {
     }
   }
 
-
   postData() {
     this.onSubmit();
     if (!this.firstError) { // si no hay errores
       this.msg = 'Enviado'
       console.log(this.msg)
       //console.log(`1st err: ${this.firstError}`)
-      this.openSnackBar(this.msg, 'OK')
+      this.openSnackBar(this.msg, 'OK', )
+
+      this.getUserData(this.jsonDataForm.value)
+
 
       /*
       const formData = this.jsonDataForm.value;
@@ -174,6 +191,12 @@ export class AppComponent implements OnInit, OnChanges {
         response => {
           console.log('Respuesta del servidor:', response);
           // Puedes realizar cualquier acción adicional con la respuesta del servidor aquí
+          if (response === 'OK'){
+            Console.warn("POST Successful")
+
+            this.msg = 'Enviado'
+            this.openSnackBar(this.msg, 'OK')
+          }
         },
         error => {
           console.error('Error al enviar los datos:', error);
@@ -200,10 +223,21 @@ export class AppComponent implements OnInit, OnChanges {
    * Crea un log del Form completo con todos sus elementos.
    */
   logForm() {
+    console.log("\n".repeat(5));
     console.log(" >>>>> JSON: ");
     console.log(this.jsonDataForm)
     console.log(" >>>>> INFORMATION HEADER: ");
     console.log(this.infoHeader);
+
+  }
+
+  logValues() {
+    console.log("\n".repeat(5));
+    console.log(" >>>>> JSON VALUES: ");
+    console.log(this.jsonDataForm.value);
+    console.log(" >>>>> JSON INFOHEADER: ");
+    console.log(this.infoHeader.value);
+
   }
 
   rowspanSize = 3;

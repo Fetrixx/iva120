@@ -5,6 +5,9 @@ import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms'
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserDataService} from "./services/user-data.service";
 
+import { NgxMaskDirective, provideEnvironmentNgxMask } from 'ngx-mask';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

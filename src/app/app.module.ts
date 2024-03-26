@@ -35,6 +35,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 //import { ThousandsSeparatorDirective } from './thousands-separator.directive'; // Importa la directiva aquí
 import { FormsModule } from '@angular/forms';
 
+
+import {IConfig, NgxMaskDirective, provideEnvironmentNgxMask} from 'ngx-mask'
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,9 +66,13 @@ import { FormsModule } from '@angular/forms';
     MatCardModule,
     DatepickerViewsSelection,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxMaskDirective
   ],
-  providers: [DecimalPipe,/* JsonService, */],
+  providers: [DecimalPipe,
+    provideEnvironmentNgxMask(maskConfig),
+    /* JsonService, */
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

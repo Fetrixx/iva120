@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, OnChanges {
     apellido1_razon: new FormControl('', Validators.required),
     apellido2: new FormControl(''),
     nombres: new FormControl(''),
-    tipoDeclaracion: new FormControl('Declaración Jurada Original'),
+    tipoDeclaracion: new FormControl('1- Declaración Jurada Original'),
     nroOrdenDeclaracion: new FormControl('', Validators.pattern("^[0-9]*$")),
     //periodoEjercicioFiscal: new FormControl(''),
     periodoEjercicioFiscal: new FormGroup({
@@ -153,23 +153,23 @@ export class AppComponent implements OnInit, OnChanges {
 
     })
     if (this.firstError) { // hay error
-      this.msg = "Rellene los campos correctamente";
+      this.msg = "Rellene los campos correctamente.";
       console.log(this.msg)
 
       this.openSnackBar(this.msg, 'OK')
       //return true
     } else {// no hay errores
-      this.msg = "Enviado";
+      this.msg = "Enviado, no hay errores";
       console.log(this.msg)
 
-      this.openSnackBar(this.msg, 'OK')
+      //this.openSnackBar(this.msg, 'OK')
     }
   }
 
   postData() {
     this.onSubmit();
     if (!this.firstError) { // si no hay errores
-      this.msg = 'Enviado'
+      this.msg = 'Enviado correctamente.'
       console.log(this.msg)
       //console.log(`1st err: ${this.firstError}`)
       this.openSnackBar(this.msg, 'OK', )
@@ -208,7 +208,7 @@ export class AppComponent implements OnInit, OnChanges {
       */
 
     } else {
-      this.openSnackBar('Rellene los campos correctamente', 'OK')
+      this.openSnackBar('Rellene los campos correctamente...', 'OK')
     }
   }
 
@@ -812,5 +812,10 @@ https://stackblitz.com/edit/angular-ren9gd?file=src%2Fapp%2Finput-error-state-ma
 buscar snackbar: snackbar para errores - YA
 
 al intentar "calcular valores"en valueChanges, al calcular se crea un evento que reacciona al valueChange, y esto crea un loop infinito. (en ngOnInit)
+
+
+
+agregar separador de miles al input
+manejar el post
 
 */

@@ -153,13 +153,13 @@ botones:
 
               <label
                 style="border-bottom-style: solid; border-color: lightblue; border-bottom-width: 1px; height: 25%; justify-content: center; align-items: center;">
-                <input id="DJ" type="radio" name="DJ"  (change)="seleccionarTipoDeclaracion('Declaración Jurada Original')" checked>
+                <input id="DJ" type="radio" name="DJ"  (change)="seleccionarTipoDeclaracion('1- Declaración Jurada Original')" checked>
                 <label for="DJ"> Declaración Jurada Original</label>
               </label>
 
               <label
                 style="border-bottom-style: solid; border-color: lightblue; border-bottom-width: 1px; height: 25%;">
-                <input id="DJR" type="radio" name="DJ"  (change)="seleccionarTipoDeclaracion('Declaración Jurada Rectificativa')">
+                <input id="DJR" type="radio" name="DJ"  (change)="seleccionarTipoDeclaracion('2- Declaración Jurada Rectificativa')">
                 <label for="DJR"> Declaración Jurada Rectificativa </label>
               </label>
 
@@ -167,7 +167,7 @@ botones:
 
               <label
                 style="height: 50%;">
-                <input id="DJCA" type="radio" name="DJ" (change)="seleccionarTipoDeclaracion('Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre Definitivo')">
+                <input id="DJCA" type="radio" name="DJ" (change)="seleccionarTipoDeclaracion('3- Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre Definitivo')">
                 <label for="DJCA">Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre Definitivo</label>
               </label>
 
@@ -357,7 +357,10 @@ botones:
           <div formArrayName="r1">
             <div [formGroupName]="0">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
-                <input type="number" formControlName="col1" class="inputNEWNumber"  id="r1_1_1">
+                <input type="number"
+                       inputmode="numeric"
+                       formControlName="col1"
+                       class="inputNEWNumber"  id="r1_1_1">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">

@@ -15,7 +15,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { MatRadioModule } from '@angular/material/radio';
 
-import { provideNativeDateAdapter } from '@angular/material/core';
+//import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -37,6 +37,7 @@ import { FormsModule } from '@angular/forms';
 
 
 import {IConfig, NgxMaskDirective, provideEnvironmentNgxMask} from 'ngx-mask'
+import {MatTooltip} from "@angular/material/tooltip";
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -67,7 +68,8 @@ const maskConfig: Partial<IConfig> = {
     DatepickerViewsSelection,
     ReactiveFormsModule,
     FormsModule,
-    NgxMaskDirective
+    NgxMaskDirective,
+    MatTooltip
   ],
   providers: [DecimalPipe,
     provideEnvironmentNgxMask(maskConfig),

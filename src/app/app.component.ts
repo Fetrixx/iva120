@@ -1,11 +1,9 @@
 import {Component, HostListener, Input, OnChanges, OnInit} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {debounceTime, distinctUntilChanged, lastValueFrom} from 'rxjs';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms'
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserDataService} from "./services/user-data.service";
-
-import { NgxMaskDirective, provideEnvironmentNgxMask } from 'ngx-mask';
 
 
 @Component({
@@ -37,6 +35,7 @@ export class AppComponent implements OnInit, OnChanges {
     }),
 
   })
+
   seleccionarTipoDeclaracion(valor: string) {
     this.infoHeader.controls['tipoDeclaracion'].setValue(valor);
   }
@@ -122,10 +121,32 @@ export class AppComponent implements OnInit, OnChanges {
       console.log(value)
       this.cnt++;
 
-      //this.calcularDatos() // crea un loop, (desata un evento que vuelve a llamar al valueChanges.)
+      // Verificar si algún valor es una cadena vacía y reemplazarlo con 0
+      this.replaceEmptyStringsWithZero();
+
+
+      this.calcularDatos() // crea un loop, (desata un evento que vuelve a llamar al valueChanges.)
     })
   }
 
+  replaceEmptyStringsWithZero() {
+    const formValue = Object.keys(this.jsonDataForm.value);
+    formValue.forEach((elem) => {
+      //console.log(this.jsonDataForm.get(elem)?.value)
+      this.jsonDataForm.get(elem)?.value.forEach((item: any, index: number) => {
+        Object.keys(item).forEach((prop) => {
+          if (item[prop] === '') {
+            // Reemplazar cadena vacía con 0 en el json
+            item[prop] = 0;
+            let id = `${elem}_${index+1}_${prop.at(prop.length-1)}`
+            // Reemplazar cadena vacía con 0 en el input
+            this.updateControlValue(id,0, false)
+            //debugger;
+          }
+        });
+      });
+    });
+  }
 
   ngOnChanges(e: any) {
     console.log(e);
@@ -135,9 +156,9 @@ export class AppComponent implements OnInit, OnChanges {
   msg = ''
   firstError: boolean = false;
 
-  getUserData(data:any){
+  getUserData(data: any) {
     console.warn(data)
-    this.userData.saveUser(data).subscribe((result) =>{
+    this.userData.saveUser(data).subscribe((result) => {
       console.warn(result);
     })
   }
@@ -175,7 +196,7 @@ export class AppComponent implements OnInit, OnChanges {
       this.msg = 'Enviado correctamente.'
       console.log(this.msg)
       //console.log(`1st err: ${this.firstError}`)
-      this.openSnackBar(this.msg, 'OK', )
+      this.openSnackBar(this.msg, 'OK',)
 
       this.getUserData(this.jsonDataForm.value)
 
@@ -218,9 +239,10 @@ export class AppComponent implements OnInit, OnChanges {
   /**
    * get data (json obj) to load the  form.
    */
+  /*
   getData() {
     //this.openSnackBar('Datos obtenidos correctamente.', 'OK')
-  }
+  }*/
 
   /**
    * Crea un log del Form completo con todos sus elementos.
@@ -294,17 +316,18 @@ export class AppComponent implements OnInit, OnChanges {
       throw error;
 
     }
-
   }
-
 
   /**
    * (UPDATE) Actualiza un FormControl previamente creado
    * @param id id de la casilla a ser controlada.
    * @param newValue valor de reemplazo
+   * @param emit "false"para no emitir un evento como valueChange. su valor predefinido es emitir el valor.
    */
-  updateControlValue(id: string, newValue: any) {
-
+  updateControlValue(id: string, newValue: any, emit:any = true) {
+    /*if (newValue === ''){
+      newValue = 0;
+    }*/
     const [prefix, row, col] = id.split('_');
     const rubro = prefix
     const rowIndex = parseInt(row) - 1;
@@ -313,10 +336,10 @@ export class AppComponent implements OnInit, OnChanges {
     const formArray = this.jsonDataForm.get(rubro) as FormArray;
     //const control = formArray.at(rowIndex).get(`col${colIndex + 1}`) as FormControl;
     const control = formArray.at(rowIndex).get(colJSON) as FormControl;
-    control.patchValue(newValue); // or use patchValue() if you want to replace the value entirely
+    control.patchValue(newValue, {emitEvent: emit}); // or use patchValue() if you want to replace the value entirely
   }
 
-  updateControlValueList(id: string, suma: string[]) {
+  updateControlValueList(id: string, suma: string[], emit:boolean=true) {
     const [prefix, row, col] = id.split('_');
     const rubro = prefix
     const rowIndex = parseInt(row) - 1;
@@ -330,13 +353,13 @@ export class AppComponent implements OnInit, OnChanges {
       const control = formArray.at(rowIndex).get(colJSON) as FormControl;
       total += control.value;
     });
-
     const control = formArray.at(rowIndex).get(colJSON) as FormControl;
-    control.patchValue(total); // or use patchValue() if you want to replace the value entirely
+
+    control.patchValue(total, {emitEvent: emit}); // or use patchValue() if you want to replace the value entirely
   }
 
 
-  updateControlValueList_resta(id: string, suma: string[]) {
+  updateControlValueList_resta(id: string, suma: string[], emit:boolean =true) {
     const [prefix, row, col] = id.split('_');
     const rubro = prefix
     const rowIndex = parseInt(row) - 1;
@@ -361,7 +384,7 @@ export class AppComponent implements OnInit, OnChanges {
 
     });
     const control = formArray.at(rowIndex).get(colJSON) as FormControl;
-    control.patchValue(total); // or use patchValue() if you want to replace the value entirely
+    control.patchValue(total, {emitEvent: emit}); // or use patchValue() if you want to replace the value entirely
   }
 
 
@@ -653,17 +676,17 @@ export class AppComponent implements OnInit, OnChanges {
     this.actualizarSumatoriaIndividual('r2_4_1', 1, 3) // primer total R2
     this.actualizarSumatoriaIndividual('r2_8_1', 5, 7) // 2do total R2
 
-    this.updateControlValueList('r2_9_1', ['r2_4_1', 'r2_8_1']) // tarda en cargarse
+    this.updateControlValueList('r2_9_1', ['r2_4_1', 'r2_8_1'], false) // tarda en cargarse
 
 
-    this.updateControlValueList('r3_6_3', ['r3_1_3', 'r3_3_3', 'r3_4_3', 'r3_5_3'])
+    this.updateControlValueList('r3_6_3', ['r3_1_3', 'r3_3_3', 'r3_4_3', 'r3_5_3'], false)
 
     let r3_3_3 = this.getLocalInputValue('r3_2_3') * ((this.getLocalInputValue('r2_1_1') + this.getLocalInputValue('r2_2_1')) / this.getLocalInputValue('r2_4_1'));
 
-    this.updateControlValue('r3_3_3', r3_3_3);
+    this.updateControlValue('r3_3_3', r3_3_3, false);
 
-    this.updateControlValue('r4_1_1', (this.getLocalInputValue('r1_12_2') + this.getLocalInputValue('r1_12_3')))
-    this.updateControlValue('r4_2_1', this.getLocalInputValue('r3_6_3'))
+    this.updateControlValue('r4_1_1', (this.getLocalInputValue('r1_12_2') + this.getLocalInputValue('r1_12_3')), false)
+    this.updateControlValue('r4_2_1', this.getLocalInputValue('r3_6_3'), false)
     let r4d = 0;
     let r4g = 0;
     if ((this.getLocalInputValue('r4_2_1') + this.getLocalInputValue('r4_3_1')) > this.getLocalInputValue('r4_1_1')) {
@@ -672,33 +695,58 @@ export class AppComponent implements OnInit, OnChanges {
     else {
       r4g = this.getLocalInputValue('r4_1_1') - (this.getLocalInputValue('r4_2_1') + this.getLocalInputValue('r4_3_1'));
     }
-    this.updateControlValue('r4_4_1', r4d)
+    this.updateControlValue('r4_4_1', r4d, false)
     if ((this.getLocalInputValue('r4_4_1') > this.getLocalInputValue('r4_5_1'))) { // inc. f, inc d - e (r4_4_1 - r4_5_1)
-      this.updateControlValue('r4_6_1', (this.getLocalInputValue('r4_4_1') - this.getLocalInputValue('r4_5_1')))
+      this.updateControlValue('r4_6_1', (this.getLocalInputValue('r4_4_1') - this.getLocalInputValue('r4_5_1')), false)
     }
-    this.updateControlValue('r4_7_1', r4g)
-    this.updateControlValueList_resta('r4_10_1', ['r4_7_1', 'r4_8_1', 'r4_9_1']) // tarda en cargarse
+    this.updateControlValue('r4_7_1', r4g, false)
+    this.updateControlValueList_resta('r4_10_1', ['r4_7_1', 'r4_8_1', 'r4_9_1'], false) // tarda en cargarse
 
 
-    this.updateControlValue('r5_1_2', this.getLocalInputValue('r4_10_1'))
+    this.updateControlValue('r5_1_2', this.getLocalInputValue('r4_10_1'), false)
     //this.updateControlValue('r5_2_1', this.getLocalInputValue('r5_7_1'))
     this.updateControlValue('r5_6_1', (
       this.getLocalInputValue('r5_2_1') + this.getLocalInputValue('r5_3_1') + this.getLocalInputValue('r5_4_1')
-    ))
+    ), false)
     this.updateControlValue('r5_6_2', (
       this.getLocalInputValue('r5_1_2') + this.getLocalInputValue('r5_5_2')
-    ))
+    ), false)
 
-    this.updateControlValue('r5_7_1', 0)
-    this.updateControlValue('r5_8_2', 0)
+    this.updateControlValue('r5_7_1', 0, false)
+    this.updateControlValue('r5_8_2', 0, false)
     if (this.getLocalInputValue('r5_6_1') > this.getLocalInputValue('r5_6_2')) { // a favor del contribuyente
-      this.updateControlValue('r5_7_1', (this.getLocalInputValue('r5_6_1') - this.getLocalInputValue('r5_6_2')));
-      this.updateControlValue('r5_8_2', 0)
+      this.updateControlValue('r5_7_1', (this.getLocalInputValue('r5_6_1') - this.getLocalInputValue('r5_6_2')), false);
+      this.updateControlValue('r5_8_2', 0, false)
     } else {
-      this.updateControlValue('r5_7_1', 0)
-      this.updateControlValue('r5_8_2', (this.getLocalInputValue('r5_6_2') - this.getLocalInputValue('r5_6_1')));
+      this.updateControlValue('r5_7_1', 0, false)
+      this.updateControlValue('r5_8_2', (this.getLocalInputValue('r5_6_2') - this.getLocalInputValue('r5_6_1')), false);
     }
+
+    this.replaceEmptyStringsWithZero()
   }
+/*
+  _replaceEmptyStringsWithZero() {
+
+    const formValue = Object.keys(this.jsonDataForm.value);
+    formValue.forEach((elem) => {
+      //console.log(this.jsonDataForm.get(elem)?.value)
+      // Recorrer cada elemento del FormArray
+      for (const item of this.jsonDataForm.get(elem)?.value) {
+        for (const prop in item) {
+
+          if (item[prop] === '') {
+            // Reemplazar cadena vacía con 0
+            item[prop] = 0;
+            let st = `${elem}_x_${prop.at(prop.length-1)}`
+            //this.updateControlValue('', 0)
+            debugger
+          }
+        }
+      }
+    })
+  }*/
+
+
 
   /**
    * Suma los datos de una columna del rubroX, colX, desde la fila x hasta la fila y.
@@ -735,7 +783,7 @@ export class AppComponent implements OnInit, OnChanges {
       const [rubro, row, col] = id.split('_');
       const colJson = "col" + col.toString();
       const total = this.calcularSumatoriaRubro(rubro, colJson, sumDesde, sumHasta);
-      this.updateControlValue(id, total);
+      this.updateControlValue(id, total, false);
       return total;
     } catch (error) {
       console.log(`Error al actualizar sumatoria de \"${id}\"`)
@@ -820,5 +868,8 @@ al intentar "calcular valores"en valueChanges, al calcular se crea un evento que
 
 agregar separador de miles al input
 manejar el post
+
+// al cambiar un campo, se recalcula, si se deja vacio, se asigna como 0
+
 
 */

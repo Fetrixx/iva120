@@ -1,4 +1,3 @@
-
 <!--
 botones:
 - leer
@@ -34,11 +33,11 @@ botones:
   <div style="margin-left: 5%; margin-top: 10px ;margin-bottom: 10px; flex-wrap: wrap;" id="botones">
 
 
-    <button mat-raised-button id="cargarTodos" (click)="cargarInputs()"> Cargar Datos JSON </button>
-    <button style="margin-left: 20px" mat-raised-button [disabled]="true"> Guardar </button>
-    <button style="margin-left: 20px" mat-raised-button (click)="print()"> Imprimir </button>
-    <button style="margin-left: 20px" mat-raised-button (click)="exportJson()"> Exportar JSON </button>
-    <button style="margin-left: 20px" mat-raised-button (click)="calcularDatos()"> Recalcular </button>
+    <button mat-raised-button id="cargarTodos" (click)="cargarInputs()"> Cargar Datos JSON</button>
+    <button style="margin-left: 20px" mat-raised-button [disabled]="true"> Guardar</button>
+    <button style="margin-left: 20px" mat-raised-button (click)="print()"> Imprimir</button>
+    <button style="margin-left: 20px" mat-raised-button (click)="exportJson()"> Exportar JSON</button>
+    <button style="margin-left: 20px" mat-raised-button (click)="calcularDatos()"> Recalcular</button>
     <button style="margin-left: 20px" mat-raised-button [color]="'primary'" (click)="postData()">Enviar Datos</button>
 
   </div>
@@ -153,22 +152,25 @@ botones:
 
               <label
                 style="border-bottom-style: solid; border-color: lightblue; border-bottom-width: 1px; height: 25%; justify-content: center; align-items: center;">
-                <input id="DJ" type="radio" name="DJ"  (change)="seleccionarTipoDeclaracion('1- Declaración Jurada Original')" checked>
+                <input id="DJ" type="radio" name="DJ"
+                       (change)="seleccionarTipoDeclaracion('1- Declaración Jurada Original')" checked>
                 <label for="DJ"> Declaración Jurada Original</label>
               </label>
 
               <label
                 style="border-bottom-style: solid; border-color: lightblue; border-bottom-width: 1px; height: 25%;">
-                <input id="DJR" type="radio" name="DJ"  (change)="seleccionarTipoDeclaracion('2- Declaración Jurada Rectificativa')">
+                <input id="DJR" type="radio" name="DJ"
+                       (change)="seleccionarTipoDeclaracion('2- Declaración Jurada Rectificativa')">
                 <label for="DJR"> Declaración Jurada Rectificativa </label>
               </label>
 
 
-
               <label
                 style="height: 50%;">
-                <input id="DJCA" type="radio" name="DJ" (change)="seleccionarTipoDeclaracion('3- Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre Definitivo')">
-                <label for="DJCA">Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre Definitivo</label>
+                <input id="DJCA" type="radio" name="DJ"
+                       (change)="seleccionarTipoDeclaracion('3- Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre Definitivo')">
+                <label for="DJCA">Declaración Jurada en Carácter de Cese de Actividades, Clausura o Cierre
+                  Definitivo</label>
               </label>
 
 
@@ -251,23 +253,27 @@ botones:
 
 
             <mat-form-field class="inputText" subscriptSizing="dynamic"
-                            style="margin-right: 5px; align-items: center; justify-content: center;" formGroupName="periodoEjercicioFiscal" >
+                            style="margin-right: 5px; align-items: center; justify-content: center;"
+                            formGroupName="periodoEjercicioFiscal">
               <mat-label class="textLeft">Mes</mat-label>
               <input matInput placeholder="" type="text" formControlName="month">
               <mat-error *ngIf="infoHeader.controls['periodoEjercicioFiscal'].controls['month'].touched ">
-                <mat-label *ngIf="infoHeader.controls['periodoEjercicioFiscal'].controls['month']?.hasError('required')">
+                <mat-label
+                  *ngIf="infoHeader.controls['periodoEjercicioFiscal'].controls['month']?.hasError('required')">
                   Campo obligatorio.
                 </mat-label>
                 <mat-label *ngIf="infoHeader.controls['periodoEjercicioFiscal'].controls['month']?.hasError('pattern')">
                   Solo Numeros.
                 </mat-label>
-                <mat-label *ngIf="infoHeader.controls['periodoEjercicioFiscal'].controls['month']?.hasError('minlength') ||  infoHeader.controls['periodoEjercicioFiscal'].controls['month']?.hasError('maxlength')">
+                <mat-label
+                  *ngIf="infoHeader.controls['periodoEjercicioFiscal'].controls['month']?.hasError('minlength') ||  infoHeader.controls['periodoEjercicioFiscal'].controls['month']?.hasError('maxlength')">
                   Debe tener 2 caracteres.
                 </mat-label>
               </mat-error>
             </mat-form-field>
             /
-            <mat-form-field subscriptSizing="dynamic" class="inputText" style=" margin-left: 5px; margin-right: 30px;" formGroupName="periodoEjercicioFiscal" >
+            <mat-form-field subscriptSizing="dynamic" class="inputText" style=" margin-left: 5px; margin-right: 30px;"
+                            formGroupName="periodoEjercicioFiscal">
               <mat-label class="textLeft">Año</mat-label>
               <input matInput placeholder="" type="text" formControlName="year">
               <mat-error *ngIf="infoHeader.controls['periodoEjercicioFiscal'].controls['year'].touched ">
@@ -277,19 +283,14 @@ botones:
                 <mat-label *ngIf="infoHeader.controls['periodoEjercicioFiscal'].controls['year']?.hasError('pattern')">
                   Solo Numeros.
                 </mat-label>
-                <mat-label *ngIf="infoHeader.controls['periodoEjercicioFiscal'].controls['year']?.hasError('minlength') ||  infoHeader.controls['periodoEjercicioFiscal'].controls['year']?.hasError('maxlength')">
+                <mat-label
+                  *ngIf="infoHeader.controls['periodoEjercicioFiscal'].controls['year']?.hasError('minlength') ||  infoHeader.controls['periodoEjercicioFiscal'].controls['year']?.hasError('maxlength')">
                   Debe tener 4 caracteres.
                 </mat-label>
 
               </mat-error>
 
             </mat-form-field>
-
-
-
-
-
-
 
 
             <!--
@@ -306,9 +307,6 @@ botones:
       </div>
     </div>
   </div>
-
-
-
 
 
   <div class="cardsDiv">
@@ -353,14 +351,13 @@ botones:
           </mat-grid-tile>
 
 
-
           <div formArrayName="r1">
             <div [formGroupName]="0">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
                        mask="separator.2" thousandSeparator="."
                        formControlName="col1"
-                       class="inputNEWNumber"  id="r1_1_1">
+                       class="inputNEWNumber" id="r1_1_1">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
@@ -370,7 +367,8 @@ botones:
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col3" class="inputNEWNumber" id="r1_1_3">
+                       mask="separator.2" thousandSeparator="." formControlName="col3" class="inputNEWNumber"
+                       id="r1_1_3">
               </mat-grid-tile>
             </div>
 
@@ -386,17 +384,19 @@ botones:
             <div [formGroupName]="1">
               <mat-grid-tile class="tile" colspan="3" rowspan="3">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber"  id="r1_2_1">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber"
+                       id="r1_2_1">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="3">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col2" class="inputNEWNumber"  id="r1_2_2">
+                       mask="separator.2" thousandSeparator="." formControlName="col2" class="inputNEWNumber"
+                       id="r1_2_2">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="3" style="background: rgb(231, 231, 231)">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." class="inputNEWNumber" [disabled]="true"  id="r1_2_3">
+                       mask="separator.2" thousandSeparator="." class="inputNEWNumber" [disabled]="true" id="r1_2_3">
               </mat-grid-tile>
             </div>
 
@@ -410,12 +410,14 @@ botones:
             <div [formGroupName]="2">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber" id="r1_3_1">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber"
+                       id="r1_3_1">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col2" class="inputNEWNumber" id="r1_3_2">
+                       mask="separator.2" thousandSeparator="." formControlName="col2" class="inputNEWNumber"
+                       id="r1_3_2">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
@@ -433,7 +435,8 @@ botones:
             <div [formGroupName]="3">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber" id="r1_4_1">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber"
+                       id="r1_4_1">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
@@ -457,7 +460,8 @@ botones:
             <div [formGroupName]="4">
               <mat-grid-tile class="tile" colspan="3" rowspan="2.5">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber" id="r1_5_1">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber"
+                       id="r1_5_1">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2.5" style="background: rgb(231, 231, 231)">
@@ -480,7 +484,8 @@ botones:
             <div [formGroupName]="5">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber" id="r1_6_1">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber"
+                       id="r1_6_1">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
@@ -503,7 +508,8 @@ botones:
             <div [formGroupName]="6">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber" id="r1_7_1">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber"
+                       id="r1_7_1">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
@@ -527,7 +533,8 @@ botones:
             <div [formGroupName]="7">
               <mat-grid-tile class="tile" colspan="3" rowspan="2.5">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber" id="r1_8_1">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber"
+                       id="r1_8_1">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2.5" style="background: rgb(231, 231, 231)">
@@ -537,7 +544,8 @@ botones:
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2.5">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col3" class="inputNEWNumber" id="r1_8_3">
+                       mask="separator.2" thousandSeparator="." formControlName="col3" class="inputNEWNumber"
+                       id="r1_8_3">
               </mat-grid-tile>
             </div>
 
@@ -554,12 +562,14 @@ botones:
             <div [formGroupName]="8">
               <mat-grid-tile class="tile" colspan="3" rowspan="5">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber" id="r1_9_1">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber"
+                       id="r1_9_1">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="5">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col2" class="inputNEWNumber" id="r1_9_2">
+                       mask="separator.2" thousandSeparator="." formControlName="col2" class="inputNEWNumber"
+                       id="r1_9_2">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="5" style="background: rgb(231, 231, 231)">
@@ -582,12 +592,14 @@ botones:
             <div [formGroupName]="9">
               <mat-grid-tile class="tile" colspan="3" rowspan="4">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber" id="r1_10_1">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber"
+                       id="r1_10_1">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="4">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col2" class="inputNEWNumber" id="r1_10_2">
+                       mask="separator.2" thousandSeparator="." formControlName="col2" class="inputNEWNumber"
+                       id="r1_10_2">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="4" style="background: rgb(231, 231, 231)">
@@ -597,17 +609,20 @@ botones:
             </div>
 
             <mat-grid-tile class="tile" colspan="7" rowspan="3">
-              <label class="textLeft">k) Ajustes de precios, devoluciones realizadas,
+              <label class="textLeft">
+                k) Ajustes de precios, devoluciones realizadas,
                 descuentos obtenidos y recupero por operaciones
                 incobrables, exonerados o no alcanzados por el
                 Impuesto
               </label>
+
             </mat-grid-tile>
 
             <div [formGroupName]="10">
               <mat-grid-tile class="tile" colspan="3" rowspan="3">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber" id="r1_11_1">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber"
+                       id="r1_11_1">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="3" style="background: rgb(231, 231, 231)">
@@ -621,7 +636,9 @@ botones:
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="7" rowspan="2">
+            <mat-grid-tile class="tile" colspan="7" rowspan="2"
+                           matTooltip="(Col. I: Inc. a+b+c+d+e+f+g+h+i+j+k); (Col. II: b+c+i+j); (Col. III: Inc. a+h)"
+                           [matTooltipShowDelay]="1000">
               <label>
                 <b>
                   l) TOTAL
@@ -632,19 +649,22 @@ botones:
             <div [formGroupName]="11">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber" id="r1_12_1" readonly
+                       mask="separator.2" thousandSeparator="." formControlName="col1" class="inputNEWNumber"
+                       id="r1_12_1" readonly
                        style="font-weight: bold !important;">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col2" class="inputNEWNumber" id="r1_12_2" readonly
+                       mask="separator.2" thousandSeparator="." formControlName="col2" class="inputNEWNumber"
+                       id="r1_12_2" readonly
                        style="font-weight: bold !important;">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col3" class="inputNEWNumber" id="r1_12_3" readonly
+                       mask="separator.2" thousandSeparator="." formControlName="col3" class="inputNEWNumber"
+                       id="r1_12_3" readonly
                        style="font-weight: bold !important;">
               </mat-grid-tile>
             </div>
@@ -679,7 +699,8 @@ botones:
             </mat-grid-tile>
 
             <mat-grid-tile class="tile" colspan="13" rowspan="2">
-              <label class="textLeft">a) Enajenación de bienes y/o prestación de servicios gravados en el mercado interno,
+              <label class="textLeft">a) Enajenación de bienes y/o prestación de servicios gravados en el mercado
+                interno,
                 con
                 excepción de los
                 productos agrícolas en estado natural </label>
@@ -688,7 +709,8 @@ botones:
             <div [formGroupName]="0">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_1_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_1_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
@@ -702,7 +724,8 @@ botones:
             <div [formGroupName]="1">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_2_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_2_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
@@ -714,18 +737,22 @@ botones:
             <div [formGroupName]="2">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_3_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_3_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="13" rowspan="2">
+            <mat-grid-tile class="tile" colspan="13" rowspan="2"
+                           matTooltip="(Inc. a+b+c)"
+                           [matTooltipShowDelay]="1000">
               <label class="textLeftBold">d) TOTAL DE OPERACIONES EN EL MERCADO INTERNO (a+b+c) </label>
             </mat-grid-tile>
 
             <div [formGroupName]="3">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_4_1" class="inputNEWNumber"
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_4_1"
+                       class="inputNEWNumber"
                        style="font-weight: bold !important;" readonly>
               </mat-grid-tile>
             </div>
@@ -738,7 +765,8 @@ botones:
             <div [formGroupName]="4">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_5_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_5_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
@@ -750,7 +778,8 @@ botones:
             <div [formGroupName]="5">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_6_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_6_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
@@ -761,11 +790,14 @@ botones:
             <div [formGroupName]="6">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_7_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_7_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="13" rowspan="2">
+            <mat-grid-tile class="tile" colspan="13" rowspan="2"
+                           matTooltip="(Inc. e+f+g) "
+                           [matTooltipShowDelay]="1000">
               <label class="textLeftBold">h) TOTAL DE OPERACIONES DE EXPORTACIÓN (e+f+g)</label>
             </mat-grid-tile>
 
@@ -773,20 +805,24 @@ botones:
             <div [formGroupName]="7">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_8_1" class="inputNEWNumber"
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_8_1"
+                       class="inputNEWNumber"
                        style="font-weight: bold !important;" readonly>
               </mat-grid-tile>
             </div>
 
 
-            <mat-grid-tile class="tile" colspan="13" rowspan="2">
+            <mat-grid-tile class="tile" colspan="13" rowspan="2"
+                           matTooltip="(Inc. d+h)"
+                           [matTooltipShowDelay]="1000">
               <label class="textLeftBold">i) TOTAL DE OPERACIONES ACUMULADAS (d+h) </label>
             </mat-grid-tile>
 
             <div [formGroupName]="8">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_9_1" class="inputNEWNumber"
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r2_9_1"
+                       class="inputNEWNumber"
                        style="font-weight: bold !important;" readonly>
               </mat-grid-tile>
             </div>
@@ -837,17 +873,20 @@ botones:
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r3_1_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r3_1_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r3_1_2" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r3_1_2"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col3" id="r3_1_3" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col3" id="r3_1_3"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
@@ -861,21 +900,26 @@ botones:
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r3_2_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r3_2_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r3_2_2" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r3_2_2"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col3" id="r3_2_3" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col3" id="r3_2_3"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="7" rowspan="2">
+            <mat-grid-tile class="tile" colspan="7" rowspan="2"
+                           matTooltip="Rubro 3, Col. III: Inc. b x (Rubro 2 Inc. a+b/ Inc. d)"
+                           [matTooltipShowDelay]="1000">
               <label class="textLeft">
                 c) IVA Crédito atribuido proporcionalmente a operaciones gravadas en el mercado interno (b * (R2: a+b /
                 c))
@@ -896,11 +940,14 @@ botones:
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col3" id="r3_3_3" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col3" id="r3_3_3"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="7" rowspan="2">
+            <mat-grid-tile class="tile" colspan="7" rowspan="2"
+                           matTooltip="(Proviene de la casilla 216 de la hoja de cálculo) "
+                           [matTooltipShowDelay]="1000">
               <label class="textLeft">
                 d) IVA Crédito atribuido proporcionalmente a operaciones gravadas en el mercado interno y a exportación
               </label>
@@ -919,7 +966,8 @@ botones:
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col3" id="r3_4_3" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col3" id="r3_4_3"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
@@ -933,21 +981,26 @@ botones:
             <div [formGroupName]="4">
               <mat-grid-tile class="tile" colspan="3" rowspan="2.5">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r3_5_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r3_5_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2.5">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r3_5_2" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r3_5_2"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2.5">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col3" id="r3_5_3" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col3" id="r3_5_3"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="7" rowspan="2">
+            <mat-grid-tile class="tile" colspan="7" rowspan="2"
+                           matTooltip="(Col. III: Inc. a+c+d+e)"
+                           [matTooltipShowDelay]="1000">
               <label class="textLeftBold">
                 f) TOTAL DE IVA CRÉDITO PARA OPERACIONES EN EL MERCADO INTERNO (a+c+d+e)
               </label>
@@ -956,17 +1009,20 @@ botones:
             <div [formGroupName]="5">
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." id="r3_6_1" class="inputNEWNumber" [disabled]="true" readonly>
+                       mask="separator.2" thousandSeparator="." id="r3_6_1" class="inputNEWNumber" [disabled]="true"
+                       readonly>
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." id="r3_6_2" class="inputNEWNumber" [disabled]="true" readonly>
+                       mask="separator.2" thousandSeparator="." id="r3_6_2" class="inputNEWNumber" [disabled]="true"
+                       readonly>
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col3" id="r3_6_3" class="inputNEWNumber" readonly
+                       mask="separator.2" thousandSeparator="." formControlName="col3" id="r3_6_3"
+                       class="inputNEWNumber" readonly
                        style="font-weight: bold !important;">
               </mat-grid-tile>
             </div>
@@ -999,23 +1055,26 @@ botones:
               </label>
             </mat-grid-tile>
 
-            <mat-grid-tile class="tile" colspan="13" rowspan="2">
-
+            <mat-grid-tile class="tile" colspan="13" rowspan="2"
+                           matTooltip="(Proviene del Rubro 1, Col. II y III: Inc. l)"
+                           [matTooltipShowDelay]="1000">
               <label class="textLeft">
                 a) IVA Débito (R1: col2 y 3: inc. l)
               </label>
-
             </mat-grid-tile>
 
             <div [formGroupName]="0">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r4_1_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r4_1_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
 
-            <mat-grid-tile class="tile" colspan="13" rowspan="2">
+            <mat-grid-tile class="tile" colspan="13" rowspan="2"
+                           matTooltip="(Proviene del Rubro 3, Inc. f)"
+                           [matTooltipShowDelay]="1000">
               <label class="textLeft">
                 b) IVA Crédito (R3: inc. f)
               </label>
@@ -1024,11 +1083,14 @@ botones:
             <div [formGroupName]="1">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." value="" formControlName="col1" id="r4_2_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." value="" formControlName="col1" id="r4_2_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="13" rowspan="2">
+            <mat-grid-tile class="tile" colspan="13" rowspan="2"
+                           matTooltip="(Proviene del Rubro 4, Inc. f; de la declaración jurada del periodo anterior) "
+                           [matTooltipShowDelay]="1000">
               <label class="textLeft">
                 c) Saldo a favor del contribuyente del período anterior por operaciones en el mercado interno
               </label>
@@ -1037,11 +1099,14 @@ botones:
             <div [formGroupName]="2">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." value="" formControlName="col1" id="r4_3_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." value="" formControlName="col1" id="r4_3_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="13" rowspan="2">
+            <mat-grid-tile class="tile" colspan="13" rowspan="2"
+                           matTooltip="cuando el Inc. a sea menor que Inc. b+Inc. c"
+                           [matTooltipShowDelay]="1000">
               <label class="textLeftBold">
                 d) SALDO A FAVOR DEL CONTRIBUYENTE (cuando el inc. a sea menor que inc. b+c)
               </label>
@@ -1050,25 +1115,31 @@ botones:
             <div [formGroupName]="3">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." value="" formControlName="col1" id="r4_4_1" class="inputNEWNumber" readonly
+                       mask="separator.2" thousandSeparator="." value="" formControlName="col1" id="r4_4_1"
+                       class="inputNEWNumber" readonly
                        style="font-weight: bold !important;">
               </mat-grid-tile>
             </div>
 
             <mat-grid-tile class="tile" colspan="13" rowspan="2">
               <label class="textLeft">
-                e) Saldo a favor del contribuyente a remitir en beneficio del Fisco
+                e) Saldo a favor del contribuyente a remitir en beneficio del Fisco (Art. 91 de la Ley). Hasta el monto
+                del Inc. d
+
               </label>
             </mat-grid-tile>
 
             <div [formGroupName]="4">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." value="" formControlName="col1" id="r4_5_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." value="" formControlName="col1" id="r4_5_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="13" rowspan="2">
+            <mat-grid-tile class="tile" colspan="13" rowspan="2"
+                           matTooltip="(Monto a trasladar en el Inc. c del presente Rubro, en el siguiente periodo fiscal), Inc. d - Inc. e"
+                           [matTooltipShowDelay]="1000">
               <label class="textLeftBold">
                 f) SALDO A FAVOR DEL CONTRIBUYENTE
               </label>
@@ -1077,12 +1148,15 @@ botones:
             <div [formGroupName]="5">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." value="" formControlName="col1" id="r4_6_1" class="inputNEWNumber" readonly
+                       mask="separator.2" thousandSeparator="." value="" formControlName="col1" id="r4_6_1"
+                       class="inputNEWNumber" readonly
                        style="font-weight: bold !important;">
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="13" rowspan="2">
+            <mat-grid-tile class="tile" colspan="13" rowspan="2"
+                           matTooltip=" cuando Inc. a sea mayor que Inc. b+Inc. c "
+                           [matTooltipShowDelay]="1000">
               <label class="textLeft">
                 g) Saldo a favor del fisco (cuando inc. a sea mayor que b+c)
               </label>
@@ -1091,12 +1165,15 @@ botones:
             <div [formGroupName]="6">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." value="" formControlName="col1" id="r4_7_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." value="" formControlName="col1" id="r4_7_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
 
-            <mat-grid-tile class="tile" colspan="13" rowspan="2">
+            <mat-grid-tile class="tile" colspan="13" rowspan="2"
+                           matTooltip="(Proviene de la casilla 148 del Anexo Exportador)"
+                           [matTooltipShowDelay]="1000">
               <label class="textLeft">
                 h) Monto del IVA Crédito utilizado en el periodo que se liquida para operaciones gravadas
               </label>
@@ -1105,7 +1182,8 @@ botones:
             <div [formGroupName]="7">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r4_8_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r4_8_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
@@ -1121,11 +1199,14 @@ botones:
             <div [formGroupName]="8">
               <mat-grid-tile class="tile" colspan="3" rowspan="2.5">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r4_9_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r4_9_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="13" rowspan="2">
+            <mat-grid-tile class="tile" colspan="13" rowspan="2"
+                           matTooltip="(Inc. g - Inc. h - Inc. i)"
+                           [matTooltipShowDelay]="1000">
               <label class="textLeftBold">
                 j) IMPUESTO DETERMINADO (g-h-i)
               </label>
@@ -1134,7 +1215,8 @@ botones:
             <div [formGroupName]="9">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1"  id="r4_10_1" class="inputNEWNumber" readonly
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r4_10_1"
+                       class="inputNEWNumber" readonly
                        style="font-weight: bold !important;">
               </mat-grid-tile>
             </div>
@@ -1174,7 +1256,9 @@ botones:
             </label>
           </mat-grid-tile>
 
-          <mat-grid-tile class="tile" colspan="10" rowspan="2">
+          <mat-grid-tile class="tile" colspan="10" rowspan="2"
+                         matTooltip="(Proviene del Rubro 4, Inc. j)"
+                         [matTooltipShowDelay]="1000">
             <label class="textLeft"> a) Impuesto determinado para operaciones gravadas </label>
           </mat-grid-tile>
 
@@ -1183,23 +1267,27 @@ botones:
             <div [formGroupName]="0">
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="."  id="r5_1_1" class="inputNEWNumber" [disabled]="true">
+                       mask="separator.2" thousandSeparator="." id="r5_1_1" class="inputNEWNumber" [disabled]="true">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col2"  id="r5_1_2" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r5_1_2"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <mat-grid-tile class="tile" colspan="10" rowspan="2"
+                           matTooltip=" (Proviene del Rubro 5, Col. I: Inc.g, de la declaración jurada del periodo anterior)"
+                           [matTooltipShowDelay]="1000">
               <label class="textLeft">b) Saldo a favor del contribuyente del período anterior </label>
             </mat-grid-tile>
 
             <div [formGroupName]="1">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1"  id="r5_2_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r5_2_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
@@ -1215,7 +1303,8 @@ botones:
             <div [formGroupName]="2">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r5_3_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r5_3_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
@@ -1232,7 +1321,8 @@ botones:
             <div [formGroupName]="3">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r5_4_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r5_4_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
@@ -1242,7 +1332,8 @@ botones:
             </div>
 
             <mat-grid-tile class="tile" colspan="10" rowspan="2">
-              <label class="textLeft"> e) Multa por presentar la Declaración Jurada con posterioridad al vencimiento </label>
+              <label class="textLeft"> e) Multa por presentar la Declaración Jurada con posterioridad al
+                vencimiento </label>
             </mat-grid-tile>
 
             <div [formGroupName]="4">
@@ -1253,46 +1344,59 @@ botones:
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r5_5_2" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r5_5_2"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <mat-grid-tile class="tile" colspan="10" rowspan="2"
+                           matTooltip="(Col. I: Inc. b+c+d); (Col. II: Inc. a+e) "
+                           [matTooltipShowDelay]="1000">
               <label class="textLeftBold"> f) SUBTOTALES </label>
             </mat-grid-tile>
 
             <div [formGroupName]="5">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r5_6_1" class="inputNEWNumber"
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r5_6_1"
+                       class="inputNEWNumber"
                        style="font-weight: bold !important;" readonly>
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r5_6_2" class="inputNEWNumber"
+                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r5_6_2"
+                       class="inputNEWNumber"
                        style="font-weight: bold !important;" readonly>
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <mat-grid-tile class="tile" colspan="10" rowspan="2"
+                           matTooltip="(Monto a trasladar al siguiente
+                            periodo fiscal en el Inc. b del presente Rubro). Diferencia entre Col. I y II: Inc. f,
+                            cuando Col. I sea mayor que Col. II. No trasladable al Rubro 4"
+                           [matTooltipShowDelay]="1000">
               <label class="textLeftBold"> g) SALDO A FAVOR DEL CONTRIBUYENTE </label>
             </mat-grid-tile>
 
             <div [formGroupName]="6">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r5_7_1" class="inputNEWNumber" readonly
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r5_7_1"
+                       class="inputNEWNumber" readonly
                        style="font-weight: bold !important;">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." id="r5_7_2" class="inputNEWNumber" [disabled]="true" readonly>
+                       mask="separator.2" thousandSeparator="." id="r5_7_2" class="inputNEWNumber" [disabled]="true"
+                       readonly>
               </mat-grid-tile>
             </div>
 
-            <mat-grid-tile class="tile" colspan="10" rowspan="2">
+            <mat-grid-tile class="tile" colspan="10" rowspan="2"
+                           matTooltip="(Diferencia entre Col. I y II: Inc. f, cuando Col. II sea mayor que Col. I)"
+                           [matTooltipShowDelay]="1000">
               <label class="textLeftBold">h) SALDO A PAGAR A FAVOR DEL FISCO </label>
             </mat-grid-tile>
 
@@ -1300,13 +1404,16 @@ botones:
             <div [formGroupName]="7">
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." id="r5_8_1" class="inputNEWNumber" [disabled]="true" readonly>
+                       mask="separator.2" thousandSeparator="." id="r5_8_1" class="inputNEWNumber" [disabled]="true"
+                       readonly>
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r5_8_2" class="inputNEWNumber" readonly
-                       style="font-weight: bold !important;">
+                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r5_8_2"
+                       class="inputNEWNumber" readonly
+                       style="font-weight: bold !important;"
+                >
               </mat-grid-tile>
             </div>
 
@@ -1353,12 +1460,14 @@ botones:
             <div [formGroupName]="0">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r6_1_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r6_1_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r6_1_2" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r6_1_2"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
@@ -1372,12 +1481,14 @@ botones:
             <div [formGroupName]="1">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r6_2_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r6_2_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r6_2_2" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col2" id="r6_2_2"
+                       class="inputNEWNumber">
               </mat-grid-tile>
             </div>
 
@@ -1390,7 +1501,8 @@ botones:
             <div [formGroupName]="2">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r6_3_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r6_3_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
@@ -1408,12 +1520,14 @@ botones:
             <div [formGroupName]="3">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r6_4_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r6_4_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." value="" id="r6_4_2" class="inputNEWNumber" [disabled]="true">
+                       mask="separator.2" thousandSeparator="." value="" id="r6_4_2" class="inputNEWNumber"
+                       [disabled]="true">
               </mat-grid-tile>
             </div>
 
@@ -1428,12 +1542,14 @@ botones:
             <div [formGroupName]="4">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r6_5_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r6_5_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." value="" id="r6_5_2" class="inputNEWNumber" [disabled]="true">
+                       mask="separator.2" thousandSeparator="." value="" id="r6_5_2" class="inputNEWNumber"
+                       [disabled]="true">
               </mat-grid-tile>
             </div>
 
@@ -1446,12 +1562,14 @@ botones:
             <div [formGroupName]="5">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r6_6_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r6_6_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." value="" id="r6_6_2" class="inputNEWNumber" [disabled]="true">
+                       mask="separator.2" thousandSeparator="." value="" id="r6_6_2" class="inputNEWNumber"
+                       [disabled]="true">
               </mat-grid-tile>
             </div>
 
@@ -1462,15 +1580,17 @@ botones:
               </label>
             </mat-grid-tile>
 
-            <div [formGroupName]="5">
+            <div [formGroupName]="6">
               <mat-grid-tile class="tile" colspan="3" rowspan="2">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r6_7_1" class="inputNEWNumber">
+                       mask="separator.2" thousandSeparator="." formControlName="col1" id="r6_7_1"
+                       class="inputNEWNumber">
               </mat-grid-tile>
 
               <mat-grid-tile class="tile" colspan="3" rowspan="2" style="background: rgb(231, 231, 231)">
                 <input type="text"
-                       mask="separator.2" thousandSeparator="." value="" id="r6_7_2" class="inputNEWNumber" [disabled]="true">
+                       mask="separator.2" thousandSeparator="." value="" id="r6_7_2" class="inputNEWNumber"
+                       [disabled]="true">
               </mat-grid-tile>
             </div>
 
@@ -1590,11 +1710,6 @@ botones:
       </div>
     </div>
   </div>
-
-
-
-
-
 
 
   <!--
